@@ -1,0 +1,170 @@
+// Documents
+
+mutation createDocument($document: documentInput!) {
+  createDocument(document: $document) {
+    id
+    name
+    displayName
+    description
+    path
+    uRL
+    mimeType
+  }
+}
+
+{
+  "document": {
+    "name": "",
+    "displayName": "",
+    "description": "",
+    "path": "",
+    "uRL": "",
+    "mimeType": ""
+  }
+}
+
+
+// Resumes
+
+mutation createResume($resume: resumeInput!) {
+  createResume(resume: $resume) {
+    id
+    jobTitle
+    description
+  }
+}
+
+{
+  "resume": {
+    "jobTitle": "",
+    "description": ""
+  }
+}
+
+
+// ResumeStates
+
+mutation createResumeState($resumeState: resumeStateInput!) {
+  createResumeState(resumeState: $resumeState) {
+    id
+    name
+    displayName
+  }
+}
+
+{
+  "resumeState": {
+    "name": "",
+    "displayName": ""
+  }
+}
+
+
+// Skills
+
+mutation createSkill($skill: skillInput!) {
+  createSkill(skill: $skill) {
+    id
+    name
+    description
+  }
+}
+
+{
+  "skill": {
+    "name": "",
+    "description": ""
+  }
+}
+
+
+// SkillAliases
+
+mutation createSkillAlias($skillAlias: skillAliasInput!) {
+  createSkillAlias(skillAlias: $skillAlias) {
+    id
+    name
+    description
+  }
+}
+
+{
+  "skillAlias": {
+    "name": "",
+    "description": ""
+  }
+}
+
+
+// ResumeSkills
+
+mutation createResumeSkill($resumeSkill: resumeSkillInput!) {
+  createResumeSkill(resumeSkill: $resumeSkill) {
+    id
+    level
+    description
+  }
+}
+
+{
+  "resumeSkill": {
+    "level": "",
+    "description": ""
+  }
+}
+
+
+// Jobs
+
+mutation createJob($job: jobInput!) {
+  createJob(job: $job) {
+    id
+    title
+    description
+  }
+}
+
+{
+  "job": {
+    "title": "",
+    "description": ""
+  }
+}
+
+
+// JobStates
+
+mutation createJobState($jobState: jobStateInput!) {
+  createJobState(jobState: $jobState) {
+    id
+    name
+    displayName
+  }
+}
+
+{
+  "jobState": {
+    "name": "",
+    "displayName": ""
+  }
+}
+
+
+// JobSkills
+
+mutation createJobSkill($jobSkill: jobSkillInput!) {
+  createJobSkill(jobSkill: $jobSkill) {
+    id
+    level
+    description
+  }
+}
+
+{
+  "jobSkill": {
+    "level": "",
+    "description": ""
+  }
+}
+
+
