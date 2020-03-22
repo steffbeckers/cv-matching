@@ -1,27 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
-
-// NgRx store
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './store/reducers';
-import { effects } from './store/effects';
+import { AppStoreModule } from './store/store.module';
 
 // Components
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    // NgRx store
-    StoreModule.forRoot({ reducers }),
-    EffectsModule.forRoot(effects),
-  ],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, AppStoreModule],
   providers: [],
   bootstrap: [AppComponent],
 })

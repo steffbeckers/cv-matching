@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Authenticated, User, Login as Credentials } from '../../shared/models/auth';
 
 export const LOGIN = '[AUTH] LOGIN';
 export const LOGIN_SUCCESS = '[AUTH] LOGIN SUCCESS';
@@ -12,13 +13,13 @@ export const ME_FAILED = '[AUTH] ME FAILED';
 export class Login implements Action {
   readonly type = LOGIN;
 
-  constructor() {}
+  constructor(public payload: Credentials) {}
 }
 
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
 
-  constructor(public payload: any) {}
+  constructor(public payload: Authenticated) {}
 }
 
 export class LoginFailed implements Action {
@@ -30,14 +31,12 @@ export class LoginFailed implements Action {
 // Me
 export class Me implements Action {
   readonly type = ME;
-
-  constructor() {}
 }
 
 export class MeSuccess implements Action {
   readonly type = ME_SUCCESS;
 
-  constructor(public payload: any) {}
+  constructor(public payload: User) {}
 }
 
 export class MeFailed implements Action {
