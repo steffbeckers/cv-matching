@@ -9,10 +9,13 @@ import { AppStoreModule } from './store/store.module';
 // Components
 import { AppComponent } from './app.component';
 
+// Services
+import { AuthService } from './shared/services/auth.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, AppStoreModule],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
