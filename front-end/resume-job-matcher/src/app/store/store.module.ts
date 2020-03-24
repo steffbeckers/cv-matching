@@ -10,7 +10,9 @@ import { reducers, effects } from '.';
 
 // Dev only
 import { storeFreeze } from 'ngrx-store-freeze';
-export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
+export const metaReducers: MetaReducer<any>[] = !environment.production
+  ? [storeFreeze]
+  : [];
 
 @NgModule({
   imports: [

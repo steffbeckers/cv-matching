@@ -11,6 +11,7 @@ import {
   mergeMap,
   exhaustMap,
   withLatestFrom,
+  tap,
 } from 'rxjs/operators';
 
 // NgRx
@@ -22,10 +23,15 @@ import { User, Authenticated } from '../../shared/models/auth';
 
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffect {
-  constructor(private actions: Actions, private authService: AuthService) {}
+  constructor(
+    private actions: Actions,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   @Effect()
   login: Observable<AuthActions.AuthActionsAll> = this.actions.pipe(
@@ -38,5 +44,19 @@ export class AuthEffect {
         catchError((error) => of(new AuthActions.LoginFailed(error)))
       );
     })
+  );
+
+  @Effect({ dispatch: false })
+  LoginSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.LOGIN_SUCCESS),
+    tap((action) => {
+      localStorage.setItem('token', action.payload.Token);
+      this.router.navigateByUrl('/');
+    })
+  );
+
+  @Effect({ dispatch: false })
+  LogInFailure: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.LOGIN_FAILED)
   );
 }

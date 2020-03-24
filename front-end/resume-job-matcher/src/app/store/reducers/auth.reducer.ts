@@ -8,6 +8,7 @@ export interface AuthState {
   rememberMe: boolean;
   loading: boolean;
   loaded: boolean;
+  errors: any;
 }
 
 export const AuthInitialState: AuthState = {
@@ -17,6 +18,7 @@ export const AuthInitialState: AuthState = {
   rememberMe: true,
   loading: false,
   loaded: false,
+  errors: null,
 };
 
 export function AuthReducer(

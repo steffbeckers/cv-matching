@@ -1,2 +1,4 @@
 <h1>Resume Job Matcher</h1>
+<button type="button" (click)="login()">Login</button>
+<div *ngIf="auth$ | async">{{ auth$ | async | json }}</div>
 <router-outlet></router-outlet>

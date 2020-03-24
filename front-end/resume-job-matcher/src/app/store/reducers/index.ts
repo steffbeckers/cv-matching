@@ -5,10 +5,10 @@ export interface AppState {
   auth: AuthState;
 }
 
-export const getAppState = createFeatureSelector<AppState>('app');
-
 export const reducers: ActionReducerMap<AppState> = {
   auth: AuthReducer,
 };
+
+export const getAuthState = createFeatureSelector<AuthState>('auth');
 
 export * from './auth.reducer';
