@@ -1,5 +1,5 @@
-import { AuthEffect } from './auth.effects';
+import { AuthEffects } from './auth.effects';
 
-export const effects = [AuthEffect];
+export const effects = [AuthEffects];
 
 export * from './auth.effects';

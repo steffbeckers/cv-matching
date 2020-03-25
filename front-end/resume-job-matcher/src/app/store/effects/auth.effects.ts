@@ -12,32 +12,52 @@ import {
   exhaustMap,
   withLatestFrom,
   tap,
+  switchMap,
 } from 'rxjs/operators';
 
 // NgRx
-import { AppState } from '../reducers';
+import { AppState, getAuthState } from '../reducers';
 import * as AuthActions from '../actions/auth.actions';
 
 // Models
-import { User, Authenticated } from '../../shared/models/auth';
+import {
+  User,
+  Authenticated,
+  Login as Credentials,
+} from '../../shared/models/auth';
 
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthEffect {
+export class AuthEffects {
   constructor(
+    private store: Store<AppState>,
     private actions: Actions,
     private authService: AuthService,
     private router: Router
   ) {}
 
+  // Load token from local storage
   @Effect()
-  login: Observable<AuthActions.AuthActionsAll> = this.actions.pipe(
+  LoadTokenFromLocalStorage: Observable<
+    AuthActions.AuthActionsAll
+  > = this.actions.pipe(
+    ofType<AuthActions.LoadTokenFromLocalStorage>(
+      AuthActions.LOAD_TOKEN_FROM_LOCAL_STORAGE
+    ),
+    withLatestFrom(this.store.pipe(select(getAuthState))),
+    mergeMap(() => [new AuthActions.Me()])
+  );
+
+  // Login
+  @Effect()
+  Login: Observable<AuthActions.AuthActionsAll> = this.actions.pipe(
     ofType<AuthActions.Login>(AuthActions.LOGIN),
-    exhaustMap((action) => {
-      return this.authService.login(action.payload).pipe(
+    map((action) => action.payload),
+    switchMap((payload: Credentials) => {
+      return this.authService.login(payload).pipe(
         map((authenticated: Authenticated) => {
           return new AuthActions.LoginSuccess(authenticated);
         }),
@@ -50,13 +70,68 @@ export class AuthEffect {
   LoginSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActions.LOGIN_SUCCESS),
     tap((action) => {
-      localStorage.setItem('token', action.payload.Token);
+      localStorage.setItem('token', action.payload.token);
       this.router.navigateByUrl('/');
     })
   );
 
   @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this.actions.pipe(
-    ofType(AuthActions.LOGIN_FAILED)
+  LoginFailed: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.LOGIN_FAILED),
+    tap((error: any) => {})
+  );
+
+  // Me
+  @Effect()
+  Me: Observable<AuthActions.AuthActionsAll> = this.actions.pipe(
+    ofType<AuthActions.Me>(AuthActions.ME),
+    switchMap(() => {
+      return this.authService.me().pipe(
+        map((user: User) => {
+          return new AuthActions.MeSuccess(user);
+        }),
+        catchError((error) => of(new AuthActions.MeFailed(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  MeSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.ME_SUCCESS),
+    tap((action) => {})
+  );
+
+  @Effect({ dispatch: false })
+  MeFailed: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.ME_FAILED),
+    tap((error: any) => {})
+  );
+
+  // Logout
+  @Effect()
+  Logout: Observable<AuthActions.AuthActionsAll> = this.actions.pipe(
+    ofType<AuthActions.Logout>(AuthActions.LOGOUT),
+    switchMap(() => {
+      return this.authService.logout().pipe(
+        map(() => {
+          return new AuthActions.LogoutSuccess();
+        }),
+        catchError((error) => of(new AuthActions.LogoutFailed(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  LogoutSuccess: Observable<User> = this.actions.pipe(
+    ofType(AuthActions.LOGOUT_SUCCESS),
+    tap(() => {
+      localStorage.removeItem('token');
+    })
+  );
+
+  @Effect({ dispatch: false })
+  LogoutFailed: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.LOGOUT_FAILED),
+    tap((error: any) => {})
   );
 }
