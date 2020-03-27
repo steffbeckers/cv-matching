@@ -44,9 +44,7 @@ export class AuthEffects {
   LoadTokenFromLocalStorage: Observable<
     AuthActions.AuthActionsAll
   > = this.actions.pipe(
-    ofType<AuthActions.LoadTokenFromLocalStorage>(
-      AuthActions.LOAD_TOKEN_FROM_LOCAL_STORAGE
-    ),
+    ofType<AuthActions.SetToken>(AuthActions.SET_TOKEN),
     withLatestFrom(this.store.pipe(select(getAuthState))),
     mergeMap(() => [new AuthActions.Me()])
   );

@@ -5,24 +5,16 @@ import { environment } from 'src/environments/environment';
 // RxJs
 import { Observable } from 'rxjs';
 
-// NgRx
-// import { select, Store } from '@ngrx/store';
-// import * as fromStore from '../../store';
-
 // Models
 import { Login as Credentials, Authenticated, User } from '../models/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  // private token: string;
+  constructor(private http: HttpClient) {}
 
-  constructor(
-    private http: HttpClient
-  ) // private store: Store<fromStore.AppState>
-  {
-    // this.store.pipe(select(fromStore.getToken)).subscribe((token: string) => {
-    //   this.token = token;
-    // });
+  public getToken(): string {
+    // TODO: Validate token if exists
+    return localStorage.getItem('token');
   }
 
   public login(credentials: Credentials): Observable<Authenticated> {

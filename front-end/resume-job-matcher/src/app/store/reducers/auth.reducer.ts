@@ -24,8 +24,8 @@ export function AuthReducer(
   action: AuthActions.AuthActionsAll
 ): AuthState {
   switch (action.type) {
-    // Load token from local storage
-    case AuthActions.LOAD_TOKEN_FROM_LOCAL_STORAGE: {
+    // Set token
+    case AuthActions.SET_TOKEN: {
       return {
         ...state,
         token: action.payload,

@@ -5,8 +5,7 @@ import {
   Login as Credentials,
 } from '../../shared/models/auth';
 
-export const LOAD_TOKEN_FROM_LOCAL_STORAGE =
-  '[AUTH] LOAD TOKEN FROM LOCAL STORAGE';
+export const SET_TOKEN = '[AUTH] SET TOKEN';
 
 export const LOGIN = '[AUTH] LOGIN';
 export const LOGIN_SUCCESS = '[AUTH] LOGIN SUCCESS';
@@ -20,9 +19,9 @@ export const LOGOUT = '[AUTH] LOGOUT';
 export const LOGOUT_SUCCESS = '[AUTH] LOGOUT SUCCESS';
 export const LOGOUT_FAILED = '[AUTH] LOGOUT FAILED';
 
-// Load token from local storage
-export class LoadTokenFromLocalStorage implements Action {
-  readonly type = LOAD_TOKEN_FROM_LOCAL_STORAGE;
+// Set token
+export class SetToken implements Action {
+  readonly type = SET_TOKEN;
 
   constructor(public payload: string) {}
 }
@@ -79,7 +78,7 @@ export class LogoutFailed implements Action {
 }
 
 export type AuthActionsAll =
-  | LoadTokenFromLocalStorage
+  | SetToken
   | Login
   | LoginSuccess
   | LoginFailed
