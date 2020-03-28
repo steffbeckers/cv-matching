@@ -1,6 +1,8 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+
 import { AuthReducer, AuthState } from './auth.reducer';
 
+// Global app state
 export interface AppState {
   auth: AuthState;
 }

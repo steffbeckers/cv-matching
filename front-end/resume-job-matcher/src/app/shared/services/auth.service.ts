@@ -13,8 +13,17 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public getToken(): string {
+    // Using local storage
+
     // TODO: Validate token if exists
     return localStorage.getItem('token');
+  }
+
+  public setToken(token: string): void {
+    // Using local storage
+
+    // TODO: Validate token
+    localStorage.setItem('token', token);
   }
 
   public login(credentials: Credentials): Observable<Authenticated> {
