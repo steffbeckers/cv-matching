@@ -24,7 +24,7 @@ import {
   User,
   Authenticated,
   Login as Credentials,
-} from 'src/app/shared/models/auth';
+} from '../../shared/models/auth';
 
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';

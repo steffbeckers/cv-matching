@@ -3,7 +3,7 @@ import {
   Authenticated,
   User,
   Login as Credentials,
-} from 'src/app/shared/models/auth';
+} from '../../shared/models/auth';
 
 export const SET_TOKEN = '[AUTH] SET TOKEN';
 
