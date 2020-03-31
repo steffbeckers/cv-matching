@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://localhost:5000/api',
+  api: 'https://resume-job-matcher.steffbeckers.eu/api',
 };
