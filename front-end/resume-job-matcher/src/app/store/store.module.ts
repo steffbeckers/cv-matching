@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 // NgRx
 import { MetaReducer, StoreModule } from '@ngrx/store';

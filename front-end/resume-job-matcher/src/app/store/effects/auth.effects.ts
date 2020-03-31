@@ -16,15 +16,15 @@ import {
 } from 'rxjs/operators';
 
 // NgRx
-import { AppState, getAuthState } from '../reducers';
-import * as AuthActions from '../actions/auth.actions';
+import { AppState, getAuthState } from 'src/app/store/reducers';
+import * as AuthActions from 'src/app/store/actions/auth.actions';
 
 // Models
 import {
   User,
   Authenticated,
   Login as Credentials,
-} from '../../shared/models/auth';
+} from 'src/app/shared/models/auth';
 
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';

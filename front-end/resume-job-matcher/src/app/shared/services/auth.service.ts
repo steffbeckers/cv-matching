@@ -6,7 +6,11 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 // Models
-import { Login as Credentials, Authenticated, User } from '../models/auth';
+import {
+  Login as Credentials,
+  Authenticated,
+  User,
+} from 'src/app/shared/models/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

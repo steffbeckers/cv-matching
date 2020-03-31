@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { AuthState, getAuthState } from '../reducers';
+import { AuthState, getAuthState } from 'src/app/store/reducers';
 
 export const getUser = createSelector(
   getAuthState,
