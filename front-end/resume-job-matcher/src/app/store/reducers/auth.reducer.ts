@@ -1,5 +1,5 @@
 import * as AuthActions from 'src/app/store/actions/auth.actions';
-import { User } from '../../shared/models/auth';
+import { User } from './../../shared/models/auth';
 
 export interface AuthState {
   authenticated: boolean;
