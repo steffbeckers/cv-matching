@@ -387,7 +387,7 @@ namespace RJM.API.BLL
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
+                Expires = DateTime.UtcNow.AddMinutes(configuration.GetSection("Authentication").GetValue<double>("TokenExpiresInMinutes")),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

@@ -53,21 +53,21 @@ namespace RJM.API.Controllers
         }
 
         [HttpGet]
-        [Route("me")]
-        public async Task<ActionResult<UserVM>> Me()
-        {
-            User currentUser = await this.bll.Me();
-
-            return Ok(mapper.Map<User, UserVM>(currentUser));
-        }
-
-        [HttpGet]
         [Route("logout")]
         public async Task<IActionResult> Logout()
         {
             await this.bll.Logout();
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("me")]
+        public async Task<ActionResult<UserVM>> Me()
+        {
+            User currentUser = await this.bll.Me();
+
+            return Ok(mapper.Map<User, UserVM>(currentUser));
         }
 
         [HttpPost]

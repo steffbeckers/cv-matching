@@ -34,6 +34,7 @@ using RJM.API.Framework.Exceptions;
 using RJM.API.GraphQL;
 using RJM.API.Models;
 using RJM.API.Services;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace RJM.API
 {
@@ -55,6 +56,13 @@ namespace RJM.API
             // Connection to the RJM database
             services.AddDbContext<RJMContext>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("RJMContext")));
+
+            // Uploads
+            services.Configure<FormOptions>(options =>
+            {
+                // Set the upload limit
+                options.MultipartBodyLengthLimit = this.configuration.GetSection("Uploads").GetValue<int>("MaxFileSizeInBytes");
+            });
 
             // Authentication
             services.AddIdentity<User, IdentityRole<Guid>>()
@@ -130,6 +138,7 @@ namespace RJM.API
 
             // Repositories
 			services.AddScoped<DocumentRepository>();
+			services.AddScoped<DocumentResumeRepository>();
 			services.AddScoped<ResumeRepository>();
 			services.AddScoped<ResumeStateRepository>();
 			services.AddScoped<SkillRepository>();
@@ -233,12 +242,18 @@ namespace RJM.API
             // Kestrel
             services.Configure<KestrelServerOptions>(options =>
             {
+                // Uploads
+                // Handle requests up to 50 MB
+                options.Limits.MaxRequestBodySize = 52428800;
                 options.AllowSynchronousIO = true;
             });
 
             // IIS Express
             services.Configure<IISServerOptions>(options =>
             {
+                // Uploads
+                // Handle requests up to 50 MB
+                options.MaxRequestBodySize = 52428800;
                 options.AllowSynchronousIO = true;
             });
         }

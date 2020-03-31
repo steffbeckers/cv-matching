@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-job-matcher-app
+  namespace: resume-job-matcher
+  labels:
+    app: resume-job-matcher-app
+    release: resume-job-matcher-app
+spec:
+  selector:
+    matchLabels:
+      app: resume-job-matcher-app
+      release: resume-job-matcher-app
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: resume-job-matcher-app
+        release: resume-job-matcher-app
+        tier: frontend
+    spec:
+      imagePullSecrets:
+        - name: dockerconfig
+      containers:
+        - image: registry.gitlab.com/steffbeckers/cv-matching/resume-job-matcher-app
+          name: resume-job-matcher-app
+          ports:
+            - containerPort: 80
+              name: resume-job-matcher-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-job-matcher-app
+  namespace: resume-job-matcher
+  labels:
+    app: resume-job-matcher-app
+    release: resume-job-matcher-app
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: resume-job-matcher-app
+    release: resume-job-matcher-app
+    tier: frontend

@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+using Microsoft.Extensions.Configuration;
 using RJM.API.DAL.Repositories;
 using RJM.API.Models;
 
@@ -11,16 +15,25 @@ namespace RJM.API.BLL
 	/// </summary>
     public class DocumentBLL
     {
+        private readonly IConfiguration configuration;
         private readonly DocumentRepository documentRepository;
+        private readonly ResumeRepository resumeRepository;
+        private readonly DocumentResumeRepository documentResumeRepository;
 
 		/// <summary>
 		/// The constructor of the Document business logic layer.
 		/// </summary>
         public DocumentBLL(
-			DocumentRepository documentRepository
+            IConfiguration configuration,
+			DocumentRepository documentRepository,
+            ResumeRepository resumeRepository,
+			DocumentResumeRepository documentResumeRepository
 		)
         {
+            this.configuration = configuration;
             this.documentRepository = documentRepository;
+            this.resumeRepository = resumeRepository;
+			this.documentResumeRepository = documentResumeRepository;
         }
 
 		/// <summary>
@@ -75,9 +88,7 @@ namespace RJM.API.BLL
 
 			document = await this.documentRepository.InsertAsync(document);
 
-			// #-#-# {1972C619-D2F2-48FD-8474-3A69621B1F78}
 			// After creation
-			// #-#-#
 
             return document;
         }
@@ -130,6 +141,58 @@ namespace RJM.API.BLL
 			// #-#-#
 
             return document;
+        }
+
+        public async Task<Document> LinkResumeToDocumentAsync(DocumentResume documentResume)
+        {
+            // Validation
+            if (documentResume == null) { return null; }
+
+            // Check if document exists
+            Document document = await this.documentRepository.GetByIdAsync(documentResume.DocumentId);
+            if (document == null)
+            {
+                return null;
+            }
+
+            // Check if resume exists
+            Resume resume = await this.resumeRepository.GetByIdAsync(documentResume.ResumeId);
+            if (resume == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
+            DocumentResume documentResumeLink = this.documentResumeRepository.GetByDocumentAndResumeId(documentResume.DocumentId, documentResume.ResumeId);
+
+            if (documentResumeLink == null)
+            {
+                await this.documentResumeRepository.InsertAsync(documentResume);
+            }
+            else
+            {
+                // Mapping of fields on many-to-many
+
+                await this.documentResumeRepository.UpdateAsync(documentResumeLink);
+            }
+
+            return await this.GetDocumentByIdAsync(documentResume.DocumentId);
+        }
+
+        public async Task<Document> UnlinkResumeFromDocumentAsync(DocumentResume documentResume)
+        {
+            // Validation
+            if (documentResume == null) { return null; }
+
+            // Retrieve existing link
+            DocumentResume documentResumeLink = this.documentResumeRepository.GetByDocumentAndResumeId(documentResume.DocumentId, documentResume.ResumeId);
+		
+            if (documentResumeLink != null)
+            {
+                await this.documentResumeRepository.DeleteAsync(documentResumeLink);
+            }
+
+            return await this.GetDocumentByIdAsync(documentResume.DocumentId);
         }
 
 		/// <summary>
