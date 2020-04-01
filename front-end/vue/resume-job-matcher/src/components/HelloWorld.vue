@@ -12,10 +12,10 @@
     <ul>
       <li>
         <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
           target="_blank"
           rel="noopener"
-          >typescript</a
+          >babel</a
         >
       </li>
       <li>
@@ -126,13 +126,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-
-@Component
-export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
-}
+<script>
+export default {
+  name: "HelloWorld",
+  props: {
+    msg: String
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
