@@ -323,7 +323,7 @@ namespace RJM.API
             .UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("./swagger/v1/swagger.json", "Resume Job Matcher Web API V1");
-                c.RoutePrefix = string.Empty;
+                c.RoutePrefix = "/ui/swagger";
             });
 
             app.UseEndpoints(endpoints =>
