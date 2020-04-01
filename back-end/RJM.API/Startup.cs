@@ -35,6 +35,7 @@ using RJM.API.GraphQL;
 using RJM.API.Models;
 using RJM.API.Services;
 using Microsoft.AspNetCore.Http.Features;
+using RJM.API.Mappers;
 
 namespace RJM.API
 {
