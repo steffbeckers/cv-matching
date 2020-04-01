@@ -1,4 +1,4 @@
-# resume-job-matcher
+# Resume Job Matcher
 
 ## Project setup
 ```
