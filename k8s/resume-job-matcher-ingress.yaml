@@ -21,6 +21,10 @@ spec:
             backend:
               serviceName: resume-job-matcher-api
               servicePort: 80
+          - path: /graphql
+            backend:
+              serviceName: resume-job-matcher-api
+              servicePort: 80
           - path: /ui
             backend:
               serviceName: resume-job-matcher-api
