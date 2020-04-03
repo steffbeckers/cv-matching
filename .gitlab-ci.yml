@@ -21,7 +21,7 @@ build:
   script:
     # front-end
     ## Vue
-    - docker build --pull -t "$CI_REGISTRY_IMAGE/resume-job-matcher-app" ./front-end/vue/resume-job-matcher
+    - docker build --pull --build-arg vue_build_mode=master -t "$CI_REGISTRY_IMAGE/resume-job-matcher-app" ./front-end/vue/resume-job-matcher
     - docker push "$CI_REGISTRY_IMAGE/resume-job-matcher-app"
     ## Angular
     #- docker build --pull -t "$CI_REGISTRY_IMAGE/resume-job-matcher-ng-app" ./front-end/angular/resume-job-matcher

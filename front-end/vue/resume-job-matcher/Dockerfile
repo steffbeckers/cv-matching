@@ -1,7 +1,7 @@
 # build stage
 FROM node:alpine as build-stage
 
-#ARG vue_build_mode
+ARG vue_build_mode
 
 WORKDIR /app
 
@@ -11,8 +11,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
-#RUN npm run build.${vue_build_mode}
+RUN npm run build.${vue_build_mode}
 
 # production stage
 FROM nginx:latest as production-stage
