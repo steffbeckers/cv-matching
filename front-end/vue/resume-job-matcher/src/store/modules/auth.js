@@ -8,7 +8,7 @@ const state = {
   authenticated: false,
   user: null,
   token: localStorage.getItem('token') || null,
-  rememberMe: false,
+  rememberMe: true,
 };
 
 // getters
@@ -44,7 +44,7 @@ const actions = {
   login({ commit, state }, credentials) {
     commit('LOGIN');
     Vue.axios
-      .post('/api/auth/login', credentials)
+      .post('/auth/login', credentials)
       .then((result) => {
         commit('LOGIN_SUCCESS', result.data);
 
@@ -55,7 +55,7 @@ const actions = {
         }
 
         // TODO: Routing? or in new action/mutation?
-        router.push({ name: 'Home' });
+        router.push({ name: 'Dashboard' });
       })
       .catch((error) => {
         commit('LOGIN_FAILED', error);
@@ -72,12 +72,12 @@ const actions = {
 
     commit('ME');
     Vue.axios
-      .get('/api/auth/me')
+      .get('/auth/me')
       .then((result) => {
         commit('ME_SUCCESS', result.data);
 
         // TODO: Routing? or in new action/mutation?
-        router.push({ name: 'Home' });
+        router.push({ name: 'Dashboard' });
       })
       .catch((error) => {
         commit('ME_FAILED', error);

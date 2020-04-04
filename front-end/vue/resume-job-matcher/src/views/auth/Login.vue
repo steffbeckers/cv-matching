@@ -1,15 +1,17 @@
 <template>
   <v-app>
     <v-content>
-      <v-container fluid>
-        <v-row>
-          <v-col>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
             <v-form v-model="loginFormValid" ref="loginForm" lazy-validation>
-              <v-card>
-                <v-card-title primary-title>
+              <v-card class="elevation-12">
+                <v-toolbar color="primary" dark flat>
+                  <v-toolbar-title>Resume Job Matcher</v-toolbar-title>
+                </v-toolbar>
+                <v-card-title class="pb-0" primary-title>
                   <div>
                     <h3 class="headline mb-0">Login</h3>
-                    <div></div>
                   </div>
                 </v-card-title>
                 <v-card-text>
@@ -28,10 +30,10 @@
                     required
                     autocomplete="current-password"
                   ></v-text-field>
-                  <v-checkbox label="Remember me?" v-model="rememberMe"></v-checkbox>
+                  <v-checkbox class="mt-0" label="Remember me?" v-model="rememberMe" :hide-details="true"></v-checkbox>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn block text @click="login" :disabled="!loginFormValid">
+                  <v-btn color="primary" class="elevation-0" block @click="login" :disabled="!loginFormValid">
                     Login
                   </v-btn>
                 </v-card-actions>
@@ -45,6 +47,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Login',
   data: () => ({
@@ -53,8 +57,12 @@ export default {
     emailOrUsernameRules: [(v) => !!v || 'Email or username is required'],
     password: '',
     passwordRules: [(v) => !!v || 'Password is required'],
-    rememberMe: false,
   }),
+  computed: {
+    ...mapState('auth', {
+      rememberMe: (state) => state.rememberMe,
+    }),
+  },
   methods: {
     login() {
       if (this.$refs.loginForm.validate()) {

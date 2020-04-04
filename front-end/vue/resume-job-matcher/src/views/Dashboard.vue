@@ -1,8 +1,8 @@
 <template>
   <v-app v-if="authenticated">
-    <v-app-bar dark clipped-left app>
-      <v-app-bar-nav-icon @click.stop="toggleDrawer()" />
-      <v-toolbar-title>Resume Job Matcher</v-toolbar-title>
+    <v-app-bar color="primary" dark clipped-left app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title class="pl-2">Resume Job Matcher</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn v-if="isAdmin" text to="admin" dark>Admin</v-btn>
       <v-btn text @click="logout" dark>Logout</v-btn>
@@ -11,18 +11,18 @@
       <v-list dense>
         <v-list-item link to="/">
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>Dashboard</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link to="about">
+        <v-list-item link to="resumes">
           <v-list-item-action>
-            <v-icon>mdi-info</v-icon>
+            <v-icon>mdi-file-account</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>About</v-list-item-title>
+            <v-list-item-title>Resumes</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -36,9 +36,9 @@
         </v-row>
       </v-container>
     </v-content>
-    <v-footer app dark>
+    <v-footer color="white" app>
       <v-spacer></v-spacer>
-      <span class="white--text"> &copy; 2020 <a href="https://steffbeckers.eu" class="white--text">Steff</a> </span>
+      <span>&copy; <a href="https://steffbeckers.eu" style="text-decoration: none">Steff</a></span>
     </v-footer>
   </v-app>
 </template>
@@ -47,19 +47,11 @@
 import { mapGetters, mapState } from 'vuex';
 
 export default {
-  name: 'Home',
+  name: 'Dashboard',
   data: () => ({
-    valid: true,
-    emailOrUsername: '',
-    emailOrUsernameRules: [(v) => !!v || 'Email or username is required'],
-    password: '',
-    passwordRules: [(v) => !!v || 'Password is required'],
-    rememberMe: true,
+    drawer: false,
   }),
   computed: {
-    ...mapState({
-      drawer: (state) => state.drawer,
-    }),
     ...mapState('auth', {
       authenticated: (state) => state.authenticated,
       user: (state) => state.user,
@@ -70,23 +62,8 @@ export default {
     }),
   },
   methods: {
-    login() {
-      if (this.$refs.form.validate()) {
-        this.$store.dispatch('auth/login', {
-          emailOrUsername: this.emailOrUsername,
-          password: this.password,
-          rememberMe: this.rememberMe,
-        });
-      }
-    },
     logout() {
       this.$store.dispatch('auth/logout');
-    },
-    clear() {
-      this.$refs.form.reset();
-    },
-    toggleDrawer() {
-      this.$store.dispatch('setDrawer', !this.drawer);
     },
   },
 };

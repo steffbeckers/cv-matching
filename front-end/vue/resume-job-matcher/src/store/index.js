@@ -7,17 +7,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    drawer: false,
+    // drawer: false,
   },
   actions: {
-    setDrawer({ commit }, payload) {
-      commit('SET_DRAWER', payload);
-    },
+    // setDrawer({ commit }, payload) {
+    //   commit('SET_DRAWER', payload);
+    // },
   },
   mutations: {
-    SET_DRAWER(state, payload) {
-      state.drawer = payload;
-    },
+    // SET_DRAWER(state, payload) {
+    //   state.drawer = payload;
+    // },
   },
   modules: {
     auth,
