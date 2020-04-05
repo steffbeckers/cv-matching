@@ -66,9 +66,6 @@ export default {
     logout() {
       this.$store.dispatch('auth/logout');
     },
-    clear() {
-      this.$refs.form.reset();
-    },
   },
 };
 </script>
