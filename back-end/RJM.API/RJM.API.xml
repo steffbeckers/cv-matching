@@ -791,6 +791,16 @@
             The URL property of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Document.SizeInBytes">
+            <summary>
+            The SizeInBytes property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.FileLastModifiedOn">
+            <summary>
+            The FileLastModifiedOn property of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Document.MimeType">
             <summary>
             The MimeType property of Document.
@@ -1481,9 +1491,14 @@
             The Path property of Document.
             </summary>
         </member>
-        <member name="P:RJM.API.ViewModels.DocumentVM.URL">
+        <member name="P:RJM.API.ViewModels.DocumentVM.SizeInBytes">
             <summary>
-            The URL property of Document.
+            The SizeInBytes property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.FileLastModifiedOn">
+            <summary>
+            The FileLastModifiedOn property of Document.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.MimeType">
