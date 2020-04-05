@@ -1,5 +1,9 @@
 image: docker:latest
 
+variables:
+  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_TLS_CERTDIR: ""
+
 services:
   - docker:dind
 
