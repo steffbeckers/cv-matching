@@ -59,7 +59,7 @@ export default {
   methods: {
     upload() {
       if (this.$refs.uploadForm.validate()) {
-        console.log(this.resumeToUpload);
+        // console.log(this.resumeToUpload);
       }
     },
   },
