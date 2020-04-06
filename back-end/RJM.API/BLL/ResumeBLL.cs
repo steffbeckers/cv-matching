@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Extensions;
 using RJM.API.Models;
 
 namespace RJM.API.BLL
@@ -12,27 +14,30 @@ namespace RJM.API.BLL
     public class ResumeBLL
     {
         private readonly ResumeRepository resumeRepository;
-        private readonly DocumentRepository documentRepository;
-        private readonly DocumentResumeRepository documentResumeRepository;
-        private readonly SkillRepository skillRepository;
+        private readonly ResumeStateRepository resumeStateRepository;
         private readonly ResumeSkillRepository resumeSkillRepository;
+        private readonly DocumentResumeRepository documentResumeRepository;
+        private readonly DocumentRepository documentRepository;
+        private readonly SkillRepository skillRepository;
 
 		/// <summary>
 		/// The constructor of the Resume business logic layer.
 		/// </summary>
         public ResumeBLL(
 			ResumeRepository resumeRepository,
+			ResumeStateRepository resumeStateRepository,
+			ResumeSkillRepository resumeSkillRepository,
+            DocumentResumeRepository documentResumeRepository,
             DocumentRepository documentRepository,
-			DocumentResumeRepository documentResumeRepository,
-            SkillRepository skillRepository,
-			ResumeSkillRepository resumeSkillRepository
+            SkillRepository skillRepository
 		)
         {
             this.resumeRepository = resumeRepository;
-            this.documentRepository = documentRepository;
-			this.documentResumeRepository = documentResumeRepository;
-            this.skillRepository = skillRepository;
+            this.resumeStateRepository = resumeStateRepository;
 			this.resumeSkillRepository = resumeSkillRepository;
+            this.documentResumeRepository = documentResumeRepository;
+            this.documentRepository = documentRepository;
+            this.skillRepository = skillRepository;
         }
 
 		/// <summary>
@@ -40,10 +45,6 @@ namespace RJM.API.BLL
 		/// </summary>
 		public async Task<IEnumerable<Resume>> GetAllResumesAsync()
         {
-			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
-			// Before retrieval
-			// #-#-#
-
             return await this.resumeRepository.GetWithLinkedEntitiesAsync();
         }
 
@@ -52,10 +53,6 @@ namespace RJM.API.BLL
 		/// </summary>
 		public async Task<Resume> GetResumeByIdAsync(Guid id)
         {
-			// #-#-# {F838CE2A-D0FB-4F8A-A826-0D653DEECB2B}
-			// Before retrieval
-			// #-#-#
-
             return await this.resumeRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
@@ -73,22 +70,47 @@ namespace RJM.API.BLL
             if (!string.IsNullOrEmpty(resume.Description))
                 resume.Description = resume.Description.Trim();
 
-			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-			// Before creation
-			// #-#-#
-
 			resume = await this.resumeRepository.InsertAsync(resume);
-
-			// #-#-# {1972C619-D2F2-48FD-8474-3A69621B1F78}
-			// After creation
-			// #-#-#
 
             return resume;
         }
 
-		/// <summary>
-		/// Updates an existing resume record by Id.
-		/// </summary>
+        public async Task<Resume> UploadResumeAsync(IFormFile file, DateTime lastModified)
+        {
+            // Validation
+            if (file == null) { return null; }
+
+            ResumeState resumeStateActive = await this.resumeStateRepository.GetByNameAsync("active");
+
+            Resume resume = new Resume()
+            {
+                ResumeState = resumeStateActive,
+                ResumeStateId = resumeStateActive.Id,
+                DocumentResume = new List<DocumentResume>()
+                {
+                    new DocumentResume()
+                    {
+                        Primary = true,
+                        Document = new Document()
+                        {
+                            Name = Guid.NewGuid().ToString().ToUpper() + "_" + file.FileName.ToSlug(),
+                            DisplayName = file.FileName,
+                            FileLastModifiedOn = lastModified,
+                            MimeType = file.ContentType,
+                            SizeInBytes = file.Length
+                        }
+                    }
+                }
+            };
+
+            resume = await this.resumeRepository.InsertAsync(resume);
+
+            return await GetResumeByIdAsync(resume.Id);
+        }
+
+        /// <summary>
+        /// Updates an existing resume record by Id.
+        /// </summary>
         public async Task<Resume> UpdateResumeAsync(Resume resumeUpdate)
         {
             // Validation
@@ -112,15 +134,7 @@ namespace RJM.API.BLL
             resume.Description = resumeUpdate.Description;
             resume.ResumeStateId = resumeUpdate.ResumeStateId;
 
-			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
-			// Before update
-			// #-#-#
-
 			resume = await this.resumeRepository.UpdateAsync(resume);
-
-			// #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
-			// After update
-			// #-#-#
 
             return resume;
         }

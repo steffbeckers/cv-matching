@@ -25,7 +25,12 @@ namespace RJM.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<ResumeState>> GetWithLinkedEntitiesAsync()
+        public async Task<ResumeState> GetByNameAsync(string name)
+        {
+            return await this.context.ResumeStates.FirstOrDefaultAsync(rs => rs.Name == name);
+        }
+
+        public async Task<IEnumerable<ResumeState>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.ResumeStates
                 .Include(x => x.Resumes)

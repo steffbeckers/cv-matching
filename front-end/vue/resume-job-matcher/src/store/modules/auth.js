@@ -134,7 +134,7 @@ const mutations = {
     state.error = null;
   },
   ME_SUCCESS(state, user) {
-    state.loading = true;
+    state.loading = false;
     state.authenticated = true;
     state.user = user;
   },
