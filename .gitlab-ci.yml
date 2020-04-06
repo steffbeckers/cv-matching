@@ -22,7 +22,7 @@ build:
   script:
     # front-end Vue
     - docker pull $CI_REGISTRY_IMAGE/resume-job-matcher-app
-    - docker build --cache-from $CI_REGISTRY_IMAGE/resume-job-matcher-app --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app ./front-end/resume-job-matcher
+    - docker build --cache-from $CI_REGISTRY_IMAGE/resume-job-matcher-app --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app ./front-end/vue/resume-job-matcher
     - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-app
     # back-end .NET Core
     - docker pull $CI_REGISTRY_IMAGE/resume-job-matcher-api
