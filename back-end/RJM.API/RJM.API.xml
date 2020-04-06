@@ -646,16 +646,6 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="T:RJM.API.DAL.AutoMapperProfile">
-            <summary>
-            Profile for mapping models to/from view models with AutoMapper.
-            </summary>
-        </member>
-        <member name="M:RJM.API.DAL.AutoMapperProfile.#ctor">
-            <summary>
-            The constructor of AutoMapperProfile.
-            </summary>
-        </member>
         <member name="T:RJM.API.DAL.Repositories.DocumentRepository">
             <summary>
             The repository for Documents in the data access layer.
@@ -756,6 +746,16 @@
             The constructor of the Skill repository.
             </summary>
         </member>
+        <member name="T:RJM.API.Mappers.AutoMapperProfile">
+            <summary>
+            Profile for mapping models to/from view models with AutoMapper.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Mappers.AutoMapperProfile.#ctor">
+            <summary>
+            The constructor of AutoMapperProfile.
+            </summary>
+        </member>
         <member name="T:RJM.API.Models.Document">
             <summary>
             Document model
@@ -789,6 +789,16 @@
         <member name="P:RJM.API.Models.Document.URL">
             <summary>
             The URL property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.SizeInBytes">
+            <summary>
+            The SizeInBytes property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.FileLastModifiedOn">
+            <summary>
+            The FileLastModifiedOn property of Document.
             </summary>
         </member>
         <member name="P:RJM.API.Models.Document.MimeType">
@@ -1481,9 +1491,14 @@
             The Path property of Document.
             </summary>
         </member>
-        <member name="P:RJM.API.ViewModels.DocumentVM.URL">
+        <member name="P:RJM.API.ViewModels.DocumentVM.SizeInBytes">
             <summary>
-            The URL property of Document.
+            The SizeInBytes property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.FileLastModifiedOn">
+            <summary>
+            The FileLastModifiedOn property of Document.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.MimeType">

@@ -6,7 +6,7 @@ using RJM.API.Models;
 using RJM.API.ViewModels;
 using RJM.API.ViewModels.Identity;
 
-namespace RJM.API.DAL
+namespace RJM.API.Mappers
 {
 	/// <summary>
 	/// Profile for mapping models to/from view models with AutoMapper.

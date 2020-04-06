@@ -46,15 +46,20 @@ namespace RJM.API.ViewModels
         /// </summary>
 		public string Path { get; set; }
 
-		/// <summary>
-        /// The URL property of Document.
+        /// <summary>
+        /// The SizeInBytes property of Document.
         /// </summary>
-		public string URL { get; set; }
+        public int? SizeInBytes { get; set; }
 
-		/// <summary>
+        /// <summary>
+        /// The FileLastModifiedOn property of Document.
+        /// </summary>
+        public DateTime FileLastModifiedOn { get; set; }
+
+        /// <summary>
         /// The MimeType property of Document.
         /// </summary>
-		public string MimeType { get; set; }
+        public string MimeType { get; set; }
 
 		// Relations
 
