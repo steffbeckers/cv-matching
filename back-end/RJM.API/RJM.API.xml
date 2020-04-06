@@ -134,7 +134,7 @@
             The business logic layer for Resumes.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.SkillRepository,RJM.API.DAL.Repositories.ResumeSkillRepository)">
+        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.ResumeStateRepository,RJM.API.DAL.Repositories.ResumeSkillRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.SkillRepository)">
             <summary>
             The constructor of the Resume business logic layer.
             </summary>

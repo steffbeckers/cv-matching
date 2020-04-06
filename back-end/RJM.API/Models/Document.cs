@@ -51,7 +51,7 @@ namespace RJM.API.Models
 		/// <summary>
 		/// The SizeInBytes property of Document.
 		/// </summary>
-		public int? SizeInBytes { get; set; }
+		public long? SizeInBytes { get; set; }
 
 		/// <summary>
 		/// The FileLastModifiedOn property of Document.

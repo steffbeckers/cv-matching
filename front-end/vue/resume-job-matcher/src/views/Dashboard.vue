@@ -47,6 +47,9 @@ export default {
     resumeToUploadRules: [(v) => !!v || 'Resume is required'],
   }),
   computed: {
+    ...mapState({
+      uploadedResume: (state) => state.uploadedResume,
+    }),
     ...mapState('auth', {
       authenticated: (state) => state.authenticated,
       user: (state) => state.user,
@@ -59,7 +62,7 @@ export default {
   methods: {
     upload() {
       if (this.$refs.uploadForm.validate()) {
-        // console.log(this.resumeToUpload);
+        this.$store.dispatch('uploadResume', { file: this.resumeToUpload, lastModified: this.resumeToUpload.lastModifiedDate });
       }
     },
   },

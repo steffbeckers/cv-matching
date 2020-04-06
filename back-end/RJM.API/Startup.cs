@@ -191,7 +191,7 @@ namespace RJM.API
 			// MVC
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
-                    options.SerializerSettings.MaxDepth = 5;
+                    options.SerializerSettings.MaxDepth = 10;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
