@@ -36,6 +36,7 @@ using RJM.API.Models;
 using RJM.API.Services;
 using Microsoft.AspNetCore.Http.Features;
 using RJM.API.Mappers;
+using Elastic.Apm.NetCoreAll;
 
 namespace RJM.API
 {
@@ -287,14 +288,17 @@ namespace RJM.API
             //    });
             //}
 
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+            // Elastic APM
+            app.UseAllElasticApm(this.configuration);
+
             // Update database migrations on startup
             UpdateDatabase(app);
 
             // Authentication
             app.UseAuthentication();
-
-            // Error handling
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseRouting();
 
