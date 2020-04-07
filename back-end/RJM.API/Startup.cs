@@ -37,6 +37,7 @@ using RJM.API.Services;
 using Microsoft.AspNetCore.Http.Features;
 using RJM.API.Mappers;
 using Elastic.Apm.NetCoreAll;
+using RJM.API.Services.Files;
 
 namespace RJM.API
 {
@@ -58,12 +59,39 @@ namespace RJM.API
             // Connection to the RJM database
             services.AddDbContext<RJMContext>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("RJMContext")));
+            
+            // Repositories
+            services.AddScoped<DocumentRepository>();
+            services.AddScoped<DocumentResumeRepository>();
+            services.AddScoped<ResumeRepository>();
+            services.AddScoped<ResumeStateRepository>();
+            services.AddScoped<SkillRepository>();
+            services.AddScoped<SkillAliasRepository>();
+            services.AddScoped<ResumeSkillRepository>();
+            services.AddScoped<JobRepository>();
+            services.AddScoped<JobStateRepository>();
+            services.AddScoped<JobSkillRepository>();
+
+            // BLLs
+            services.AddScoped<DocumentBLL>();
+            services.AddScoped<ResumeBLL>();
+            services.AddScoped<ResumeStateBLL>();
+            services.AddScoped<SkillBLL>();
+            services.AddScoped<SkillAliasBLL>();
+            services.AddScoped<JobBLL>();
+            services.AddScoped<JobStateBLL>();
+            services.AddScoped<AuthBLL>();
+
+            // Services
+            services.AddSingleton<IEmailService, EmailService>();
 
             // Uploads
+            services.AddSingleton<FileService>();
+            services.AddSingleton<AWSS3Service>();
             services.Configure<FormOptions>(options =>
             {
                 // Set the upload limit
-                options.MultipartBodyLengthLimit = this.configuration.GetSection("Uploads").GetValue<int>("MaxFileSizeInBytes");
+                options.MultipartBodyLengthLimit = this.configuration.GetSection("FileService").GetValue<int>("MaxFileSizeInBytes");
             });
 
             // Authentication
@@ -137,31 +165,6 @@ namespace RJM.API
                 options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
                 //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
             });
-
-            // Repositories
-			services.AddScoped<DocumentRepository>();
-			services.AddScoped<DocumentResumeRepository>();
-			services.AddScoped<ResumeRepository>();
-			services.AddScoped<ResumeStateRepository>();
-			services.AddScoped<SkillRepository>();
-			services.AddScoped<SkillAliasRepository>();
-			services.AddScoped<ResumeSkillRepository>();
-			services.AddScoped<JobRepository>();
-			services.AddScoped<JobStateRepository>();
-			services.AddScoped<JobSkillRepository>();
-
-			// BLLs
-			services.AddScoped<DocumentBLL>();
-			services.AddScoped<ResumeBLL>();
-			services.AddScoped<ResumeStateBLL>();
-			services.AddScoped<SkillBLL>();
-			services.AddScoped<SkillAliasBLL>();
-			services.AddScoped<JobBLL>();
-			services.AddScoped<JobStateBLL>();
-            services.AddScoped<AuthBLL>();
-
-            // Services
-            services.AddSingleton<IEmailService, EmailService>();
 
             // GraphQL
             services.AddScoped<IDependencyResolver>(s =>
@@ -292,7 +295,10 @@ namespace RJM.API
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             // Elastic APM
-            app.UseAllElasticApm(this.configuration);
+            if (env.IsProduction())
+            {
+                app.UseAllElasticApm(this.configuration);
+            }
 
             // Update database migrations on startup
             UpdateDatabase(app);

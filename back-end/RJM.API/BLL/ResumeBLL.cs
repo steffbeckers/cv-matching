@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using RJM.API.DAL.Repositories;
 using RJM.API.Framework.Extensions;
 using RJM.API.Models;
+using RJM.API.Services.Files;
 
 namespace RJM.API.BLL
 {
@@ -19,6 +21,7 @@ namespace RJM.API.BLL
         private readonly DocumentResumeRepository documentResumeRepository;
         private readonly DocumentRepository documentRepository;
         private readonly SkillRepository skillRepository;
+        private readonly FileService fileService; // TODO: Move to document bll?
 
 		/// <summary>
 		/// The constructor of the Resume business logic layer.
@@ -29,8 +32,9 @@ namespace RJM.API.BLL
 			ResumeSkillRepository resumeSkillRepository,
             DocumentResumeRepository documentResumeRepository,
             DocumentRepository documentRepository,
-            SkillRepository skillRepository
-		)
+            SkillRepository skillRepository,
+            FileService fileService
+        )
         {
             this.resumeRepository = resumeRepository;
             this.resumeStateRepository = resumeStateRepository;
@@ -38,6 +42,7 @@ namespace RJM.API.BLL
             this.documentResumeRepository = documentResumeRepository;
             this.documentRepository = documentRepository;
             this.skillRepository = skillRepository;
+            this.fileService = fileService;
         }
 
 		/// <summary>
@@ -80,6 +85,22 @@ namespace RJM.API.BLL
             // Validation
             if (file == null) { return null; }
 
+            Document document = new Document()
+            {
+                Id = Guid.NewGuid(),
+                Name = file.FileName.ToSlug(),
+                DisplayName = file.FileName,
+                FileLastModifiedOn = lastModified,
+                MimeType = file.ContentType,
+                SizeInBytes = file.Length
+            };
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                await this.fileService.UploadDocument(document, stream);
+            }
+
             ResumeState resumeStateActive = await this.resumeStateRepository.GetByNameAsync("active");
 
             Resume resume = new Resume()
@@ -91,14 +112,7 @@ namespace RJM.API.BLL
                     new DocumentResume()
                     {
                         Primary = true,
-                        Document = new Document()
-                        {
-                            Name = Guid.NewGuid().ToString().ToUpper() + "_" + file.FileName.ToSlug(),
-                            DisplayName = file.FileName,
-                            FileLastModifiedOn = lastModified,
-                            MimeType = file.ContentType,
-                            SizeInBytes = file.Length
-                        }
+                        Document = document
                     }
                 }
             };
