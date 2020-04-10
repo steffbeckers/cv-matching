@@ -61,14 +61,20 @@ namespace RJM.API.ViewModels
         /// </summary>
         public string MimeType { get; set; }
 
-		// Relations
+        public byte[] Content { get; set; }
 
-		//// Many-to-many
+        // Relations
 
-		/// <summary>
+        public Guid UserId { get; set; }
+
+        public UserVM User { get; set; }
+
+        //// Many-to-many
+
+        /// <summary>
         /// The related Resumes of Document.
         /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
+        public IList<ResumeVM> Resumes { get; set; }
 
         ////// To create a link with Resume directly on create of Document.
         public Guid? ResumeId { get; set; }

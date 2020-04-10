@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
 using RJM.API.Models;
 
@@ -16,6 +19,9 @@ namespace RJM.API.BLL
     public class DocumentBLL
     {
         private readonly IConfiguration configuration;
+        private readonly ILogger<DocumentBLL> logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<User> userManager;
         private readonly DocumentRepository documentRepository;
         private readonly ResumeRepository resumeRepository;
         private readonly DocumentResumeRepository documentResumeRepository;
@@ -25,12 +31,18 @@ namespace RJM.API.BLL
 		/// </summary>
         public DocumentBLL(
             IConfiguration configuration,
-			DocumentRepository documentRepository,
+            ILogger<DocumentBLL> logger,
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<User> userManager,
+            DocumentRepository documentRepository,
             ResumeRepository resumeRepository,
 			DocumentResumeRepository documentResumeRepository
 		)
         {
             this.configuration = configuration;
+            this.logger = logger;
+            this.httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
             this.documentRepository = documentRepository;
             this.resumeRepository = resumeRepository;
 			this.documentResumeRepository = documentResumeRepository;
@@ -67,8 +79,17 @@ namespace RJM.API.BLL
         {
             // Validation
             if (document == null) { return null; }
+            
+            // Before creation
 
-			// Trimming strings
+            // User
+            if (document.UserId == Guid.Empty)
+            {
+                User currentUser = await this.userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
+                document.UserId = currentUser.Id;
+            }
+
+            // Trimming strings
             if (!string.IsNullOrEmpty(document.Name))
                 document.Name = document.Name.Trim();
             if (!string.IsNullOrEmpty(document.DisplayName))
@@ -82,9 +103,7 @@ namespace RJM.API.BLL
             if (!string.IsNullOrEmpty(document.MimeType))
                 document.MimeType = document.MimeType.Trim();
 
-			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-			// Before creation
-			// #-#-#
+            // TODO: Upload document with FileService (move code from ResumeBLL)
 
 			document = await this.documentRepository.InsertAsync(document);
 

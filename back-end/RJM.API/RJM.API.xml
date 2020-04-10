@@ -14,7 +14,7 @@
             The business logic layer for Documents.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository)">
+        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository)">
             <summary>
             The constructor of the Document business logic layer.
             </summary>
@@ -152,6 +152,11 @@
         <member name="M:RJM.API.BLL.ResumeBLL.CreateResumeAsync(RJM.API.Models.Resume)">
             <summary>
             Creates a new resume record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.UploadResumeAsync(Microsoft.AspNetCore.Http.IFormFile,System.DateTime)">
+            <summary>
+            Upload a new resume.
             </summary>
         </member>
         <member name="M:RJM.API.BLL.ResumeBLL.UpdateResumeAsync(RJM.API.Models.Resume)">

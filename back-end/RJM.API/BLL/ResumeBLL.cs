@@ -75,13 +75,26 @@ namespace RJM.API.BLL
             if (!string.IsNullOrEmpty(resume.Description))
                 resume.Description = resume.Description.Trim();
 
-			resume = await this.resumeRepository.InsertAsync(resume);
+            // Default resume state
+            if (resume.ResumeStateId == Guid.Empty)
+            {
+                ResumeState resumeStateActive = await this.resumeStateRepository.GetByNameAsync("active");
+                resume.ResumeStateId = resumeStateActive.Id;
+                resume.ResumeState = resumeStateActive;
+            }
+
+            resume = await this.resumeRepository.InsertAsync(resume);
 
             return resume;
         }
 
+        /// <summary>
+		/// Upload a new resume.
+		/// </summary>
         public async Task<Resume> UploadResumeAsync(IFormFile file, DateTime lastModified)
         {
+            // TODO: Move to DocumentBLL
+
             // Validation
             if (file == null) { return null; }
 

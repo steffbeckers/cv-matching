@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RJM.API.Models
 {
@@ -63,13 +64,20 @@ namespace RJM.API.Models
 		/// </summary>
 		public string MimeType { get; set; }
 
+		[NotMapped]
+		public byte[] Content { get; set; }
+
 		// Relations
+
+		public Guid UserId { get; set; }
+
+		public User User { get; set; }
 
 		//// Many-to-many
 
 		/// <summary>
-        /// The related Resumes of Document.
-        /// </summary>
+		/// The related Resumes of Document.
+		/// </summary>
 		public IList<DocumentResume> DocumentResume { get; set; }
 
 		// Generic properties

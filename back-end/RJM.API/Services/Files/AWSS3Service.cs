@@ -49,7 +49,31 @@ namespace RJM.API.Services.Files
                 AutoCloseStream = true
             };
 
+            this.logger.LogInformation("Starting file upload to AWS S3 storage bucket: " + key + " (" + mimeType + ")");
+
             await fileTransferUtility.UploadAsync(uploadRequest);
+
+            this.logger.LogInformation("File uploaded to AWS S3 storage bucket: " + key + " (" + mimeType + ")");
+        }
+
+        public async Task<GetObjectResponse> DownloadFile(string key)
+        {
+            GetObjectRequest request = new GetObjectRequest
+            {
+                BucketName = this.configuration.GetSection("FileService")
+                                .GetSection("AWSS3Service")
+                                .GetSection("Bucket")
+                                .GetValue<string>("Name"),
+                Key = key
+            };
+
+            this.logger.LogInformation("Starting download from AWS S3 storage bucket: " + key);
+
+            GetObjectResponse response = await this.awsS3Client.GetObjectAsync(request);
+
+            this.logger.LogInformation("Downloaded file from AWS S3 storage bucket: " + response.Key + " (" + response.Headers["Content-Type"] + ")");
+
+            return response;
         }
     }
 }
