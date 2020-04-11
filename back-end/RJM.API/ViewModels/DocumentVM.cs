@@ -46,35 +46,42 @@ namespace RJM.API.ViewModels
         /// </summary>
 		public string Path { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The SizeInBytes property of Document.
         /// </summary>
-        public long? SizeInBytes { get; set; }
+		public long? SizeInBytes { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The FileLastModifiedOn property of Document.
         /// </summary>
-        public DateTime FileLastModifiedOn { get; set; }
+		public DateTime FileLastModifiedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The MimeType property of Document.
         /// </summary>
-        public string MimeType { get; set; }
+		public string MimeType { get; set; }
 
-        public byte[] Content { get; set; }
+		// Relations
 
-        // Relations
+		//// Many-to-one
 
-        public Guid UserId { get; set; }
+	    /// <summary>
+        /// The related foreign key DocumentTypeId for DocumentType of Document.
+        /// </summary>
+		public Guid? DocumentTypeId { get; set; }
 
-        public UserVM User { get; set; }
+		/// <summary>
+        /// The related DocumentType of Document.
+        /// </summary>
+		public DocumentTypeVM DocumentType { get; set; }
 
-        //// Many-to-many
 
-        /// <summary>
+		//// Many-to-many
+
+		/// <summary>
         /// The related Resumes of Document.
         /// </summary>
-        public IList<ResumeVM> Resumes { get; set; }
+		public IList<ResumeVM> Resumes { get; set; }
 
         ////// To create a link with Resume directly on create of Document.
         public Guid? ResumeId { get; set; }

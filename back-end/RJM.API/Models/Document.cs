@@ -69,9 +69,21 @@ namespace RJM.API.Models
 
 		// Relations
 
+		//// Many-to-one
+		
 		public Guid UserId { get; set; }
 
 		public User User { get; set; }
+
+		/// <summary>
+		/// The related foreign key DocumentTypeId for DocumentType of Document.
+		/// </summary>
+		public Guid? DocumentTypeId { get; set; }
+
+		/// <summary>
+		/// The related DocumentType of Document.
+		/// </summary>
+		public DocumentType DocumentType { get; set; }
 
 		//// Many-to-many
 
