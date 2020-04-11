@@ -2,10 +2,11 @@ using GraphQL.Types;
 using System;
 using RJM.API.DAL.Repositories;
 using RJM.API.Models;
+using APIModels = RJM.API.Models;
 
 namespace RJM.API.GraphQL.Types
 {
-    public class DocumentTypeType : ObjectGraphType<DocumentType>
+    public class DocumentTypeType : ObjectGraphType<APIModels.DocumentType>
     {
         public DocumentTypeType(
             DocumentRepository documentRepository,

@@ -2,8 +2,10 @@ using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
 using RJM.API.BLL;
+using GraphQLTypes = RJM.API.GraphQL.Types;
 using RJM.API.GraphQL.Types;
 using RJM.API.Models;
+using APIModels = RJM.API.Models;
 
 namespace RJM.API.GraphQL
 {
@@ -41,14 +43,14 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "updateDocument",
                 arguments: new QueryArguments(
                     //new QueryArgument<NonNullGraphType<IdGraphType>>
                     //{
                     //    Name = "id"
                     //},
-                    new QueryArgument<NonNullGraphType<DocumentInputType>>
+                    new QueryArgument<NonNullGraphType<GraphQLTypes.DocumentInputType>>
                     {
                         Name = "document"
                     }
@@ -64,7 +66,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "linkResumeToDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
@@ -82,7 +84,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "unlinkResumeFromDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
@@ -100,7 +102,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "removeDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>
@@ -129,7 +131,7 @@ namespace RJM.API.GraphQL
                 ),
                 resolve: async context =>
                 {
-                    DocumentType documentType = context.GetArgument<DocumentType>("documentType");
+                    APIModels.DocumentType documentType = context.GetArgument<APIModels.DocumentType>("documentType");
 
                     return await context.TryAsyncResolve(
                         async c => await documentTypeBLL.CreateDocumentTypeAsync(documentType)
@@ -152,7 +154,7 @@ namespace RJM.API.GraphQL
                 resolve: async context =>
                 {
                     //Guid id = context.GetArgument<Guid>("id");
-                    DocumentType documentType = context.GetArgument<DocumentType>("documentType");
+                    APIModels.DocumentType documentType = context.GetArgument<APIModels.DocumentType>("documentType");
 
                     return await context.TryAsyncResolve(
                         async c => await documentTypeBLL.UpdateDocumentTypeAsync(documentType)
