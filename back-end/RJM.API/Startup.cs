@@ -62,6 +62,7 @@ namespace RJM.API
             
             // Repositories
             services.AddScoped<DocumentRepository>();
+            services.AddScoped<DocumentTypeRepository>();
             services.AddScoped<DocumentResumeRepository>();
             services.AddScoped<ResumeRepository>();
             services.AddScoped<ResumeStateRepository>();
@@ -74,6 +75,7 @@ namespace RJM.API
 
             // BLLs
             services.AddScoped<DocumentBLL>();
+            services.AddScoped<DocumentTypeBLL>();
             services.AddScoped<ResumeBLL>();
             services.AddScoped<ResumeStateBLL>();
             services.AddScoped<SkillBLL>();
