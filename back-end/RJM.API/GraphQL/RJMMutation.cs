@@ -22,23 +22,23 @@ namespace RJM.API.GraphQL
             this.AuthorizeWith("Authorized");
 
 			// Documents
-            FieldAsync<DocumentType>(
-                "createDocument",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<DocumentInputType>>
-                    {
-                        Name = "document"
-                    }
-                ),
-                resolve: async context =>
-                {
-                    Document document = context.GetArgument<Document>("document");
+            //FieldAsync<DocumentType>(
+            //    "createDocument",
+            //    arguments: new QueryArguments(
+            //        new QueryArgument<NonNullGraphType<DocumentInputType>>
+            //        {
+            //            Name = "document"
+            //        }
+            //    ),
+            //    resolve: async context =>
+            //    {
+            //        Document document = context.GetArgument<Document>("document");
 
-                    return await context.TryAsyncResolve(
-                        async c => await documentBLL.CreateDocumentAsync(document)
-                    );
-                }
-            );
+            //        return await context.TryAsyncResolve(
+            //            async c => await documentBLL.CreateDocumentAsync(document)
+            //        );
+            //    }
+            //);
 
             FieldAsync<DocumentType>(
                 "updateDocument",

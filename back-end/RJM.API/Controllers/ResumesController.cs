@@ -97,26 +97,6 @@ namespace RJM.API.Controllers
 			);
         }
 
-        // POST: api/resumes/upload
-        [HttpPost("upload")]
-        public async Task<ActionResult<ResumeVM>> UploadResume([FromForm] IFormFile file, [FromForm] DateTime lastModified)
-        {
-            // Validation
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Resume resume = await this.bll.UploadResumeAsync(file, lastModified);
-
-            // Mapping
-            return CreatedAtAction(
-                "GetResume",
-                new { id = resume.Id },
-                this.mapper.Map<Resume, ResumeVM>(resume)
-            );
-        }
-
         // PUT: api/resumes/{id}
         /// <summary>
         /// Updates a specific resume.

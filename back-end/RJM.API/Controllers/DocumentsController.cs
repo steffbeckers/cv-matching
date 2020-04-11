@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using RJM.API.BLL;
 using RJM.API.Models;
 using RJM.API.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace RJM.API.Controllers
 {
@@ -70,12 +71,16 @@ namespace RJM.API.Controllers
         }
 
         // POST: api/documents
-		/// <summary>
-		/// Creates a new document.
-		/// </summary>
-		/// <param name="documentVM"></param>
+        /// <summary>
+        /// Uploads a new document.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="fileLastModified"></param>
         [HttpPost]
-        public async Task<ActionResult<DocumentVM>> CreateDocument([FromBody] DocumentVM documentVM)
+        public async Task<ActionResult<DocumentVM>> UploadDocument(
+            [FromForm] IFormFile file,
+            [FromForm] DateTime fileLastModified
+        )
         {
             // Validation
             if (!ModelState.IsValid)
@@ -83,10 +88,7 @@ namespace RJM.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Mapping
-            Document document = this.mapper.Map<DocumentVM, Document>(documentVM);
-
-            document = await this.bll.CreateDocumentAsync(document);
+            Document document = await this.bll.CreateDocumentAsync(file, fileLastModified);
 
 			// Mapping
             return CreatedAtAction(
@@ -96,12 +98,12 @@ namespace RJM.API.Controllers
 			);
         }
 
-		// PUT: api/documents/{id}
-		/// <summary>
-		/// Updates a specific document.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="documentVM"></param>
+        // PUT: api/documents/{id}
+        /// <summary>
+        /// Updates a specific document.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="documentVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<DocumentVM>> UpdateDocument([FromRoute] Guid id, [FromBody] DocumentVM documentVM)
         {

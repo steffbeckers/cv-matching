@@ -57,7 +57,7 @@ namespace RJM.API.Models
 		/// <summary>
 		/// The FileLastModifiedOn property of Document.
 		/// </summary>
-		public DateTime FileLastModifiedOn { get; set; }
+		public DateTime? FileLastModifiedOn { get; set; }
 
 		/// <summary>
 		/// The MimeType property of Document.

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Exceptions;
 using RJM.API.Models;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,11 @@ namespace RJM.API.Services.Files
 
         public async Task<Document> UploadDocument(Document document, Stream stream)
         {
-            if (document == null)
+            // Validation
+            if (document == null || stream == null)
             {
-                return document;
+                // TODO: Check for better exception/error handling implementation?
+                throw new FileServiceException("Document info and stream should be present");
             }
 
             string uploadLocation = this.configuration.GetSection("FileService")
@@ -45,8 +48,9 @@ namespace RJM.API.Services.Files
                                               .GetSection("Bucket")
                                               .GetValue<string>("DocumentsPath");
                     pathInBucket += "/" + document.Id.ToString().ToUpper();
+                    document.Path = pathInBucket;
 
-                    await this.awsS3Service.UploadFile(stream, pathInBucket, document.MimeType);
+                    await this.awsS3Service.UploadFile(stream, document.Path, document.MimeType);
                     break;
                 case "AzureStorage":
                     // TODO
@@ -58,9 +62,11 @@ namespace RJM.API.Services.Files
 
         public async Task<Stream> DownloadDocument(Document document)
         {
+            // Validation
             if (document == null)
             {
-                return null;
+                // TODO: Check for better exception/error handling implementation?
+                throw new FileServiceException("Document info should be present");
             }
 
             string downloadLocation = this.configuration.GetSection("FileService")
