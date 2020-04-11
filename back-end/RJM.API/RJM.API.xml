@@ -14,7 +14,7 @@
             The business logic layer for Documents.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository)">
+        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.Services.Files.FileService)">
             <summary>
             The constructor of the Document business logic layer.
             </summary>
@@ -29,7 +29,7 @@
             Retrieves one document by Id.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.CreateDocumentAsync(RJM.API.Models.Document)">
+        <member name="M:RJM.API.BLL.DocumentBLL.CreateDocumentAsync(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.DateTime})">
             <summary>
             Creates a new document record.
             </summary>
@@ -47,6 +47,46 @@
         <member name="M:RJM.API.BLL.DocumentBLL.DeleteDocumentAsync(RJM.API.Models.Document)">
             <summary>
             Deletes an existing document record.
+            </summary>
+        </member>
+        <member name="T:RJM.API.BLL.DocumentTypeBLL">
+            <summary>
+            The business logic layer for DocumentTypes.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.#ctor(RJM.API.DAL.Repositories.DocumentTypeRepository)">
+            <summary>
+            The constructor of the DocumentType business logic layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.GetAllDocumentTypesAsync">
+            <summary>
+            Retrieves all documenttypes.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.GetDocumentTypeByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one documenttype by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.CreateDocumentTypeAsync(RJM.API.Models.DocumentType)">
+            <summary>
+            Creates a new documenttype record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.UpdateDocumentTypeAsync(RJM.API.Models.DocumentType)">
+            <summary>
+            Updates an existing documenttype record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.DeleteDocumentTypeByIdAsync(System.Guid)">
+            <summary>
+            Deletes an existing documenttype record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.DocumentTypeBLL.DeleteDocumentTypeAsync(RJM.API.Models.DocumentType)">
+            <summary>
+            Deletes an existing documenttype record.
             </summary>
         </member>
         <member name="T:RJM.API.BLL.JobBLL">
@@ -134,7 +174,7 @@
             The business logic layer for Resumes.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.ResumeStateRepository,RJM.API.DAL.Repositories.ResumeSkillRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.SkillRepository,RJM.API.Services.Files.FileService)">
+        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.ResumeStateRepository,RJM.API.DAL.Repositories.ResumeSkillRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.SkillRepository)">
             <summary>
             The constructor of the Resume business logic layer.
             </summary>
@@ -315,11 +355,12 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:RJM.API.Controllers.DocumentsController.CreateDocument(RJM.API.ViewModels.DocumentVM)">
+        <member name="M:RJM.API.Controllers.DocumentsController.UploadDocument(Microsoft.AspNetCore.Http.IFormFile,System.DateTime)">
             <summary>
-            Creates a new document.
+            Uploads a new document.
             </summary>
-            <param name="documentVM"></param>
+            <param name="file"></param>
+            <param name="fileLastModified"></param>
         </member>
         <member name="M:RJM.API.Controllers.DocumentsController.UpdateDocument(System.Guid,RJM.API.ViewModels.DocumentVM)">
             <summary>
@@ -343,6 +384,46 @@
         <member name="M:RJM.API.Controllers.DocumentsController.DeleteDocument(System.Guid)">
             <summary>
             Deletes a specific document.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:RJM.API.Controllers.DocumentTypesController">
+            <summary>
+            The DocumentTypes controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentTypesController.#ctor(Microsoft.Extensions.Logging.ILogger{RJM.API.Controllers.DocumentTypesController},AutoMapper.IMapper,RJM.API.BLL.DocumentTypeBLL)">
+            <summary>
+            The constructor of the DocumentTypes controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentTypesController.GetDocumentTypes">
+            <summary>
+            Retrieves all documenttypes.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentTypesController.GetDocumentType(System.Guid)">
+            <summary>
+            Retrieves a specific documenttype.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentTypesController.CreateDocumentType(RJM.API.ViewModels.DocumentTypeVM)">
+            <summary>
+            Creates a new documenttype.
+            </summary>
+            <param name="documenttypeVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentTypesController.UpdateDocumentType(System.Guid,RJM.API.ViewModels.DocumentTypeVM)">
+            <summary>
+            Updates a specific documenttype.
+            </summary>
+            <param name="id"></param>
+            <param name="documentTypeVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentTypesController.DeleteDocumentType(System.Guid)">
+            <summary>
+            Deletes a specific documenttype.
             </summary>
             <param name="id"></param>
         </member>
@@ -666,6 +747,16 @@
             The constructor of the DocumentResume repository.
             </summary>
         </member>
+        <member name="T:RJM.API.DAL.Repositories.DocumentTypeRepository">
+            <summary>
+            The repository for DocumentTypes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.DocumentTypeRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the DocumentType repository.
+            </summary>
+        </member>
         <member name="T:RJM.API.DAL.Repositories.JobRepository">
             <summary>
             The repository for Jobs in the data access layer.
@@ -806,6 +897,16 @@
             The MimeType property of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Document.DocumentTypeId">
+            <summary>
+            The related foreign key DocumentTypeId for DocumentType of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.DocumentType">
+            <summary>
+            The related DocumentType of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Document.DocumentResume">
             <summary>
             The related Resumes of Document.
@@ -907,6 +1008,66 @@
             </summary>
         </member>
         <member name="P:RJM.API.Models.DocumentResume.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.DocumentType">
+            <summary>
+            DocumentType model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.Id">
+            <summary>
+            The identifier of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.Name">
+            <summary>
+            The Name property of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.DisplayName">
+            <summary>
+            The DisplayName property of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.Documents">
+            <summary>
+            The related Documents of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentType.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
@@ -1461,6 +1622,61 @@
             The user who last modified the record
             </summary>
         </member>
+        <member name="T:RJM.API.ViewModels.DocumentTypeVM">
+            <summary>
+            DocumentType view model
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.Id">
+            <summary>
+            The identifier of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.Name">
+            <summary>
+            The Name property of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.DisplayName">
+            <summary>
+            The DisplayName property of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.Documents">
+            <summary>
+            The related Documents of DocumentType.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentTypeVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:RJM.API.ViewModels.DocumentVM">
             <summary>
             Document view model
@@ -1504,6 +1720,16 @@
         <member name="P:RJM.API.ViewModels.DocumentVM.MimeType">
             <summary>
             The MimeType property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.DocumentTypeId">
+            <summary>
+            The related foreign key DocumentTypeId for DocumentType of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.DocumentType">
+            <summary>
+            The related DocumentType of Document.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.Resumes">

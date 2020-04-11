@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RJM.API.Models
 {
@@ -56,20 +57,39 @@ namespace RJM.API.Models
 		/// <summary>
 		/// The FileLastModifiedOn property of Document.
 		/// </summary>
-		public DateTime FileLastModifiedOn { get; set; }
+		public DateTime? FileLastModifiedOn { get; set; }
 
 		/// <summary>
 		/// The MimeType property of Document.
 		/// </summary>
 		public string MimeType { get; set; }
 
+		[NotMapped]
+		public byte[] Content { get; set; }
+
 		// Relations
+
+		//// Many-to-one
+		
+		public Guid UserId { get; set; }
+
+		public User User { get; set; }
+
+		/// <summary>
+		/// The related foreign key DocumentTypeId for DocumentType of Document.
+		/// </summary>
+		public Guid? DocumentTypeId { get; set; }
+
+		/// <summary>
+		/// The related DocumentType of Document.
+		/// </summary>
+		public DocumentType DocumentType { get; set; }
 
 		//// Many-to-many
 
 		/// <summary>
-        /// The related Resumes of Document.
-        /// </summary>
+		/// The related Resumes of Document.
+		/// </summary>
 		public IList<DocumentResume> DocumentResume { get; set; }
 
 		// Generic properties

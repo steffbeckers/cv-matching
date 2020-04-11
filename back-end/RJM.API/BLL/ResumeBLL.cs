@@ -21,7 +21,6 @@ namespace RJM.API.BLL
         private readonly DocumentResumeRepository documentResumeRepository;
         private readonly DocumentRepository documentRepository;
         private readonly SkillRepository skillRepository;
-        private readonly FileService fileService; // TODO: Move to document bll?
 
 		/// <summary>
 		/// The constructor of the Resume business logic layer.
@@ -32,8 +31,7 @@ namespace RJM.API.BLL
 			ResumeSkillRepository resumeSkillRepository,
             DocumentResumeRepository documentResumeRepository,
             DocumentRepository documentRepository,
-            SkillRepository skillRepository,
-            FileService fileService
+            SkillRepository skillRepository
         )
         {
             this.resumeRepository = resumeRepository;
@@ -42,7 +40,6 @@ namespace RJM.API.BLL
             this.documentResumeRepository = documentResumeRepository;
             this.documentRepository = documentRepository;
             this.skillRepository = skillRepository;
-            this.fileService = fileService;
         }
 
 		/// <summary>
@@ -75,51 +72,17 @@ namespace RJM.API.BLL
             if (!string.IsNullOrEmpty(resume.Description))
                 resume.Description = resume.Description.Trim();
 
-			resume = await this.resumeRepository.InsertAsync(resume);
-
-            return resume;
-        }
-
-        public async Task<Resume> UploadResumeAsync(IFormFile file, DateTime lastModified)
-        {
-            // Validation
-            if (file == null) { return null; }
-
-            Document document = new Document()
+            // Default resume state
+            if (resume.ResumeStateId == Guid.Empty)
             {
-                Id = Guid.NewGuid(),
-                Name = file.FileName.ToSlug(),
-                DisplayName = file.FileName,
-                FileLastModifiedOn = lastModified,
-                MimeType = file.ContentType,
-                SizeInBytes = file.Length
-            };
-
-            using (MemoryStream stream = new MemoryStream())
-            {
-                await file.CopyToAsync(stream);
-                await this.fileService.UploadDocument(document, stream);
+                ResumeState resumeStateActive = await this.resumeStateRepository.GetByNameAsync("active");
+                resume.ResumeStateId = resumeStateActive.Id;
+                resume.ResumeState = resumeStateActive;
             }
-
-            ResumeState resumeStateActive = await this.resumeStateRepository.GetByNameAsync("active");
-
-            Resume resume = new Resume()
-            {
-                ResumeState = resumeStateActive,
-                ResumeStateId = resumeStateActive.Id,
-                DocumentResume = new List<DocumentResume>()
-                {
-                    new DocumentResume()
-                    {
-                        Primary = true,
-                        Document = document
-                    }
-                }
-            };
 
             resume = await this.resumeRepository.InsertAsync(resume);
 
-            return await GetResumeByIdAsync(resume.Id);
+            return resume;
         }
 
         /// <summary>
@@ -146,7 +109,8 @@ namespace RJM.API.BLL
             // Mapping
             resume.JobTitle = resumeUpdate.JobTitle;
             resume.Description = resumeUpdate.Description;
-            resume.ResumeStateId = resumeUpdate.ResumeStateId;
+            if (resumeUpdate.ResumeStateId != Guid.Empty)
+                resume.ResumeStateId = resumeUpdate.ResumeStateId;
 
 			resume = await this.resumeRepository.UpdateAsync(resume);
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RJM.API.DAL;
 
 namespace RJM.API.Migrations
 {
     [DbContext(typeof(RJMContext))]
-    partial class RJMContextModelSnapshot : ModelSnapshot
+    [Migration("20200410223122_DocumentUserId")]
+    partial class DocumentUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,10 +171,7 @@ namespace RJM.API.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DocumentTypeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("FileLastModifiedOn")
+                    b.Property<DateTime>("FileLastModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MimeType")
@@ -203,8 +202,6 @@ namespace RJM.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("DocumentTypeId");
 
                     b.HasIndex("ModifiedByUserId");
 
@@ -254,44 +251,6 @@ namespace RJM.API.Migrations
                     b.HasIndex("ResumeId");
 
                     b.ToTable("DocumentResume");
-                });
-
-            modelBuilder.Entity("RJM.API.Models.DocumentType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ModifiedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("ModifiedByUserId");
-
-                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("RJM.API.Models.Job", b =>
@@ -754,10 +713,6 @@ namespace RJM.API.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("RJM.API.Models.DocumentType", "DocumentType")
-                        .WithMany("Documents")
-                        .HasForeignKey("DocumentTypeId");
-
                     b.HasOne("RJM.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
@@ -795,21 +750,6 @@ namespace RJM.API.Migrations
                         .WithMany("DocumentResume")
                         .HasForeignKey("ResumeId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RJM.API.Models.DocumentType", b =>
-                {
-                    b.HasOne("RJM.API.Models.User", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("RJM.API.Models.User", "ModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("ModifiedByUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

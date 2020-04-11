@@ -19,10 +19,10 @@ export default new Vuex.Store({
 
       const formData = new FormData();
       formData.append('file', resumeData.file, resumeData.file.Name);
-      formData.append('lastModified', resumeData.lastModified.toISOString());
+      formData.append('fileLastModified', resumeData.lastModified.toISOString());
 
       Vue.axios
-        .post('/resumes/upload', formData)
+        .post('/documents', formData)
         .then((result) => {
           commit('RESUME_UPLOAD_SUCCESS', result.data);
         })

@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
-using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Exceptions;
+using RJM.API.Framework.Extensions;
 using RJM.API.Models;
+using RJM.API.Services.Files;
 
 namespace RJM.API.BLL
 {
@@ -16,34 +20,44 @@ namespace RJM.API.BLL
     public class DocumentBLL
     {
         private readonly IConfiguration configuration;
+        private readonly ILogger<DocumentBLL> logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<User> userManager;
         private readonly DocumentRepository documentRepository;
         private readonly ResumeRepository resumeRepository;
         private readonly DocumentResumeRepository documentResumeRepository;
+        private readonly FileService fileService;
 
-		/// <summary>
-		/// The constructor of the Document business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Document business logic layer.
+        /// </summary>
         public DocumentBLL(
             IConfiguration configuration,
-			DocumentRepository documentRepository,
+            ILogger<DocumentBLL> logger,
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<User> userManager,
+            DocumentRepository documentRepository,
             ResumeRepository resumeRepository,
-			DocumentResumeRepository documentResumeRepository
-		)
+			DocumentResumeRepository documentResumeRepository,
+            FileService fileService
+        )
         {
             this.configuration = configuration;
+            this.logger = logger;
+            this.httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
             this.documentRepository = documentRepository;
             this.resumeRepository = resumeRepository;
 			this.documentResumeRepository = documentResumeRepository;
+            this.fileService = fileService;
         }
 
-		/// <summary>
-		/// Retrieves all documents.
-		/// </summary>
-		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
+        /// <summary>
+        /// Retrieves all documents.
+        /// </summary>
+        public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
-			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
 			// Before retrieval
-			// #-#-#
 
             return await this.documentRepository.GetWithLinkedEntitiesAsync();
         }
@@ -53,9 +67,7 @@ namespace RJM.API.BLL
 		/// </summary>
 		public async Task<Document> GetDocumentByIdAsync(Guid id)
         {
-			// #-#-# {F838CE2A-D0FB-4F8A-A826-0D653DEECB2B}
 			// Before retrieval
-			// #-#-#
 
             return await this.documentRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
@@ -63,39 +75,48 @@ namespace RJM.API.BLL
 		/// <summary>
 		/// Creates a new document record.
 		/// </summary>
-        public async Task<Document> CreateDocumentAsync(Document document)
+        public async Task<Document> CreateDocumentAsync(IFormFile file, DateTime? fileLastModified)
         {
             // Validation
-            if (document == null) { return null; }
+            if (file == null) {
+                // TODO: Check for better exception/error handling implementation?
+                throw new DocumentException("File should be present");
+            }
 
-			// Trimming strings
-            if (!string.IsNullOrEmpty(document.Name))
-                document.Name = document.Name.Trim();
-            if (!string.IsNullOrEmpty(document.DisplayName))
-                document.DisplayName = document.DisplayName.Trim();
-            if (!string.IsNullOrEmpty(document.Description))
-                document.Description = document.Description.Trim();
-            if (!string.IsNullOrEmpty(document.Path))
-                document.Path = document.Path.Trim();
-            if (!string.IsNullOrEmpty(document.URL))
-                document.URL = document.URL.Trim();
-            if (!string.IsNullOrEmpty(document.MimeType))
-                document.MimeType = document.MimeType.Trim();
+            Document document = new Document()
+            {
+                Id = Guid.NewGuid(),
+                Name = file.FileName.ToSlug(),
+                DisplayName = file.FileName,
+                MimeType = file.ContentType,
+                SizeInBytes = file.Length,
+                FileLastModifiedOn = fileLastModified
+            };
 
-			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-			// Before creation
-			// #-#-#
+            // Before creation
 
-			document = await this.documentRepository.InsertAsync(document);
+            // User
+            User currentUser = await this.userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
+            document.UserId = currentUser.Id;
+            document.User = currentUser;
+
+            // File upload
+            using (MemoryStream stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                document = await this.fileService.UploadDocument(document, stream);
+            }
+
+            document = await this.documentRepository.InsertAsync(document);
 
 			// After creation
 
             return document;
         }
 
-		/// <summary>
-		/// Updates an existing document record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing document record by Id.
+        /// </summary>
         public async Task<Document> UpdateDocumentAsync(Document documentUpdate)
         {
             // Validation
@@ -131,6 +152,7 @@ namespace RJM.API.BLL
             document.SizeInBytes = documentUpdate.SizeInBytes;
             document.FileLastModifiedOn = documentUpdate.FileLastModifiedOn;
             document.MimeType = documentUpdate.MimeType;
+            document.DocumentTypeId = documentUpdate.DocumentTypeId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update
