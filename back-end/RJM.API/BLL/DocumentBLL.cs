@@ -24,6 +24,7 @@ namespace RJM.API.BLL
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
         private readonly DocumentRepository documentRepository;
+        private readonly DocumentTypeRepository documentTypeRepository;
         private readonly ResumeRepository resumeRepository;
         private readonly DocumentResumeRepository documentResumeRepository;
         private readonly FileService fileService;
@@ -37,6 +38,7 @@ namespace RJM.API.BLL
             IHttpContextAccessor httpContextAccessor,
             UserManager<User> userManager,
             DocumentRepository documentRepository,
+            DocumentTypeRepository documentTypeRepository,
             ResumeRepository resumeRepository,
 			DocumentResumeRepository documentResumeRepository,
             FileService fileService
@@ -47,6 +49,7 @@ namespace RJM.API.BLL
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
             this.documentRepository = documentRepository;
+            this.documentTypeRepository = documentTypeRepository;
             this.resumeRepository = resumeRepository;
 			this.documentResumeRepository = documentResumeRepository;
             this.fileService = fileService;
@@ -75,7 +78,7 @@ namespace RJM.API.BLL
 		/// <summary>
 		/// Creates a new document record.
 		/// </summary>
-        public async Task<Document> CreateDocumentAsync(IFormFile file, DateTime? fileLastModified)
+        public async Task<Document> CreateDocumentAsync(IFormFile file, DateTime? fileLastModified, string typeName)
         {
             // Validation
             if (file == null) {
@@ -95,6 +98,17 @@ namespace RJM.API.BLL
 
             // Before creation
 
+            // Document type
+            if (!string.IsNullOrEmpty(typeName))
+            {
+                DocumentType documentType = await this.documentTypeRepository.GetByNameAsync(typeName);
+                if (documentType != null)
+                {
+                    document.DocumentTypeId = documentType.Id;
+                    document.DocumentType = documentType;
+                }
+            }
+
             // User
             User currentUser = await this.userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
             document.UserId = currentUser.Id;
@@ -109,7 +123,12 @@ namespace RJM.API.BLL
 
             document = await this.documentRepository.InsertAsync(document);
 
-			// After creation
+            // After creation
+
+            // TODO: 
+            // - Create resume if type is a resume?
+            // - Background service with queue? RabbitMQ?
+            // - Start parsing with Amazon Textract?
 
             return document;
         }
