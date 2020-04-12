@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200321000009_ResumeAndSkill.cs" />
     <Compile Remove="Migrations\20200321000009_ResumeAndSkill.Designer.cs" />
+    <Compile Remove="Migrations\20200412214046_DocumentTypeUploadedResume.cs" />
+    <Compile Remove="Migrations\20200412214046_DocumentTypeUploadedResume.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

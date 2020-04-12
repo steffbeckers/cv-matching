@@ -64,15 +64,18 @@ namespace RJM.API.Models
 		/// </summary>
 		public string MimeType { get; set; }
 
-		[NotMapped]
-		public byte[] Content { get; set; }
-
 		// Relations
 
 		//// Many-to-one
-		
+
+		/// <summary>
+		/// The related foreign key UserId for User of Document.
+		/// </summary>
 		public Guid UserId { get; set; }
 
+		/// <summary>
+		/// The related User of Document.
+		/// </summary>
 		public User User { get; set; }
 
 		/// <summary>

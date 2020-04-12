@@ -14,7 +14,7 @@
             The business logic layer for Documents.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.Services.Files.FileService)">
+        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.DocumentTypeRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.Services.Files.FileService)">
             <summary>
             The constructor of the Document business logic layer.
             </summary>
@@ -29,7 +29,7 @@
             Retrieves one document by Id.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.CreateDocumentAsync(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.DateTime})">
+        <member name="M:RJM.API.BLL.DocumentBLL.CreateDocumentAsync(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.DateTime},System.String)">
             <summary>
             Creates a new document record.
             </summary>
@@ -355,12 +355,13 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:RJM.API.Controllers.DocumentsController.UploadDocument(Microsoft.AspNetCore.Http.IFormFile,System.DateTime)">
+        <member name="M:RJM.API.Controllers.DocumentsController.UploadDocument(Microsoft.AspNetCore.Http.IFormFile,System.DateTime,System.String)">
             <summary>
             Uploads a new document.
             </summary>
             <param name="file"></param>
             <param name="fileLastModified"></param>
+            <param name="typeName"></param>
         </member>
         <member name="M:RJM.API.Controllers.DocumentsController.UpdateDocument(System.Guid,RJM.API.ViewModels.DocumentVM)">
             <summary>
@@ -895,6 +896,16 @@
         <member name="P:RJM.API.Models.Document.MimeType">
             <summary>
             The MimeType property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.UserId">
+            <summary>
+            The related foreign key UserId for User of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.User">
+            <summary>
+            The related User of Document.
             </summary>
         </member>
         <member name="P:RJM.API.Models.Document.DocumentTypeId">
@@ -1642,41 +1653,6 @@
             The DisplayName property of DocumentType.
             </summary>
         </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.Documents">
-            <summary>
-            The related Documents of DocumentType.
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.CreatedOn">
-            <summary>
-            The date and time of when the record is created
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.ModifiedOn">
-            <summary>
-            The date and time of when the record is modified
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.CreatedByUserId">
-            <summary>
-            The Id of the user who created the record
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.CreatedByUser">
-            <summary>
-            The user who created the record
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.ModifiedByUserId">
-            <summary>
-            The Id of the user who last modified the record
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.DocumentTypeVM.ModifiedByUser">
-            <summary>
-            The user who last modified the record
-            </summary>
-        </member>
         <member name="T:RJM.API.ViewModels.DocumentVM">
             <summary>
             Document view model
@@ -1707,6 +1683,11 @@
             The Path property of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.URL">
+            <summary>
+            The URL property of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.SizeInBytes">
             <summary>
             The SizeInBytes property of Document.
@@ -1720,6 +1701,16 @@
         <member name="P:RJM.API.ViewModels.DocumentVM.MimeType">
             <summary>
             The MimeType property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.UserId">
+            <summary>
+            The related foreign key UserId for User of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.User">
+            <summary>
+            The related User of Document.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.DocumentTypeId">

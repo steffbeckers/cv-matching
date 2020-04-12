@@ -47,14 +47,19 @@ namespace RJM.API.ViewModels
 		public string Path { get; set; }
 
 		/// <summary>
-        /// The SizeInBytes property of Document.
-        /// </summary>
+		/// The URL property of Document.
+		/// </summary>
+		public string URL { get; set; }
+
+		/// <summary>
+		/// The SizeInBytes property of Document.
+		/// </summary>
 		public long? SizeInBytes { get; set; }
 
 		/// <summary>
         /// The FileLastModifiedOn property of Document.
         /// </summary>
-		public DateTime FileLastModifiedOn { get; set; }
+		public DateTime? FileLastModifiedOn { get; set; }
 
 		/// <summary>
         /// The MimeType property of Document.
@@ -65,16 +70,25 @@ namespace RJM.API.ViewModels
 
 		//// Many-to-one
 
-	    /// <summary>
-        /// The related foreign key DocumentTypeId for DocumentType of Document.
-        /// </summary>
+		/// <summary>
+		/// The related foreign key UserId for User of Document.
+		/// </summary>
+		public Guid UserId { get; set; }
+
+		/// <summary>
+		/// The related User of Document.
+		/// </summary>
+		public UserVM User { get; set; }
+
+		/// <summary>
+		/// The related foreign key DocumentTypeId for DocumentType of Document.
+		/// </summary>
 		public Guid? DocumentTypeId { get; set; }
 
 		/// <summary>
         /// The related DocumentType of Document.
         /// </summary>
 		public DocumentTypeVM DocumentType { get; set; }
-
 
 		//// Many-to-many
 
@@ -117,6 +131,5 @@ namespace RJM.API.ViewModels
         /// The user who last modified the record
         /// </summary>
 		public UserVM ModifiedByUser { get; set; }
-
     }
 }

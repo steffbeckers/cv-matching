@@ -76,10 +76,12 @@ namespace RJM.API.Controllers
         /// </summary>
         /// <param name="file"></param>
         /// <param name="fileLastModified"></param>
+        /// <param name="typeName"></param>
         [HttpPost]
         public async Task<ActionResult<DocumentVM>> UploadDocument(
             [FromForm] IFormFile file,
-            [FromForm] DateTime fileLastModified
+            [FromForm] DateTime fileLastModified,
+            [FromForm] string typeName
         )
         {
             // Validation
@@ -88,7 +90,7 @@ namespace RJM.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Document document = await this.bll.CreateDocumentAsync(file, fileLastModified);
+            Document document = await this.bll.CreateDocumentAsync(file, fileLastModified, typeName);
 
 			// Mapping
             return CreatedAtAction(
