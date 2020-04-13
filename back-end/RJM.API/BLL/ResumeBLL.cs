@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
 using RJM.API.Framework.Extensions;
 using RJM.API.Models;
@@ -15,18 +18,29 @@ namespace RJM.API.BLL
 	/// </summary>
     public class ResumeBLL
     {
+        private readonly IConfiguration configuration;
+        private readonly ILogger<DocumentBLL> logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<User> userManager;
+
         private readonly ResumeRepository resumeRepository;
         private readonly ResumeStateRepository resumeStateRepository;
         private readonly ResumeSkillRepository resumeSkillRepository;
+
         private readonly DocumentResumeRepository documentResumeRepository;
         private readonly DocumentRepository documentRepository;
+
         private readonly SkillRepository skillRepository;
 
 		/// <summary>
 		/// The constructor of the Resume business logic layer.
 		/// </summary>
         public ResumeBLL(
-			ResumeRepository resumeRepository,
+            IConfiguration configuration,
+            ILogger<DocumentBLL> logger,
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<User> userManager,
+            ResumeRepository resumeRepository,
 			ResumeStateRepository resumeStateRepository,
 			ResumeSkillRepository resumeSkillRepository,
             DocumentResumeRepository documentResumeRepository,
@@ -34,11 +48,18 @@ namespace RJM.API.BLL
             SkillRepository skillRepository
         )
         {
+            this.configuration = configuration;
+            this.logger = logger;
+            this.httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
+
             this.resumeRepository = resumeRepository;
             this.resumeStateRepository = resumeStateRepository;
 			this.resumeSkillRepository = resumeSkillRepository;
+
             this.documentResumeRepository = documentResumeRepository;
             this.documentRepository = documentRepository;
+
             this.skillRepository = skillRepository;
         }
 
@@ -66,7 +87,9 @@ namespace RJM.API.BLL
             // Validation
             if (resume == null) { return null; }
 
-			// Trimming strings
+            // Before creation
+
+            // Trimming strings
             if (!string.IsNullOrEmpty(resume.JobTitle))
                 resume.JobTitle = resume.JobTitle.Trim();
             if (!string.IsNullOrEmpty(resume.Description))
@@ -80,7 +103,17 @@ namespace RJM.API.BLL
                 resume.ResumeState = resumeStateActive;
             }
 
+            // User
+            if (resume.UserId == Guid.Empty)
+            {
+                User currentUser = await this.userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
+                resume.UserId = currentUser.Id;
+                resume.User = currentUser;
+            }
+
             resume = await this.resumeRepository.InsertAsync(resume);
+
+            // After creation
 
             return resume;
         }

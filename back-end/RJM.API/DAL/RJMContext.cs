@@ -103,6 +103,11 @@ namespace RJM.API.DAL
 
             // User
             modelBuilder.Entity<Document>()
+                .HasOne(x => x.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Document>()
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
@@ -185,6 +190,11 @@ namespace RJM.API.DAL
             modelBuilder.Entity<Resume>().Property(e => e.ResumeStateId).IsRequired();
 
             // User
+            modelBuilder.Entity<Resume>()
+                .HasOne(x => x.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Resume>()
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
