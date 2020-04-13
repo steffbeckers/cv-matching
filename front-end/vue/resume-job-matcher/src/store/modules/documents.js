@@ -9,7 +9,7 @@ const state = {
 
 // actions
 const actions = {
-  upload({ commit }, payload) {
+  upload({ commit, dispatch }, payload) {
     commit('UPLOAD', payload);
 
     const formData = new FormData();
@@ -21,6 +21,9 @@ const actions = {
       .post('/documents', formData)
       .then((result) => {
         commit('UPLOAD_SUCCESS', result.data);
+
+        // Load resumes again
+        dispatch('resumes/getAll', null, { root: true });
       })
       .catch((error) => {
         commit('UPLOAD_FAILED', error);

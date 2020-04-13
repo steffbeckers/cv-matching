@@ -33,6 +33,7 @@ namespace RJM.API.DAL.Repositories
                     .ThenInclude(x => x.Resume)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
+                .OrderByDescending(x => x.ModifiedOn)
                 .ToListAsync();
         }
 

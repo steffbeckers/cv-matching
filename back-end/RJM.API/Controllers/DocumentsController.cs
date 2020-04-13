@@ -90,7 +90,7 @@ namespace RJM.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Document document = await this.bll.CreateDocumentAsync(file, fileLastModified, typeName);
+            Document document = await this.bll.UploadDocumentAsync(file, fileLastModified, typeName);
 
 			// Mapping
             return CreatedAtAction(

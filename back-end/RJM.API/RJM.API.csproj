@@ -13,6 +13,10 @@
     <Compile Remove="Migrations\20200321000009_ResumeAndSkill.Designer.cs" />
     <Compile Remove="Migrations\20200412214046_DocumentTypeUploadedResume.cs" />
     <Compile Remove="Migrations\20200412214046_DocumentTypeUploadedResume.Designer.cs" />
+    <Compile Remove="Migrations\20200413200213_ResumeUser.cs" />
+    <Compile Remove="Migrations\20200413200213_ResumeUser.Designer.cs" />
+    <Compile Remove="Migrations\20200413201227_ResumeUser.cs" />
+    <Compile Remove="Migrations\20200413201227_ResumeUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

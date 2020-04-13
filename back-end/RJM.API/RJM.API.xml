@@ -14,7 +14,7 @@
             The business logic layer for Documents.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.DocumentTypeRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.Services.Files.FileService)">
+        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.Services.Files.FileService,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.DocumentTypeRepository,RJM.API.BLL.ResumeBLL,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository)">
             <summary>
             The constructor of the Document business logic layer.
             </summary>
@@ -29,9 +29,9 @@
             Retrieves one document by Id.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.CreateDocumentAsync(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.DateTime},System.String)">
+        <member name="M:RJM.API.BLL.DocumentBLL.UploadDocumentAsync(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.DateTime},System.String)">
             <summary>
-            Creates a new document record.
+            Uploads a new document.
             </summary>
         </member>
         <member name="M:RJM.API.BLL.DocumentBLL.UpdateDocumentAsync(RJM.API.Models.Document)">
@@ -174,7 +174,7 @@
             The business logic layer for Resumes.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.ResumeStateRepository,RJM.API.DAL.Repositories.ResumeSkillRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.SkillRepository)">
+        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.BLL.DocumentBLL},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{RJM.API.Models.User},RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.ResumeStateRepository,RJM.API.DAL.Repositories.ResumeSkillRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.SkillRepository)">
             <summary>
             The constructor of the Resume business logic layer.
             </summary>
@@ -1308,6 +1308,16 @@
             The Description property of Resume.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Resume.UserId">
+            <summary>
+            The related foreign key UserId for User of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.User">
+            <summary>
+            The related User of Resume.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Resume.ResumeStateId">
             <summary>
             The related foreign key ResumeStateId for ResumeState of Resume.
@@ -1898,41 +1908,6 @@
             The DisplayName property of ResumeState.
             </summary>
         </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.Resumes">
-            <summary>
-            The related Resumes of ResumeState.
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.CreatedOn">
-            <summary>
-            The date and time of when the record is created
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.ModifiedOn">
-            <summary>
-            The date and time of when the record is modified
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.CreatedByUserId">
-            <summary>
-            The Id of the user who created the record
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.CreatedByUser">
-            <summary>
-            The user who created the record
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.ModifiedByUserId">
-            <summary>
-            The Id of the user who last modified the record
-            </summary>
-        </member>
-        <member name="P:RJM.API.ViewModels.ResumeStateVM.ModifiedByUser">
-            <summary>
-            The user who last modified the record
-            </summary>
-        </member>
         <member name="T:RJM.API.ViewModels.ResumeVM">
             <summary>
             Resume view model
@@ -1951,6 +1926,16 @@
         <member name="P:RJM.API.ViewModels.ResumeVM.Description">
             <summary>
             The Description property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.UserId">
+            <summary>
+            The related foreign key UserId for User of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.User">
+            <summary>
+            The related User of Resume.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.ResumeVM.ResumeStateId">

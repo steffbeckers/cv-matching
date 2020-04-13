@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RJM.API.Models;
 using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
@@ -40,9 +41,19 @@ namespace RJM.API.ViewModels
 
 		//// Many-to-one
 
-	    /// <summary>
-        /// The related foreign key ResumeStateId for ResumeState of Resume.
-        /// </summary>
+		/// <summary>
+		/// The related foreign key UserId for User of Resume.
+		/// </summary>
+		public Guid UserId { get; set; }
+
+		/// <summary>
+		/// The related User of Resume.
+		/// </summary>
+		public UserVM User { get; set; }
+
+		/// <summary>
+		/// The related foreign key ResumeStateId for ResumeState of Resume.
+		/// </summary>
 		public Guid ResumeStateId { get; set; }
 
 		/// <summary>

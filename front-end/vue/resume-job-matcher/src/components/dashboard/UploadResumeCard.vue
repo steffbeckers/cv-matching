@@ -9,8 +9,8 @@
       <v-card-text>
         <v-file-input
           v-model="resumeToUpload"
-          label="Select your resume"
-          prepend-icon="mdi-file-account"
+          label="Choose file"
+          append-icon="mdi-file-account"
           :show-size="1000"
           :rules="resumeToUploadRules"
           required

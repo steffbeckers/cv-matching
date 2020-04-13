@@ -31,10 +31,12 @@ namespace RJM.API.DAL.Repositories
                 .Include(x => x.ResumeState)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Document)
+                        .ThenInclude(x => x.DocumentType)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
+                .OrderByDescending(x => x.ModifiedOn)
                 .ToListAsync();
         }
 
@@ -44,6 +46,7 @@ namespace RJM.API.DAL.Repositories
                 .Include(x => x.ResumeState)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Document)
+                        .ThenInclude(x => x.DocumentType)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)

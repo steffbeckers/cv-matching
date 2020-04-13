@@ -54,8 +54,7 @@ namespace RJM.API.Mappers
                     x => x.MapFrom(
                         y => y.DocumentResume.Select(z => z.Document)
                     )
-                );
-			CreateMap<Resume, ResumeVM>()
+                )
                 .ForMember(
                     x => x.Skills,
                     x => x.MapFrom(
@@ -77,8 +76,7 @@ namespace RJM.API.Mappers
                             }
                         );
                     }
-                );
-            CreateMap<ResumeVM, Resume>()
+                )
                 .ForMember(
                     x => x.ResumeSkill,
                     x =>
@@ -108,8 +106,7 @@ namespace RJM.API.Mappers
                     x => x.MapFrom(
                         y => y.ResumeSkill.Select(z => z.Resume)
                     )
-                );
-			CreateMap<Skill, SkillVM>()
+                )
                 .ForMember(
                     x => x.Jobs,
                     x => x.MapFrom(
@@ -133,8 +130,7 @@ namespace RJM.API.Mappers
                             }
                         );
                     }
-                );
-            CreateMap<SkillVM, Skill>()
+                )
                 .ForMember(
                     x => x.JobSkill,
                     x =>

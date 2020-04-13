@@ -23,11 +23,14 @@ namespace RJM.API.BLL
         private readonly ILogger<DocumentBLL> logger;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
+        private readonly FileService fileService;
+
         private readonly DocumentRepository documentRepository;
         private readonly DocumentTypeRepository documentTypeRepository;
+
+        private readonly ResumeBLL resumeBLL;
         private readonly ResumeRepository resumeRepository;
         private readonly DocumentResumeRepository documentResumeRepository;
-        private readonly FileService fileService;
 
         /// <summary>
         /// The constructor of the Document business logic layer.
@@ -37,22 +40,26 @@ namespace RJM.API.BLL
             ILogger<DocumentBLL> logger,
             IHttpContextAccessor httpContextAccessor,
             UserManager<User> userManager,
+            FileService fileService,
             DocumentRepository documentRepository,
             DocumentTypeRepository documentTypeRepository,
+            ResumeBLL resumeBLL,
             ResumeRepository resumeRepository,
-			DocumentResumeRepository documentResumeRepository,
-            FileService fileService
+			DocumentResumeRepository documentResumeRepository
         )
         {
             this.configuration = configuration;
             this.logger = logger;
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
+            this.fileService = fileService;
+
             this.documentRepository = documentRepository;
             this.documentTypeRepository = documentTypeRepository;
+
+            this.resumeBLL = resumeBLL;
             this.resumeRepository = resumeRepository;
 			this.documentResumeRepository = documentResumeRepository;
-            this.fileService = fileService;
         }
 
         /// <summary>
@@ -76,9 +83,9 @@ namespace RJM.API.BLL
         }
 
 		/// <summary>
-		/// Creates a new document record.
+		/// Uploads a new document.
 		/// </summary>
-        public async Task<Document> CreateDocumentAsync(IFormFile file, DateTime? fileLastModified, string typeName)
+        public async Task<Document> UploadDocumentAsync(IFormFile file, DateTime? fileLastModified, string typeName)
         {
             // Validation
             if (file == null) {
@@ -125,8 +132,26 @@ namespace RJM.API.BLL
 
             // After creation
 
-            // TODO: 
-            // - Create resume if type is a resume?
+            // Resume
+            if (document.DocumentType != null && document.DocumentType.Name == "uploaded-resume")
+            {
+                Resume resume = new Resume()
+                {
+                    Description = "Resume created during upload of document: " + document.DisplayName,
+                    DocumentResume = new List<DocumentResume>() {
+                        new DocumentResume()
+                        {
+                            DocumentId = document.Id,
+                            Document = document,
+                            Primary = true
+                        }
+                    }
+                };
+
+                await this.resumeBLL.CreateResumeAsync(resume);
+            }
+
+            // TODO:
             // - Background service with queue? RabbitMQ?
             // - Start parsing with Amazon Textract?
 

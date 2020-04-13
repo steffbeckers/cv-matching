@@ -38,16 +38,25 @@ namespace RJM.API.Models
 
 		//// Many-to-one
 
-	    /// <summary>
-        /// The related foreign key ResumeStateId for ResumeState of Resume.
-        /// </summary>
+		/// <summary>
+		/// The related foreign key UserId for User of Resume.
+		/// </summary>
+		public Guid UserId { get; set; }
+
+		/// <summary>
+		/// The related User of Resume.
+		/// </summary>
+		public User User { get; set; }
+
+		/// <summary>
+		/// The related foreign key ResumeStateId for ResumeState of Resume.
+		/// </summary>
 		public Guid ResumeStateId { get; set; }
 
 		/// <summary>
         /// The related ResumeState of Resume.
         /// </summary>
 		public ResumeState ResumeState { get; set; }
-
 
 		//// Many-to-many
 
