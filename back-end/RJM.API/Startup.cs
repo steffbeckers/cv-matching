@@ -38,6 +38,10 @@ using Microsoft.AspNetCore.Http.Features;
 using RJM.API.Mappers;
 using Elastic.Apm.NetCoreAll;
 using RJM.API.Services.Files;
+using RJM.API.Services.Emails;
+using Microsoft.Extensions.ObjectPool;
+using RJM.API.Services.RabbitMQ;
+using RabbitMQ.Client;
 
 namespace RJM.API
 {
@@ -95,6 +99,11 @@ namespace RJM.API
                 // Set the upload limit
                 options.MultipartBodyLengthLimit = this.configuration.GetSection("FileService").GetValue<int>("MaxFileSizeInBytes");
             });
+
+            // RabbitMQ
+            services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
+            services.AddSingleton<IPooledObjectPolicy<IModel>, RabbitMQPooledObjectPolicy>();
+            services.AddSingleton<RabbitMQService>();
 
             // Authentication
             services.AddIdentity<User, IdentityRole<Guid>>()

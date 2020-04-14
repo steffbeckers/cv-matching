@@ -11,6 +11,7 @@ using RJM.API.Framework.Exceptions;
 using RJM.API.Framework.Extensions;
 using RJM.API.Models;
 using RJM.API.Services.Files;
+using RJM.API.Services.RabbitMQ;
 
 namespace RJM.API.BLL
 {
@@ -23,7 +24,9 @@ namespace RJM.API.BLL
         private readonly ILogger<DocumentBLL> logger;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
+
         private readonly FileService fileService;
+        private readonly RabbitMQService rabbitMQService;
 
         private readonly DocumentRepository documentRepository;
         private readonly DocumentTypeRepository documentTypeRepository;
@@ -41,6 +44,7 @@ namespace RJM.API.BLL
             IHttpContextAccessor httpContextAccessor,
             UserManager<User> userManager,
             FileService fileService,
+            RabbitMQService rabbitMQService,
             DocumentRepository documentRepository,
             DocumentTypeRepository documentTypeRepository,
             ResumeBLL resumeBLL,
@@ -51,8 +55,10 @@ namespace RJM.API.BLL
             this.configuration = configuration;
             this.logger = logger;
             this.httpContextAccessor = httpContextAccessor;
+
             this.userManager = userManager;
             this.fileService = fileService;
+            this.rabbitMQService = rabbitMQService;
 
             this.documentRepository = documentRepository;
             this.documentTypeRepository = documentTypeRepository;
@@ -149,11 +155,30 @@ namespace RJM.API.BLL
                 };
 
                 await this.resumeBLL.CreateResumeAsync(resume);
-            }
 
-            // TODO:
-            // - Background service with queue? RabbitMQ?
-            // - Start parsing with Amazon Textract?
+                // TODO:
+                // - Background service with queue? RabbitMQ?
+                // - Start parsing with Amazon Textract?
+                // TEST:
+                Document documentToQueue = new Document()
+                {
+                    Id = document.Id,
+                    Path = document.Path,
+                    MimeType = document.MimeType,
+                    SizeInBytes = document.SizeInBytes,
+                    DocumentType = document.DocumentType
+                };
+                if (document.DocumentType != null)
+                {
+                    documentToQueue.DocumentType = new DocumentType()
+                    {
+                        Id = document.DocumentType.Id,
+                        Name = document.DocumentType.Name,
+                        DisplayName = document.DocumentType.DisplayName
+                    };
+                }
+                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "*.amazon.textract.parsing");
+            }
 
             return document;
         }
