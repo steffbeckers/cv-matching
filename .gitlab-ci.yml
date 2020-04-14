@@ -21,15 +21,18 @@ build:
   stage: build
   script:
     # front-end Vue
-    - docker pull $CI_REGISTRY_IMAGE/resume-job-matcher-app
-    - docker build --build-arg vue_build_mode=master --cache-from $CI_REGISTRY_IMAGE/resume-job-matcher-app --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app ./front-end/vue/resume-job-matcher
+    - docker build --build-arg vue_build_mode=master --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-app ./front-end/vue/resume-job-matcher
     - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-app:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-app
     # back-end .NET Core
-    - docker pull $CI_REGISTRY_IMAGE/resume-job-matcher-api
-    - docker build --cache-from $CI_REGISTRY_IMAGE/resume-job-matcher-api --tag $CI_REGISTRY_IMAGE/resume-job-matcher-api:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-api ./back-end/RJM.API
+    ## API
+    - docker build --tag $CI_REGISTRY_IMAGE/resume-job-matcher-api:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-api ./back-end/RJM.API
     - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-api:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-api
+    ## Background tasks
+    - docker build --tag $CI_REGISTRY_IMAGE/resume-job-matcher-background-worker:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE/resume-job-matcher-background-worker ./back-end/RJM.BackgroundTasks
+    - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-background-worker:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE/resume-job-matcher-background-worker
   only:
     - master
 # deploy stage
