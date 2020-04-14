@@ -4,16 +4,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
-COPY ["RJM.API.csproj", "RJM.API/"]
-RUN dotnet restore "RJM.API/RJM.API.csproj"
-COPY . "RJM.API/"
-WORKDIR "/src/RJM.API"
-RUN dotnet build "RJM.API.csproj" -c Release -o /app
+COPY ["RJM.BackgroundTasks.csproj", "RJM.BackgroundTasks/"]
+RUN dotnet restore "RJM.BackgroundTasks/RJM.BackgroundTasks.csproj"
+COPY . "RJM.BackgroundTasks/"
+WORKDIR "/src/RJM.BackgroundTasks"
+RUN dotnet build "RJM.BackgroundTasks.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "RJM.API.csproj" -c Release -o /app
+RUN dotnet publish "RJM.BackgroundTasks.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "RJM.API.dll"]
+ENTRYPOINT ["dotnet", "RJM.BackgroundTasks.dll"]
