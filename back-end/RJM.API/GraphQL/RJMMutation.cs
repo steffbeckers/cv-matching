@@ -2,8 +2,10 @@ using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
 using RJM.API.BLL;
+using GraphQLTypes = RJM.API.GraphQL.Types;
 using RJM.API.GraphQL.Types;
 using RJM.API.Models;
+using APIModels = RJM.API.Models;
 
 namespace RJM.API.GraphQL
 {
@@ -11,6 +13,7 @@ namespace RJM.API.GraphQL
     {
         public RJMMutation(
 			DocumentBLL documentBLL,
+			DocumentTypeBLL documentTypeBLL,
 			ResumeBLL resumeBLL,
 			ResumeStateBLL resumeStateBLL,
 			SkillBLL skillBLL,
@@ -22,32 +25,32 @@ namespace RJM.API.GraphQL
             this.AuthorizeWith("Authorized");
 
 			// Documents
-            FieldAsync<DocumentType>(
-                "createDocument",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<DocumentInputType>>
-                    {
-                        Name = "document"
-                    }
-                ),
-                resolve: async context =>
-                {
-                    Document document = context.GetArgument<Document>("document");
+            //FieldAsync<DocumentType>(
+            //    "createDocument",
+            //    arguments: new QueryArguments(
+            //        new QueryArgument<NonNullGraphType<DocumentInputType>>
+            //        {
+            //            Name = "document"
+            //        }
+            //    ),
+            //    resolve: async context =>
+            //    {
+            //        Document document = context.GetArgument<Document>("document");
 
-                    return await context.TryAsyncResolve(
-                        async c => await documentBLL.CreateDocumentAsync(document)
-                    );
-                }
-            );
+            //        return await context.TryAsyncResolve(
+            //            async c => await documentBLL.CreateDocumentAsync(document)
+            //        );
+            //    }
+            //);
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "updateDocument",
                 arguments: new QueryArguments(
                     //new QueryArgument<NonNullGraphType<IdGraphType>>
                     //{
                     //    Name = "id"
                     //},
-                    new QueryArgument<NonNullGraphType<DocumentInputType>>
+                    new QueryArgument<NonNullGraphType<GraphQLTypes.DocumentInputType>>
                     {
                         Name = "document"
                     }
@@ -63,7 +66,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "linkResumeToDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
@@ -81,7 +84,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "unlinkResumeFromDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
@@ -99,7 +102,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-            FieldAsync<DocumentType>(
+            FieldAsync<GraphQLTypes.DocumentType>(
                 "removeDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>
@@ -113,6 +116,66 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await documentBLL.DeleteDocumentByIdAsync(id)
+                    );
+                }
+            );
+
+			// DocumentTypes
+            FieldAsync<DocumentTypeType>(
+                "createDocumentType",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentTypeInputType>>
+                    {
+                        Name = "documentType"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    APIModels.DocumentType documentType = context.GetArgument<APIModels.DocumentType>("documentType");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentTypeBLL.CreateDocumentTypeAsync(documentType)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentTypeType>(
+                "updateDocumentType",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<DocumentTypeInputType>>
+                    {
+                        Name = "documentType"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    APIModels.DocumentType documentType = context.GetArgument<APIModels.DocumentType>("documentType");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentTypeBLL.UpdateDocumentTypeAsync(documentType)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentTypeType>(
+                "removeDocumentType",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentTypeBLL.DeleteDocumentTypeByIdAsync(id)
                     );
                 }
             );

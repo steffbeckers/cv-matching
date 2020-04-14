@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using RJM.API.BLL;
 using RJM.API.Models;
 using RJM.API.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace RJM.API.Controllers
 {
@@ -77,7 +78,7 @@ namespace RJM.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ResumeVM>> CreateResume([FromBody] ResumeVM resumeVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -96,12 +97,12 @@ namespace RJM.API.Controllers
 			);
         }
 
-		// PUT: api/resumes/{id}
-		/// <summary>
-		/// Updates a specific resume.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="resumeVM"></param>
+        // PUT: api/resumes/{id}
+        /// <summary>
+        /// Updates a specific resume.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="resumeVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<ResumeVM>> UpdateResume([FromRoute] Guid id, [FromBody] ResumeVM resumeVM)
         {

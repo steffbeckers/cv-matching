@@ -2,7 +2,17 @@ using System;
 
 namespace RJM.API.Framework.Exceptions
 {
-    # region Authentication
+    public class DocumentException : Exception
+    {
+        public DocumentException(string message) : base(message) { }
+    }
+
+    public class FileServiceException : Exception
+    {
+        public FileServiceException(string message) : base(message) { }
+    }
+
+    #region Authentication
 
     public class LoginFailedException : Exception
     {

@@ -36,6 +36,12 @@ using RJM.API.Models;
 using RJM.API.Services;
 using Microsoft.AspNetCore.Http.Features;
 using RJM.API.Mappers;
+using Elastic.Apm.NetCoreAll;
+using RJM.API.Services.Files;
+using RJM.API.Services.Emails;
+using Microsoft.Extensions.ObjectPool;
+using RJM.API.Services.RabbitMQ;
+using RabbitMQ.Client;
 
 namespace RJM.API
 {
@@ -57,13 +63,47 @@ namespace RJM.API
             // Connection to the RJM database
             services.AddDbContext<RJMContext>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("RJMContext")));
+            
+            // Repositories
+            services.AddScoped<DocumentRepository>();
+            services.AddScoped<DocumentTypeRepository>();
+            services.AddScoped<DocumentResumeRepository>();
+            services.AddScoped<ResumeRepository>();
+            services.AddScoped<ResumeStateRepository>();
+            services.AddScoped<SkillRepository>();
+            services.AddScoped<SkillAliasRepository>();
+            services.AddScoped<ResumeSkillRepository>();
+            services.AddScoped<JobRepository>();
+            services.AddScoped<JobStateRepository>();
+            services.AddScoped<JobSkillRepository>();
+
+            // BLLs
+            services.AddScoped<DocumentBLL>();
+            services.AddScoped<DocumentTypeBLL>();
+            services.AddScoped<ResumeBLL>();
+            services.AddScoped<ResumeStateBLL>();
+            services.AddScoped<SkillBLL>();
+            services.AddScoped<SkillAliasBLL>();
+            services.AddScoped<JobBLL>();
+            services.AddScoped<JobStateBLL>();
+            services.AddScoped<AuthBLL>();
+
+            // Services
+            services.AddSingleton<IEmailService, EmailService>();
 
             // Uploads
+            services.AddSingleton<FileService>();
+            services.AddSingleton<AWSS3Service>();
             services.Configure<FormOptions>(options =>
             {
                 // Set the upload limit
-                options.MultipartBodyLengthLimit = this.configuration.GetSection("Uploads").GetValue<int>("MaxFileSizeInBytes");
+                options.MultipartBodyLengthLimit = this.configuration.GetSection("FileService").GetValue<int>("MaxFileSizeInBytes");
             });
+
+            // RabbitMQ
+            services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
+            services.AddSingleton<IPooledObjectPolicy<IModel>, RabbitMQPooledObjectPolicy>();
+            services.AddSingleton<RabbitMQService>();
 
             // Authentication
             services.AddIdentity<User, IdentityRole<Guid>>()
@@ -137,31 +177,6 @@ namespace RJM.API
                 //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
             });
 
-            // Repositories
-			services.AddScoped<DocumentRepository>();
-			services.AddScoped<DocumentResumeRepository>();
-			services.AddScoped<ResumeRepository>();
-			services.AddScoped<ResumeStateRepository>();
-			services.AddScoped<SkillRepository>();
-			services.AddScoped<SkillAliasRepository>();
-			services.AddScoped<ResumeSkillRepository>();
-			services.AddScoped<JobRepository>();
-			services.AddScoped<JobStateRepository>();
-			services.AddScoped<JobSkillRepository>();
-
-			// BLLs
-			services.AddScoped<DocumentBLL>();
-			services.AddScoped<ResumeBLL>();
-			services.AddScoped<ResumeStateBLL>();
-			services.AddScoped<SkillBLL>();
-			services.AddScoped<SkillAliasBLL>();
-			services.AddScoped<JobBLL>();
-			services.AddScoped<JobStateBLL>();
-            services.AddScoped<AuthBLL>();
-
-            // Services
-            services.AddSingleton<IEmailService, EmailService>();
-
             // GraphQL
             services.AddScoped<IDependencyResolver>(s =>
                 new FuncDependencyResolver(s.GetRequiredService));
@@ -191,7 +206,7 @@ namespace RJM.API
 			// MVC
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
-                    options.SerializerSettings.MaxDepth = 5;
+                    options.SerializerSettings.MaxDepth = 10;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
@@ -287,14 +302,20 @@ namespace RJM.API
             //    });
             //}
 
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+            // Elastic APM
+            if (env.IsProduction())
+            {
+                app.UseAllElasticApm(this.configuration);
+            }
+
             // Update database migrations on startup
             UpdateDatabase(app);
 
             // Authentication
             app.UseAuthentication();
-
-            // Error handling
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseRouting();
 

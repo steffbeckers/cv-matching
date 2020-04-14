@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "RJM.BackgroundTasks": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

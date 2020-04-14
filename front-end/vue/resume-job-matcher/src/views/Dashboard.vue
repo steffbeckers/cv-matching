@@ -3,34 +3,15 @@
     <v-row>
       <v-col>
         <h1>Hi, {{ user.firstName }}</h1>
+        <p class="mb-0">This is your personal dashboard.</p>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="8" md="4">
-        <v-form v-model="uploadFormValid" ref="uploadForm" lazy-validation>
-          <v-card>
-            <v-card-title class="pb-0" primary-title>
-              <div>
-                <h3 class="headline mb-0">Upload your own resume</h3>
-              </div>
-            </v-card-title>
-            <v-card-text>
-              <v-file-input
-                v-model="resumeToUpload"
-                label="Select your resume"
-                prepend-icon="mdi-file-account"
-                :show-size="1000"
-                :rules="resumeToUploadRules"
-                required
-              ></v-file-input>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" class="elevation-0" block @click="upload" :disabled="!uploadFormValid">
-                Upload
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-form>
+      <v-col cols="12" sm="6" md="4">
+        <UploadResumeCard />
+      </v-col>
+      <v-col cols="12" sm="6" md="8">
+        <ResumesCard />
       </v-col>
     </v-row>
   </v-container>
@@ -39,13 +20,13 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 
+// Components
+import UploadResumeCard from '../components/dashboard/UploadResumeCard';
+import ResumesCard from '../components/dashboard/ResumesCard';
+
 export default {
   name: 'Dashboard',
-  data: () => ({
-    uploadFormValid: false,
-    resumeToUpload: null,
-    resumeToUploadRules: [(v) => !!v || 'Resume is required'],
-  }),
+  data: () => ({}),
   computed: {
     ...mapState('auth', {
       authenticated: (state) => state.authenticated,
@@ -56,12 +37,13 @@ export default {
       rolesList: 'rolesList',
     }),
   },
-  methods: {
-    upload() {
-      if (this.$refs.uploadForm.validate()) {
-        // console.log(this.resumeToUpload);
-      }
-    },
+  mounted() {
+    // Load resumes
+    this.$store.dispatch('resumes/getAll');
+  },
+  components: {
+    UploadResumeCard,
+    ResumesCard,
   },
 };
 </script>

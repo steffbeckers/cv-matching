@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
-using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Exceptions;
+using RJM.API.Framework.Extensions;
 using RJM.API.Models;
+using RJM.API.Services.Files;
+using RJM.API.Services.RabbitMQ;
 
 namespace RJM.API.BLL
 {
@@ -16,34 +21,59 @@ namespace RJM.API.BLL
     public class DocumentBLL
     {
         private readonly IConfiguration configuration;
+        private readonly ILogger<DocumentBLL> logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<User> userManager;
+
+        private readonly FileService fileService;
+        private readonly RabbitMQService rabbitMQService;
+
         private readonly DocumentRepository documentRepository;
+        private readonly DocumentTypeRepository documentTypeRepository;
+
+        private readonly ResumeBLL resumeBLL;
         private readonly ResumeRepository resumeRepository;
         private readonly DocumentResumeRepository documentResumeRepository;
 
-		/// <summary>
-		/// The constructor of the Document business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Document business logic layer.
+        /// </summary>
         public DocumentBLL(
             IConfiguration configuration,
-			DocumentRepository documentRepository,
+            ILogger<DocumentBLL> logger,
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<User> userManager,
+            FileService fileService,
+            RabbitMQService rabbitMQService,
+            DocumentRepository documentRepository,
+            DocumentTypeRepository documentTypeRepository,
+            ResumeBLL resumeBLL,
             ResumeRepository resumeRepository,
 			DocumentResumeRepository documentResumeRepository
-		)
+        )
         {
             this.configuration = configuration;
+            this.logger = logger;
+            this.httpContextAccessor = httpContextAccessor;
+
+            this.userManager = userManager;
+            this.fileService = fileService;
+            this.rabbitMQService = rabbitMQService;
+
             this.documentRepository = documentRepository;
+            this.documentTypeRepository = documentTypeRepository;
+
+            this.resumeBLL = resumeBLL;
             this.resumeRepository = resumeRepository;
 			this.documentResumeRepository = documentResumeRepository;
         }
 
-		/// <summary>
-		/// Retrieves all documents.
-		/// </summary>
-		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
+        /// <summary>
+        /// Retrieves all documents.
+        /// </summary>
+        public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
-			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
 			// Before retrieval
-			// #-#-#
 
             return await this.documentRepository.GetWithLinkedEntitiesAsync();
         }
@@ -53,49 +83,109 @@ namespace RJM.API.BLL
 		/// </summary>
 		public async Task<Document> GetDocumentByIdAsync(Guid id)
         {
-			// #-#-# {F838CE2A-D0FB-4F8A-A826-0D653DEECB2B}
 			// Before retrieval
-			// #-#-#
 
             return await this.documentRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
 		/// <summary>
-		/// Creates a new document record.
+		/// Uploads a new document.
 		/// </summary>
-        public async Task<Document> CreateDocumentAsync(Document document)
+        public async Task<Document> UploadDocumentAsync(IFormFile file, DateTime? fileLastModified, string typeName)
         {
             // Validation
-            if (document == null) { return null; }
+            if (file == null) {
+                // TODO: Check for better exception/error handling implementation?
+                throw new DocumentException("File should be present");
+            }
 
-			// Trimming strings
-            if (!string.IsNullOrEmpty(document.Name))
-                document.Name = document.Name.Trim();
-            if (!string.IsNullOrEmpty(document.DisplayName))
-                document.DisplayName = document.DisplayName.Trim();
-            if (!string.IsNullOrEmpty(document.Description))
-                document.Description = document.Description.Trim();
-            if (!string.IsNullOrEmpty(document.Path))
-                document.Path = document.Path.Trim();
-            if (!string.IsNullOrEmpty(document.URL))
-                document.URL = document.URL.Trim();
-            if (!string.IsNullOrEmpty(document.MimeType))
-                document.MimeType = document.MimeType.Trim();
+            Document document = new Document()
+            {
+                Id = Guid.NewGuid(),
+                Name = file.FileName.ToSlug(),
+                DisplayName = file.FileName,
+                MimeType = file.ContentType,
+                SizeInBytes = file.Length,
+                FileLastModifiedOn = fileLastModified
+            };
 
-			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-			// Before creation
-			// #-#-#
+            // Before creation
 
-			document = await this.documentRepository.InsertAsync(document);
+            // Document type
+            if (!string.IsNullOrEmpty(typeName))
+            {
+                DocumentType documentType = await this.documentTypeRepository.GetByNameAsync(typeName);
+                if (documentType != null)
+                {
+                    document.DocumentTypeId = documentType.Id;
+                    document.DocumentType = documentType;
+                }
+            }
 
-			// After creation
+            // User
+            User currentUser = await this.userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
+            document.UserId = currentUser.Id;
+            document.User = currentUser;
+
+            // File upload
+            using (MemoryStream stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                document = await this.fileService.UploadDocument(document, stream);
+            }
+
+            document = await this.documentRepository.InsertAsync(document);
+
+            // After creation
+
+            // Resume
+            if (document.DocumentType != null && document.DocumentType.Name == "uploaded-resume")
+            {
+                Resume resume = new Resume()
+                {
+                    Description = "Resume created during upload of document: " + document.DisplayName,
+                    DocumentResume = new List<DocumentResume>() {
+                        new DocumentResume()
+                        {
+                            DocumentId = document.Id,
+                            Document = document,
+                            Primary = true
+                        }
+                    }
+                };
+
+                await this.resumeBLL.CreateResumeAsync(resume);
+
+                // TODO:
+                // - Background service with queue? RabbitMQ?
+                // - Start parsing with Amazon Textract?
+                // TEST:
+                Document documentToQueue = new Document()
+                {
+                    Id = document.Id,
+                    Path = document.Path,
+                    MimeType = document.MimeType,
+                    SizeInBytes = document.SizeInBytes,
+                    DocumentType = document.DocumentType
+                };
+                if (document.DocumentType != null)
+                {
+                    documentToQueue.DocumentType = new DocumentType()
+                    {
+                        Id = document.DocumentType.Id,
+                        Name = document.DocumentType.Name,
+                        DisplayName = document.DocumentType.DisplayName
+                    };
+                }
+                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "*.amazon.textract.parsing");
+            }
 
             return document;
         }
 
-		/// <summary>
-		/// Updates an existing document record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing document record by Id.
+        /// </summary>
         public async Task<Document> UpdateDocumentAsync(Document documentUpdate)
         {
             // Validation
@@ -131,6 +221,7 @@ namespace RJM.API.BLL
             document.SizeInBytes = documentUpdate.SizeInBytes;
             document.FileLastModifiedOn = documentUpdate.FileLastModifiedOn;
             document.MimeType = documentUpdate.MimeType;
+            document.DocumentTypeId = documentUpdate.DocumentTypeId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

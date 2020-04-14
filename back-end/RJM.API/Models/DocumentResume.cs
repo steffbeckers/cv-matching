@@ -20,14 +20,16 @@ namespace RJM.API.Models
         /// </summary>
 		public Guid Id { get; set; }
 
-		// Relations
+        public bool Primary { get; set; }
 
-		//// Many-to-one
+        // Relations
 
-	    /// <summary>
+        //// Many-to-one
+
+        /// <summary>
         /// The related foreign key DocumentId for Document of DocumentResume.
         /// </summary>
-		public Guid DocumentId { get; set; }
+        public Guid DocumentId { get; set; }
 
 		/// <summary>
         /// The related Document of DocumentResume.

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-job-matcher-background-worker
+  namespace: resume-job-matcher
+  labels:
+    app: resume-job-matcher-background-worker
+    release: resume-job-matcher-background-worker
+spec:
+  selector:
+    matchLabels:
+      app: resume-job-matcher-background-worker
+      release: resume-job-matcher-background-worker
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: resume-job-matcher-background-worker
+        release: resume-job-matcher-background-worker
+        tier: backend
+    spec:
+      imagePullSecrets:
+        - name: dockerconfig
+      containers:
+        - image: registry.gitlab.com/steffbeckers/cv-matching/resume-job-matcher-background-worker
+          name: resume-job-matcher-background-worker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-job-matcher-background-worker
+  namespace: resume-job-matcher
+  labels:
+    app: resume-job-matcher-background-worker
+    release: resume-job-matcher-background-worker
+spec:
+  selector:
+    app: resume-job-matcher-background-worker
+    release: resume-job-matcher-background-worker
+    tier: backend

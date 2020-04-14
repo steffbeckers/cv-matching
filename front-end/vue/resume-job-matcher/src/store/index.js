@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 
 import ui from './modules/ui';
 import auth from './modules/auth';
+import documents from './modules/documents';
+import resumes from './modules/resumes';
 
 Vue.use(Vuex);
 
@@ -13,5 +15,7 @@ export default new Vuex.Store({
   modules: {
     ui,
     auth,
+    documents,
+    resumes,
   },
 });

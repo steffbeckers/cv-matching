@@ -13,8 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using RJM.API.Framework.Exceptions;
 using RJM.API.Models;
-using RJM.API.Services;
 using RJM.API.ViewModels.Identity;
+using RJM.API.Services.Emails;
 
 namespace RJM.API.BLL
 {

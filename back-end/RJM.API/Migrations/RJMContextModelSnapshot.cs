@@ -169,7 +169,10 @@ namespace RJM.API.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FileLastModifiedOn")
+                    b.Property<Guid?>("DocumentTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("FileLastModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MimeType")
@@ -188,17 +191,24 @@ namespace RJM.API.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SizeInBytes")
-                        .HasColumnType("int");
+                    b.Property<long?>("SizeInBytes")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("URL")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedByUserId");
 
+                    b.HasIndex("DocumentTypeId");
+
                     b.HasIndex("ModifiedByUserId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Documents");
                 });
@@ -227,6 +237,9 @@ namespace RJM.API.Migrations
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Primary")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("ResumeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -241,6 +254,44 @@ namespace RJM.API.Migrations
                     b.HasIndex("ResumeId");
 
                     b.ToTable("DocumentResume");
+                });
+
+            modelBuilder.Entity("RJM.API.Models.DocumentType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ModifiedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("ModifiedByUserId");
+
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("RJM.API.Models.Job", b =>
@@ -398,6 +449,9 @@ namespace RJM.API.Migrations
                     b.Property<Guid>("ResumeStateId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedByUserId");
@@ -405,6 +459,8 @@ namespace RJM.API.Migrations
                     b.HasIndex("ModifiedByUserId");
 
                     b.HasIndex("ResumeStateId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Resumes");
                 });
@@ -703,9 +759,19 @@ namespace RJM.API.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("RJM.API.Models.DocumentType", "DocumentType")
+                        .WithMany("Documents")
+                        .HasForeignKey("DocumentTypeId");
+
                     b.HasOne("RJM.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("RJM.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
@@ -734,6 +800,21 @@ namespace RJM.API.Migrations
                         .WithMany("DocumentResume")
                         .HasForeignKey("ResumeId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RJM.API.Models.DocumentType", b =>
+                {
+                    b.HasOne("RJM.API.Models.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("RJM.API.Models.User", "ModifiedByUser")
+                        .WithMany()
+                        .HasForeignKey("ModifiedByUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -818,6 +899,12 @@ namespace RJM.API.Migrations
                         .WithMany("Resumes")
                         .HasForeignKey("ResumeStateId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RJM.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

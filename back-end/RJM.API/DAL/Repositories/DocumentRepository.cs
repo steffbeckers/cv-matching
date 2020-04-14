@@ -28,16 +28,19 @@ namespace RJM.API.DAL.Repositories
 		public async Task<IEnumerable<Document>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Documents
+                .Include(x => x.DocumentType)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Resume)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
+                .OrderByDescending(x => x.ModifiedOn)
                 .ToListAsync();
         }
 
 		public async Task<Document> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Documents
+                .Include(x => x.DocumentType)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Resume)
                 .Include(x => x.CreatedByUser)
@@ -45,6 +48,13 @@ namespace RJM.API.DAL.Repositories
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public IEnumerable<Document> GetByDocumentTypeId(Guid documentTypeId)
+        {
+            return this.context.Documents
+                .Where(t => t.DocumentTypeId == documentTypeId)
+                .ToList();
+        }
+        
         public IEnumerable<Document> GetByResumeId(Guid resumeId)
         {
             return this.context.DocumentResume
@@ -53,15 +63,5 @@ namespace RJM.API.DAL.Repositories
                 .Select(x => x.Document)
                 .ToList();
         }
-        
-        //// Async test
-        //public async Task<IEnumerable<Document>> GetByResumeIdAsync(Guid resumeId)
-        //{
-        //    return await this.context.DocumentResume
-        //        .Include(x => x.Document)
-        //        .Where(x => x.ResumeId == resumeId)
-        //        .Select(x => x.Document)
-        //        .ToListAsync();
-        //}
     }
 }

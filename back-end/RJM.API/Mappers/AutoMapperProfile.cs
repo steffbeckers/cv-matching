@@ -43,15 +43,18 @@ namespace RJM.API.Mappers
                     }
                 );
 
+            // DocumentTypes
+            CreateMap<DocumentType, DocumentTypeVM>();
+            CreateMap<DocumentTypeVM, DocumentType>();
+
             // Resumes
-			CreateMap<Resume, ResumeVM>()
+            CreateMap<Resume, ResumeVM>()
                 .ForMember(
                     x => x.Documents,
                     x => x.MapFrom(
                         y => y.DocumentResume.Select(z => z.Document)
                     )
-                );
-			CreateMap<Resume, ResumeVM>()
+                )
                 .ForMember(
                     x => x.Skills,
                     x => x.MapFrom(
@@ -73,8 +76,7 @@ namespace RJM.API.Mappers
                             }
                         );
                     }
-                );
-            CreateMap<ResumeVM, Resume>()
+                )
                 .ForMember(
                     x => x.ResumeSkill,
                     x =>
@@ -94,16 +96,17 @@ namespace RJM.API.Mappers
                 );
 
             // ResumeStates
+            CreateMap<ResumeState, ResumeStateVM>();
+            CreateMap<ResumeStateVM, ResumeState>();
 
             // Skills
-			CreateMap<Skill, SkillVM>()
+            CreateMap<Skill, SkillVM>()
                 .ForMember(
                     x => x.Resumes,
                     x => x.MapFrom(
                         y => y.ResumeSkill.Select(z => z.Resume)
                     )
-                );
-			CreateMap<Skill, SkillVM>()
+                )
                 .ForMember(
                     x => x.Jobs,
                     x => x.MapFrom(
@@ -127,8 +130,7 @@ namespace RJM.API.Mappers
                             }
                         );
                     }
-                );
-            CreateMap<SkillVM, Skill>()
+                )
                 .ForMember(
                     x => x.JobSkill,
                     x =>
@@ -148,9 +150,11 @@ namespace RJM.API.Mappers
                 );
 
             // SkillAliases
+            CreateMap<SkillAlias, SkillAliasVM>();
+            CreateMap<SkillAliasVM, SkillAlias>();
 
             // Jobs
-			CreateMap<Job, JobVM>()
+            CreateMap<Job, JobVM>()
                 .ForMember(
                     x => x.Skills,
                     x => x.MapFrom(
@@ -177,9 +181,11 @@ namespace RJM.API.Mappers
                 );
 
             // JobStates
+            CreateMap<JobState, JobStateVM>();
+            CreateMap<JobStateVM, JobState>();
 
             // Users
-			CreateMap<User, UserVM>();
+            CreateMap<User, UserVM>();
             CreateMap<UserVM, User>();
         }
     }
