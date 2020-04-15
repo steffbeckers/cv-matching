@@ -43,9 +43,24 @@ namespace RJM.BackgroundTasks
             // Create channel  
             channel = connection.CreateModel();
 
-            channel.ExchangeDeclare("rjm.background.tasks", ExchangeType.Topic, true);
-            channel.QueueDeclare("rjm.background.tasks", true, false, false, null);
-            channel.QueueBind("rjm.background.tasks", "rjm.background.tasks", "*.amazon.textract.parsing", null);
+            channel.ExchangeDeclare(
+                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+                ExchangeType.Topic,
+                true
+            );
+            channel.QueueDeclare(
+                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+                true,
+                false,
+                false,
+                null
+            );
+            channel.QueueBind(
+                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+                "document.parsing.amazon.textract" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+                null
+            );
             channel.BasicQos(0, 1, false);
 
             connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
@@ -75,7 +90,11 @@ namespace RJM.BackgroundTasks
             consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
 
             // Start consuming
-            channel.BasicConsume("rjm.background.tasks", false, consumer);
+            channel.BasicConsume(
+                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+                false,
+                consumer
+            );
 
             return Task.CompletedTask;
         }

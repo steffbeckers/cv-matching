@@ -168,6 +168,7 @@ namespace RJM.API.BLL
                     SizeInBytes = document.SizeInBytes,
                     DocumentType = document.DocumentType
                 };
+
                 if (document.DocumentType != null)
                 {
                     documentToQueue.DocumentType = new DocumentType()
@@ -177,7 +178,8 @@ namespace RJM.API.BLL
                         DisplayName = document.DocumentType.DisplayName
                     };
                 }
-                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "*.amazon.textract.parsing");
+
+                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "document.parsing.amazon.textract");
             }
 
             return document;

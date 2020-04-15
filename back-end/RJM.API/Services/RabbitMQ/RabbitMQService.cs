@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.ObjectPool;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.ObjectPool;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
@@ -11,10 +12,12 @@ namespace RJM.API.Services.RabbitMQ
 {
     public class RabbitMQService
     {
+        private readonly IConfiguration configuration;
         private readonly DefaultObjectPool<IModel> objectPool;
 
-        public RabbitMQService(IPooledObjectPolicy<IModel> objectPolicy)
+        public RabbitMQService(IConfiguration configuration, IPooledObjectPolicy<IModel> objectPolicy)
         {
+            this.configuration = configuration;
             objectPool = new DefaultObjectPool<IModel>(objectPolicy, Environment.ProcessorCount * 2);
         }
 
@@ -22,6 +25,10 @@ namespace RJM.API.Services.RabbitMQ
         {
             if (message == null)
                 return;
+
+            // Name suffixes
+            exchangeName += this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix");
+            routeKey += this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix");
 
             IModel channel = objectPool.Get();
 
