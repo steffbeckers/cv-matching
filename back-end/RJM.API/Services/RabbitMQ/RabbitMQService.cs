@@ -27,8 +27,8 @@ namespace RJM.API.Services.RabbitMQ
                 return;
 
             // Name suffixes
-            exchangeName += this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix");
-            routeKey += this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix");
+            exchangeName += this.configuration.GetSection("RabbitMQService").GetValue<string>("Suffix");
+            routeKey += this.configuration.GetSection("RabbitMQService").GetValue<string>("Suffix");
 
             IModel channel = objectPool.Get();
 

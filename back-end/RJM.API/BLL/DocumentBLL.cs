@@ -156,10 +156,7 @@ namespace RJM.API.BLL
 
                 await this.resumeBLL.CreateResumeAsync(resume);
 
-                // TODO:
-                // - Background service with queue? RabbitMQ?
-                // - Start parsing with Amazon Textract?
-                // TEST:
+                // Add document to parsing queue
                 Document documentToQueue = new Document()
                 {
                     Id = document.Id,

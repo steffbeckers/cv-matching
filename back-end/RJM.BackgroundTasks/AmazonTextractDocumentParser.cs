@@ -17,6 +17,9 @@ namespace RJM.BackgroundTasks
         private readonly ILogger<AmazonTextractDocumentParser> logger;
         private IConnection connection;
         private IModel channel;
+        private string exchange = "rjm.background.tasks";
+        private string queue = "rjm.background.tasks";
+        private string routingKey = "document.parsing.amazon.textract";
 
         public AmazonTextractDocumentParser(IConfiguration configuration, ILogger<AmazonTextractDocumentParser> logger)
         {
@@ -41,29 +44,34 @@ namespace RJM.BackgroundTasks
             this.connection = factory.CreateConnection();
 
             // Create channel  
-            channel = connection.CreateModel();
+            this.channel = connection.CreateModel();
 
-            channel.ExchangeDeclare(
-                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+            // Append suffix
+            this.exchange += this.configuration.GetSection("RabbitMQService").GetValue<string>("Suffix");
+            this.queue += this.configuration.GetSection("RabbitMQService").GetValue<string>("Suffix");
+            this.routingKey += this.configuration.GetSection("RabbitMQService").GetValue<string>("Suffix");
+
+            this.channel.ExchangeDeclare(
+                exchange,
                 ExchangeType.Topic,
                 true
             );
-            channel.QueueDeclare(
-                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+            this.channel.QueueDeclare(
+                queue,
                 true,
                 false,
                 false,
                 null
             );
-            channel.QueueBind(
-                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
-                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
-                "document.parsing.amazon.textract" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+            this.channel.QueueBind(
+                queue,
+                exchange,
+                routingKey,
                 null
             );
-            channel.BasicQos(0, 1, false);
+            this.channel.BasicQos(0, 1, false);
 
-            connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
+            this.connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -90,8 +98,8 @@ namespace RJM.BackgroundTasks
             consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
 
             // Start consuming
-            channel.BasicConsume(
-                "rjm.background.tasks" + this.configuration.GetSection("RabbitMQService").GetValue<string>("NameSuffix"),
+            this.channel.BasicConsume(
+                this.queue,
                 false,
                 consumer
             );
@@ -112,8 +120,8 @@ namespace RJM.BackgroundTasks
 
         public override void Dispose()
         {
-            channel.Close();
-            connection.Close();
+            this.channel.Close();
+            this.connection.Close();
 
             base.Dispose();
         }
