@@ -156,10 +156,8 @@ namespace RJM.API.BLL
 
                 await this.resumeBLL.CreateResumeAsync(resume);
 
-                // TODO:
-                // - Background service with queue? RabbitMQ?
-                // - Start parsing with Amazon Textract?
-                // TEST:
+                // Add document to parsing queue
+                // TODO: Setting?
                 Document documentToQueue = new Document()
                 {
                     Id = document.Id,
@@ -168,6 +166,7 @@ namespace RJM.API.BLL
                     SizeInBytes = document.SizeInBytes,
                     DocumentType = document.DocumentType
                 };
+
                 if (document.DocumentType != null)
                 {
                     documentToQueue.DocumentType = new DocumentType()
@@ -177,7 +176,8 @@ namespace RJM.API.BLL
                         DisplayName = document.DocumentType.DisplayName
                     };
                 }
-                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "*.amazon.textract.parsing");
+
+                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "document.parsing.amazon.textract");
             }
 
             return document;

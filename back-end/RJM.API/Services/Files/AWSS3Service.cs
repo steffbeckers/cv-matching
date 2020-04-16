@@ -30,7 +30,7 @@ namespace RJM.API.Services.Files
                 this.configuration.GetSection("FileService")
                     .GetSection("AWSS3Service")
                     .GetValue<string>("SecretAccessKey"),
-                RegionEndpoint.EUCentral1
+                RegionEndpoint.EUWest2
             );
         }
 
