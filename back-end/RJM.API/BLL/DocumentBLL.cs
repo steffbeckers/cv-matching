@@ -157,6 +157,7 @@ namespace RJM.API.BLL
                 await this.resumeBLL.CreateResumeAsync(resume);
 
                 // Add document to parsing queue
+                // TODO: Setting?
                 Document documentToQueue = new Document()
                 {
                     Id = document.Id,

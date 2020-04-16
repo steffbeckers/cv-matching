@@ -149,7 +149,13 @@ namespace RJM.BackgroundTasks
                 document.Path
             );
 
+            this.textDetectionService.WaitForJobCompletion(jobId);
+            
             this.logger.LogInformation("Text detected in document, job ID: " + jobId);
+            
+            this.textDetectionService.Print(this.textDetectionService.GetJobResults(jobId));
+
+            // TODO: Save response in database?
         }
 
         private void OnConsumerConsumerCancelled(object sender, ConsumerEventArgs e) { }
@@ -221,6 +227,7 @@ namespace RJM.BackgroundTasks
             });
             response.Wait();
             result.Add(response.Result);
+
             var nextToken = response.Result.NextToken;
             while (nextToken != null)
             {
@@ -234,6 +241,7 @@ namespace RJM.BackgroundTasks
                 result.Add(response.Result);
                 nextToken = response.Result.NextToken;
             }
+
             return result;
         }
 
@@ -251,11 +259,13 @@ namespace RJM.BackgroundTasks
                 Bucket = bucketName,
                 Name = key
             };
+
             var request = new DetectDocumentTextRequest();
             request.Document = new Document
             {
                 S3Object = s3Object
             };
+
             return await this.textract.DetectDocumentTextAsync(request);
         }
 
