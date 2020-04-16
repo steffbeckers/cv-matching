@@ -11,7 +11,7 @@
         <UploadResumeCard />
       </v-col>
       <v-col cols="12" sm="6" md="8">
-        <ResumesCard />
+        <MyLatestResumesCard />
       </v-col>
     </v-row>
   </v-container>
@@ -22,7 +22,7 @@ import { mapGetters, mapState } from 'vuex';
 
 // Components
 import UploadResumeCard from '../components/dashboard/UploadResumeCard';
-import ResumesCard from '../components/dashboard/ResumesCard';
+import MyLatestResumesCard from '../components/dashboard/MyLatestResumesCard';
 
 export default {
   name: 'Dashboard',
@@ -43,7 +43,7 @@ export default {
   },
   components: {
     UploadResumeCard,
-    ResumesCard,
+    MyLatestResumesCard,
   },
 };
 </script>
