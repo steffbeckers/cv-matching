@@ -18,6 +18,7 @@
     "RJM.API": {
       "commandName": "Project",
       "environmentVariables": {
+        "AWS_REGION": "eu-west-2",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5000"
