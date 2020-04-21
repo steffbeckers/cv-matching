@@ -1,0 +1,19 @@
+[
+  {
+    "Blocks": [],
+    "DetectDocumentTextModelVersion": "1.0",
+    "DocumentMetadata": null,
+    "JobStatus": {
+      "Value": "FAILED"
+    },
+    "NextToken": null,
+    "StatusMessage": "INVALID_IMAGE_TYPE",
+    "Warnings": [],
+    "ResponseMetadata": {
+      "RequestId": "0aa3062c-c740-4ba0-8082-138fe134ce93",
+      "Metadata": {}
+    },
+    "ContentLength": 98,
+    "HttpStatusCode": 200
+  }
+]
