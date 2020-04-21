@@ -177,7 +177,7 @@ namespace RJM.API.BLL
                     };
                 }
 
-                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "document.parsing.amazon.textract");
+                this.rabbitMQService.Publish(documentToQueue, "rjm.background.tasks", "topic", "document.parser");
             }
 
             return document;

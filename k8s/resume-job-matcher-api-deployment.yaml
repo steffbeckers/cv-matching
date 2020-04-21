@@ -28,7 +28,10 @@ spec:
           name: resume-job-matcher-api
           ports:
             - containerPort: 80
-              name: resume-job-matcher-api
+              name: rjm-api
+          env:
+            - name: AWS_REGION
+              value: eu-west-2
 ---
 apiVersion: v1
 kind: Service

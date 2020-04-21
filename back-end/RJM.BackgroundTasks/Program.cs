@@ -18,7 +18,7 @@ namespace RJM.BackgroundTasks
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<AmazonTextractDocumentParser>();
+                    services.AddHostedService<DocumentParser>();
                 });
     }
 }
