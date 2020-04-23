@@ -183,6 +183,38 @@ namespace RJM.API.BLL
             return document;
         }
 
+        public async Task<Document> CreateDocumentContentAsync(Guid id, DocumentContent documentContent)
+        {
+            // Validation
+            if (documentContent == null) { return null; }
+
+            // Retrieve existing
+            Document document = await this.GetDocumentByIdAsync(id);
+            if (document == null)
+            {
+                return null;
+            }
+
+            // Add the content to the document
+            document.DocumentContents.Add(documentContent);
+
+            document = await this.documentRepository.UpdateAsync(document);
+
+            return document;
+        }
+
+        public async Task<Document> CreateDocumentContentsAsync(Guid id, List<DocumentContent> documentContents)
+        {
+            Document document = null;
+
+            foreach (DocumentContent documentContent in documentContents)
+            {
+                document = await this.CreateDocumentContentAsync(id, documentContent);
+            }
+
+            return document;
+        }
+
         /// <summary>
         /// Updates an existing document record by Id.
         /// </summary>

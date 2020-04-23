@@ -34,10 +34,12 @@ namespace RJM.API.DAL
             this.httpContextAccessor = httpContextAccessor;
         }
 
+        // General
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<DocumentType> DocumentTypes { get; set; }
+		public DbSet<DocumentContent> DocumentContents { get; set; }
 		public DbSet<DocumentResume> DocumentResume { get; set; }
-		public DbSet<Resume> Resumes { get; set; }
+        public DbSet<Resume> Resumes { get; set; }
 		public DbSet<ResumeState> ResumeStates { get; set; }
 		public DbSet<Skill> Skills { get; set; }
 		public DbSet<SkillAlias> SkillAliases { get; set; }
@@ -46,7 +48,7 @@ namespace RJM.API.DAL
 		public DbSet<JobState> JobStates { get; set; }
 		public DbSet<JobSkill> JobSkill { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
@@ -90,16 +92,35 @@ namespace RJM.API.DAL
 			#region Documents
 
             // Soft delete query filter
-            modelBuilder.Entity<Document>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<Document>()
+                .HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Document>().ToTable("Documents");
+			modelBuilder.Entity<Document>()
+                .ToTable("Documents");
 
 			// Key
-			modelBuilder.Entity<Document>().HasKey(e => e.Id);
+			modelBuilder.Entity<Document>()
+                .HasKey(e => e.Id);
 
-            // Required properties
-            modelBuilder.Entity<Document>().Property(e => e.Name).IsRequired();
+            // Properties
+            modelBuilder.Entity<Document>()
+                .Property(e => e.Name)
+                .HasMaxLength(256)
+                .IsRequired();
+
+            modelBuilder.Entity<Document>()
+                .Property(e => e.DisplayName)
+                .HasMaxLength(256)
+                .IsRequired();
+
+            modelBuilder.Entity<Document>()
+                .Property(e => e.Description)
+                .HasMaxLength(512);
+
+            modelBuilder.Entity<Document>()
+                .Property(e => e.MimeType)
+                .HasMaxLength(100);
 
             // User
             modelBuilder.Entity<Document>()
@@ -122,17 +143,27 @@ namespace RJM.API.DAL
 			#region DocumentTypes
 
             // Soft delete query filter
-            modelBuilder.Entity<DocumentType>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<DocumentType>()
+                .HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<DocumentType>().ToTable("DocumentTypes");
+			modelBuilder.Entity<DocumentType>()
+                .ToTable("DocumentTypes");
 
 			// Key
-			modelBuilder.Entity<DocumentType>().HasKey(e => e.Id);
+			modelBuilder.Entity<DocumentType>()
+                .HasKey(e => e.Id);
 
-            // Required properties
-            modelBuilder.Entity<DocumentType>().Property(e => e.Name).IsRequired();
-            modelBuilder.Entity<DocumentType>().Property(e => e.DisplayName).IsRequired();
+            // Properties
+            modelBuilder.Entity<DocumentType>()
+                .Property(e => e.Name)
+                .HasMaxLength(256)
+                .IsRequired();
+
+            modelBuilder.Entity<DocumentType>()
+                .Property(e => e.DisplayName)
+                .HasMaxLength(256)
+                .IsRequired();
 
             // User
             modelBuilder.Entity<DocumentType>()
@@ -147,7 +178,28 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region DocumentResume
+            #region DocumentContents
+
+            // Soft delete query filter
+            modelBuilder.Entity<DocumentContent>()
+                .HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<DocumentContent>()
+                .ToTable("DocumentContents");
+
+            // Key
+            modelBuilder.Entity<DocumentContent>()
+                .HasKey(e => e.Id);
+
+            // Properties
+            modelBuilder.Entity<DocumentContent>()
+                .Property(e => e.Text)
+                .IsRequired();
+
+            #endregion
+
+            #region DocumentResume
 
             // Soft delete query filter
             modelBuilder.Entity<DocumentResume>().HasQueryFilter(e => e.DeletedOn == null);
@@ -428,8 +480,9 @@ namespace RJM.API.DAL
                 if (
 					entry.Entity.GetType() == typeof(Document) ||
 					entry.Entity.GetType() == typeof(DocumentType) ||
+					entry.Entity.GetType() == typeof(DocumentContent) ||
 					entry.Entity.GetType() == typeof(DocumentResume) ||
-					entry.Entity.GetType() == typeof(Resume) ||
+                    entry.Entity.GetType() == typeof(Resume) ||
 					entry.Entity.GetType() == typeof(ResumeState) ||
 					entry.Entity.GetType() == typeof(Skill) ||
 					entry.Entity.GetType() == typeof(SkillAlias) ||
@@ -461,8 +514,9 @@ namespace RJM.API.DAL
                 if (
 					entry.Entity.GetType() == typeof(Document) ||
 					entry.Entity.GetType() == typeof(DocumentType) ||
+					entry.Entity.GetType() == typeof(DocumentContent) ||
 					entry.Entity.GetType() == typeof(DocumentResume) ||
-					entry.Entity.GetType() == typeof(Resume) ||
+                    entry.Entity.GetType() == typeof(Resume) ||
 					entry.Entity.GetType() == typeof(ResumeState) ||
 					entry.Entity.GetType() == typeof(Skill) ||
 					entry.Entity.GetType() == typeof(SkillAlias) ||
@@ -499,8 +553,9 @@ namespace RJM.API.DAL
                     if (
 					    entry.Entity.GetType() == typeof(Document) ||
 					    entry.Entity.GetType() == typeof(DocumentType) ||
+					    //entry.Entity.GetType() == typeof(DocumentContent) ||
 					    entry.Entity.GetType() == typeof(DocumentResume) ||
-					    entry.Entity.GetType() == typeof(Resume) ||
+                        entry.Entity.GetType() == typeof(Resume) ||
 					    entry.Entity.GetType() == typeof(ResumeState) ||
 					    entry.Entity.GetType() == typeof(Skill) ||
 					    entry.Entity.GetType() == typeof(SkillAlias) ||

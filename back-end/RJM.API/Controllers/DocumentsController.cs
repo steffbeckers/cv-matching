@@ -124,11 +124,59 @@ namespace RJM.API.Controllers
 			return Ok(this.mapper.Map<Document, DocumentVM>(document));
         }
 
+        // POST: api/documents/{id}/content
+        /// <summary>
+        /// Adds document content to a document.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="documentContentVM"></param>
+        [HttpPut("{id}")]
+        public async Task<ActionResult<DocumentVM>> CreateDocumentContents([FromRoute] Guid id, [FromBody] DocumentContentVM documentContentVM)
+        {
+            // Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Mapping
+            DocumentContent documentContent = this.mapper.Map<DocumentContentVM, DocumentContent>(documentContentVM);
+
+            Document document = await this.bll.CreateDocumentContentAsync(id, documentContent);
+
+            // Mapping
+            return Ok(this.mapper.Map<Document, DocumentVM>(document));
+        }
+
+        // POST: api/documents/{id}/contents
+        /// <summary>
+        /// Adds multiple document contents to a document.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="documentContentsVM"></param>
+        [HttpPut("{id}")]
+        public async Task<ActionResult<DocumentVM>> CreateDocumentContents([FromRoute] Guid id, [FromBody] List<DocumentContentVM> documentContentsVM)
+        {
+            // Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Mapping
+            List<DocumentContent> documentContents = this.mapper.Map<List<DocumentContentVM>, List<DocumentContent>>(documentContentsVM);
+
+            Document document = await this.bll.CreateDocumentContentsAsync(id, documentContents);
+
+            // Mapping
+            return Ok(this.mapper.Map<Document, DocumentVM>(document));
+        }
+
         // PUT: api/documents/resumes/link
-		/// <summary>
-		/// Links a specific resume to document.
-		/// </summary>
-		/// <param name="documentResume"></param>
+        /// <summary>
+        /// Links a specific resume to document.
+        /// </summary>
+        /// <param name="documentResume"></param>
         [HttpPut("Resumes/Link")]
         public async Task<ActionResult<DocumentVM>> LinkResumeToDocument([FromBody] DocumentResume documentResume)
         {
