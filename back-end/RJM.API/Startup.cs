@@ -67,6 +67,7 @@ namespace RJM.API
             // Repositories
             services.AddScoped<DocumentRepository>();
             services.AddScoped<DocumentTypeRepository>();
+            services.AddScoped<DocumentContentRepository>();
             services.AddScoped<DocumentResumeRepository>();
             services.AddScoped<ResumeRepository>();
             services.AddScoped<ResumeStateRepository>();

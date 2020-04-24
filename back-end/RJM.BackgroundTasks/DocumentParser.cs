@@ -39,9 +39,9 @@ namespace RJM.BackgroundTasks
             // Amazon AWS Textract config
             CredentialProfileOptions credentialProfileOptions = new CredentialProfileOptions
             {
-                AccessKey = this.configuration.GetSection("AmazonTextract")
+                AccessKey = this.configuration.GetSection("AWS")
                                               .GetValue<string>("AccessKey"),
-                SecretKey = this.configuration.GetSection("AmazonTextract")
+                SecretKey = this.configuration.GetSection("AWS")
                                               .GetValue<string>("SecretAccessKey")
             };
 
@@ -51,7 +51,7 @@ namespace RJM.BackgroundTasks
             NetSDKCredentialsFile netSDKCredentialsFile = new NetSDKCredentialsFile();
             netSDKCredentialsFile.RegisterProfile(credentialProfile);
 
-            AWSOptions awsOptions = this.configuration.GetAWSOptions("AmazonTextract");
+            AWSOptions awsOptions = this.configuration.GetAWSOptions("AWS");
             this.textDetectionService = new AmazonTextractTextDetectionService(awsOptions.CreateServiceClient<IAmazonTextract>());
 
             // RabbitMQ
@@ -157,7 +157,7 @@ namespace RJM.BackgroundTasks
                     this.logger.LogInformation($"Amazon Textract - Start text detection of document with ID: {document.Id}");
 
                     string jobId = await this.textDetectionService.StartDocumentTextDetection(
-                        this.configuration.GetSection("AmazonTextract")
+                        this.configuration.GetSection("AWS")
                             .GetSection("Bucket")
                             .GetValue<string>("Name"),
                         document.Path

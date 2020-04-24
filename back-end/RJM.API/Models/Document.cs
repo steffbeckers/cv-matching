@@ -11,7 +11,10 @@ namespace RJM.API.Models
     {
 		public Document()
         {
-            // Relations
+			// Relations
+
+			//// One-to-many
+			this.DocumentContents = new List<DocumentContent>();
 
 			//// Many-to-many
 			this.DocumentResume = new List<DocumentResume>();
@@ -87,6 +90,9 @@ namespace RJM.API.Models
 		/// The related DocumentType of Document.
 		/// </summary>
 		public DocumentType DocumentType { get; set; }
+
+		//// One-to-many
+		public IList<DocumentContent> DocumentContents { get; set; }
 
 		//// Many-to-many
 

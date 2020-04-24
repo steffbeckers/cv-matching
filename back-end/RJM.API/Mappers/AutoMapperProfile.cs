@@ -47,6 +47,10 @@ namespace RJM.API.Mappers
             CreateMap<DocumentType, DocumentTypeVM>();
             CreateMap<DocumentTypeVM, DocumentType>();
 
+            // DocumentContent
+            CreateMap<DocumentContent, DocumentContentVM>();
+            CreateMap<DocumentContentVM, DocumentContent>();
+
             // Resumes
             CreateMap<Resume, ResumeVM>()
                 .ForMember(
