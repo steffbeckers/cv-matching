@@ -1,117 +1,115 @@
+using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using RJM.API.Models;
-using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Resume view model
     /// </summary>
     public class ResumeVM
     {
-		public ResumeVM()
+        public ResumeVM()
         {
             // Relations
 
-			//// Many-to-many
-			this.Documents = new List<DocumentVM>();
-			this.Skills = new List<SkillVM>();
+            //// Many-to-many
+            this.Documents = new List<DocumentVM>();
+            this.Skills = new List<SkillVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Resume.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The JobTitle property of Resume.
         /// </summary>
-		public string JobTitle { get; set; }
+        public string JobTitle { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of Resume.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-		/// <summary>
-		/// The related foreign key UserId for User of Resume.
-		/// </summary>
-		public Guid UserId { get; set; }
+        /// <summary>
+        /// The related foreign key UserId for User of Resume.
+        /// </summary>
+        public Guid UserId { get; set; }
 
-		/// <summary>
-		/// The related User of Resume.
-		/// </summary>
-		public UserVM User { get; set; }
+        /// <summary>
+        /// The related User of Resume.
+        /// </summary>
+        public UserVM User { get; set; }
 
-		/// <summary>
-		/// The related foreign key ResumeStateId for ResumeState of Resume.
-		/// </summary>
-		public Guid ResumeStateId { get; set; }
+        /// <summary>
+        /// The related foreign key ResumeStateId for ResumeState of Resume.
+        /// </summary>
+        public Guid ResumeStateId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related ResumeState of Resume.
         /// </summary>
-		public ResumeStateVM ResumeState { get; set; }
+        public ResumeStateVM ResumeState { get; set; }
 
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Documents of Resume.
         /// </summary>
-		public IList<DocumentVM> Documents { get; set; }
+        public IList<DocumentVM> Documents { get; set; }
 
         ////// To create a link with Document directly on create of Resume.
         public Guid? DocumentId { get; set; }
-		/// <summary>
+        /// <summary>
         /// The related Skills of Resume.
         /// </summary>
-		public IList<SkillVM> Skills { get; set; }
+        public IList<SkillVM> Skills { get; set; }
 
         ////// To create a link with Skill directly on create of Resume.
         public Guid? SkillId { get; set; }
         public int? SkillLevel { get; set; }
         public string SkillDescription { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
     }
 }

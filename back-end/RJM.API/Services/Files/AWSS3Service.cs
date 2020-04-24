@@ -1,14 +1,9 @@
-﻿using Amazon;
-using Amazon.Runtime;
-using Amazon.S3;
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RJM.API.Services.Files
@@ -17,31 +12,24 @@ namespace RJM.API.Services.Files
     {
         private readonly IConfiguration configuration;
         private readonly ILogger<AWSS3Service> logger;
-        private readonly AmazonS3Client awsS3Client;
+        private readonly IAmazonS3 amazonS3;
 
-        public AWSS3Service(IConfiguration configuration, ILogger<AWSS3Service> logger)
+        public AWSS3Service(IConfiguration configuration, ILogger<AWSS3Service> logger, IAmazonS3 amazonS3)
         {
             this.configuration = configuration;
             this.logger = logger;
-            this.awsS3Client = new AmazonS3Client(
-                this.configuration.GetSection("FileService")
-                    .GetSection("AWSS3Service")
-                    .GetValue<string>("AccessKey"),
-                this.configuration.GetSection("FileService")
-                    .GetSection("AWSS3Service")
-                    .GetValue<string>("SecretAccessKey"),
-                RegionEndpoint.EUWest2
-            );
+            this.amazonS3 = amazonS3;
         }
 
         public async Task UploadFile(Stream fileStream, string key, string mimeType)
         {
-            TransferUtility fileTransferUtility = new TransferUtility(this.awsS3Client);
+            TransferUtility fileTransferUtility = new TransferUtility(this.amazonS3);
 
-            TransferUtilityUploadRequest uploadRequest = new TransferUtilityUploadRequest() {
+            TransferUtilityUploadRequest uploadRequest = new TransferUtilityUploadRequest()
+            {
                 InputStream = fileStream,
-                BucketName = this.configuration.GetSection("FileService")
-                                .GetSection("AWSS3Service")
+                BucketName = this.configuration.GetSection("AWS")
+                                .GetSection("S3")
                                 .GetSection("Bucket")
                                 .GetValue<string>("Name"),
                 Key = key,
@@ -60,8 +48,8 @@ namespace RJM.API.Services.Files
         {
             GetObjectRequest request = new GetObjectRequest
             {
-                BucketName = this.configuration.GetSection("FileService")
-                                .GetSection("AWSS3Service")
+                BucketName = this.configuration.GetSection("AWS")
+                                .GetSection("S3")
                                 .GetSection("Bucket")
                                 .GetValue<string>("Name"),
                 Key = key
@@ -69,7 +57,7 @@ namespace RJM.API.Services.Files
 
             this.logger.LogInformation("Starting download from AWS S3 storage bucket: " + key);
 
-            GetObjectResponse response = await this.awsS3Client.GetObjectAsync(request);
+            GetObjectResponse response = await this.amazonS3.GetObjectAsync(request);
 
             this.logger.LogInformation("Downloaded file from AWS S3 storage bucket: " + response.Key + " (" + response.Headers["Content-Type"] + ")");
 

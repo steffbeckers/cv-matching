@@ -1,5 +1,4 @@
 using GraphQL.Types;
-using System;
 using RJM.API.Models;
 
 namespace RJM.API.GraphQL.Types

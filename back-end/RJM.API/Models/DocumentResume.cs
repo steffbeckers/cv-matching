@@ -1,24 +1,23 @@
 using System;
-using System.Collections.Generic;
 
 namespace RJM.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// DocumentResume model
     /// </summary>
     public class DocumentResume
     {
-		public DocumentResume()
+        public DocumentResume()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of DocumentResume.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         public bool Primary { get; set; }
 
@@ -31,60 +30,60 @@ namespace RJM.API.Models
         /// </summary>
         public Guid DocumentId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Document of DocumentResume.
         /// </summary>
-		public Document Document { get; set; }
+        public Document Document { get; set; }
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key ResumeId for Resume of DocumentResume.
         /// </summary>
-		public Guid ResumeId { get; set; }
+        public Guid ResumeId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Resume of DocumentResume.
         /// </summary>
-		public Resume Resume { get; set; }
+        public Resume Resume { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public User CreatedByUser { get; set; }
+        public User CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public User ModifiedByUser { get; set; }
+        public User ModifiedByUser { get; set; }
 
-		// TODO: Multi-tenancy
-		//public Guid TenantId { get; set; }
+        // TODO: Multi-tenancy
+        //public Guid TenantId { get; set; }
     }
 }

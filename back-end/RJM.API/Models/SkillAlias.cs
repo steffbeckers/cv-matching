@@ -1,88 +1,87 @@
 using System;
-using System.Collections.Generic;
 
 namespace RJM.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// SkillAlias model
     /// </summary>
     public class SkillAlias
     {
-		public SkillAlias()
+        public SkillAlias()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of SkillAlias.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of SkillAlias.
         /// </summary>
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of SkillAlias.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key SkillId for Skill of SkillAlias.
         /// </summary>
-		public Guid SkillId { get; set; }
+        public Guid SkillId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Skill of SkillAlias.
         /// </summary>
-		public Skill Skill { get; set; }
+        public Skill Skill { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public User CreatedByUser { get; set; }
+        public User CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public User ModifiedByUser { get; set; }
+        public User ModifiedByUser { get; set; }
 
-		// TODO: Multi-tenancy
-		//public Guid TenantId { get; set; }
+        // TODO: Multi-tenancy
+        //public Guid TenantId { get; set; }
     }
 }

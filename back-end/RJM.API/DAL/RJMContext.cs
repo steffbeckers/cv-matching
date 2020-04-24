@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using RJM.API.Models;
 using System;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using RJM.API.Models;
 
 namespace RJM.API.DAL
 {
@@ -21,11 +21,11 @@ namespace RJM.API.DAL
         IdentityRoleClaim<Guid>,
         IdentityUserToken<Guid>
     >
-	{
+    {
         private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-		public RJMContext(
+        public RJMContext(
             IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration
         ) : base()
@@ -35,18 +35,18 @@ namespace RJM.API.DAL
         }
 
         // General
-		public DbSet<Document> Documents { get; set; }
-		public DbSet<DocumentType> DocumentTypes { get; set; }
-		public DbSet<DocumentContent> DocumentContents { get; set; }
-		public DbSet<DocumentResume> DocumentResume { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+        public DbSet<DocumentContent> DocumentContents { get; set; }
+        public DbSet<DocumentResume> DocumentResume { get; set; }
         public DbSet<Resume> Resumes { get; set; }
-		public DbSet<ResumeState> ResumeStates { get; set; }
-		public DbSet<Skill> Skills { get; set; }
-		public DbSet<SkillAlias> SkillAliases { get; set; }
-		public DbSet<ResumeSkill> ResumeSkill { get; set; }
-		public DbSet<Job> Jobs { get; set; }
-		public DbSet<JobState> JobStates { get; set; }
-		public DbSet<JobSkill> JobSkill { get; set; }
+        public DbSet<ResumeState> ResumeStates { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<SkillAlias> SkillAliases { get; set; }
+        public DbSet<ResumeSkill> ResumeSkill { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobState> JobStates { get; set; }
+        public DbSet<JobSkill> JobSkill { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -58,7 +58,7 @@ namespace RJM.API.DAL
             }
         }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -77,7 +77,7 @@ namespace RJM.API.DAL
             {
                 e.ToTable("UserLogins");
                 // In case you changed the TKey type
-                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
@@ -89,18 +89,18 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region Documents
+            #region Documents
 
             // Soft delete query filter
             modelBuilder.Entity<Document>()
                 .HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Document>()
+            modelBuilder.Entity<Document>()
                 .ToTable("Documents");
 
-			// Key
-			modelBuilder.Entity<Document>()
+            // Key
+            modelBuilder.Entity<Document>()
                 .HasKey(e => e.Id);
 
             // Properties
@@ -140,18 +140,18 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region DocumentTypes
+            #region DocumentTypes
 
             // Soft delete query filter
             modelBuilder.Entity<DocumentType>()
                 .HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<DocumentType>()
+            modelBuilder.Entity<DocumentType>()
                 .ToTable("DocumentTypes");
 
-			// Key
-			modelBuilder.Entity<DocumentType>()
+            // Key
+            modelBuilder.Entity<DocumentType>()
                 .HasKey(e => e.Id);
 
             // Properties
@@ -205,10 +205,10 @@ namespace RJM.API.DAL
             modelBuilder.Entity<DocumentResume>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<DocumentResume>().ToTable("DocumentResume");
+            modelBuilder.Entity<DocumentResume>().ToTable("DocumentResume");
 
-			// Key
-			modelBuilder.Entity<DocumentResume>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<DocumentResume>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<DocumentResume>().Property(e => e.DocumentId).IsRequired();
@@ -227,16 +227,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region Resumes
+            #region Resumes
 
             // Soft delete query filter
             modelBuilder.Entity<Resume>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Resume>().ToTable("Resumes");
+            modelBuilder.Entity<Resume>().ToTable("Resumes");
 
-			// Key
-			modelBuilder.Entity<Resume>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<Resume>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Resume>().Property(e => e.ResumeStateId).IsRequired();
@@ -259,16 +259,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region ResumeStates
+            #region ResumeStates
 
             // Soft delete query filter
             modelBuilder.Entity<ResumeState>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<ResumeState>().ToTable("ResumeStates");
+            modelBuilder.Entity<ResumeState>().ToTable("ResumeStates");
 
-			// Key
-			modelBuilder.Entity<ResumeState>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<ResumeState>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<ResumeState>().Property(e => e.Name).IsRequired();
@@ -287,16 +287,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region Skills
+            #region Skills
 
             // Soft delete query filter
             modelBuilder.Entity<Skill>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Skill>().ToTable("Skills");
+            modelBuilder.Entity<Skill>().ToTable("Skills");
 
-			// Key
-			modelBuilder.Entity<Skill>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<Skill>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Skill>().Property(e => e.Name).IsRequired();
@@ -314,16 +314,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region SkillAliases
+            #region SkillAliases
 
             // Soft delete query filter
             modelBuilder.Entity<SkillAlias>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<SkillAlias>().ToTable("SkillAliases");
+            modelBuilder.Entity<SkillAlias>().ToTable("SkillAliases");
 
-			// Key
-			modelBuilder.Entity<SkillAlias>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<SkillAlias>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<SkillAlias>().Property(e => e.Name).IsRequired();
@@ -342,16 +342,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region ResumeSkill
+            #region ResumeSkill
 
             // Soft delete query filter
             modelBuilder.Entity<ResumeSkill>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<ResumeSkill>().ToTable("ResumeSkill");
+            modelBuilder.Entity<ResumeSkill>().ToTable("ResumeSkill");
 
-			// Key
-			modelBuilder.Entity<ResumeSkill>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<ResumeSkill>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<ResumeSkill>().Property(e => e.ResumeId).IsRequired();
@@ -370,16 +370,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region Jobs
+            #region Jobs
 
             // Soft delete query filter
             modelBuilder.Entity<Job>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Job>().ToTable("Jobs");
+            modelBuilder.Entity<Job>().ToTable("Jobs");
 
-			// Key
-			modelBuilder.Entity<Job>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<Job>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Job>().Property(e => e.JobStateId).IsRequired();
@@ -397,16 +397,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region JobStates
+            #region JobStates
 
             // Soft delete query filter
             modelBuilder.Entity<JobState>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<JobState>().ToTable("JobStates");
+            modelBuilder.Entity<JobState>().ToTable("JobStates");
 
-			// Key
-			modelBuilder.Entity<JobState>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<JobState>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<JobState>().Property(e => e.Name).IsRequired();
@@ -425,16 +425,16 @@ namespace RJM.API.DAL
 
             #endregion
 
-			#region JobSkill
+            #region JobSkill
 
             // Soft delete query filter
             modelBuilder.Entity<JobSkill>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<JobSkill>().ToTable("JobSkill");
+            modelBuilder.Entity<JobSkill>().ToTable("JobSkill");
 
-			// Key
-			modelBuilder.Entity<JobSkill>().HasKey(e => e.Id);
+            // Key
+            modelBuilder.Entity<JobSkill>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<JobSkill>().Property(e => e.JobId).IsRequired();
@@ -452,9 +452,9 @@ namespace RJM.API.DAL
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
-		}
+        }
 
-		public override int SaveChanges()
+        public override int SaveChanges()
         {
             SoftDeleteLogic();
             TimestampsLogic();
@@ -478,19 +478,19 @@ namespace RJM.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Document) ||
-					entry.Entity.GetType() == typeof(DocumentType) ||
-					entry.Entity.GetType() == typeof(DocumentContent) ||
-					entry.Entity.GetType() == typeof(DocumentResume) ||
+                    entry.Entity.GetType() == typeof(Document) ||
+                    entry.Entity.GetType() == typeof(DocumentType) ||
+                    entry.Entity.GetType() == typeof(DocumentContent) ||
+                    entry.Entity.GetType() == typeof(DocumentResume) ||
                     entry.Entity.GetType() == typeof(Resume) ||
-					entry.Entity.GetType() == typeof(ResumeState) ||
-					entry.Entity.GetType() == typeof(Skill) ||
-					entry.Entity.GetType() == typeof(SkillAlias) ||
-					entry.Entity.GetType() == typeof(ResumeSkill) ||
-					entry.Entity.GetType() == typeof(Job) ||
-					entry.Entity.GetType() == typeof(JobState) ||
-					entry.Entity.GetType() == typeof(JobSkill)
-				)
+                    entry.Entity.GetType() == typeof(ResumeState) ||
+                    entry.Entity.GetType() == typeof(Skill) ||
+                    entry.Entity.GetType() == typeof(SkillAlias) ||
+                    entry.Entity.GetType() == typeof(ResumeSkill) ||
+                    entry.Entity.GetType() == typeof(Job) ||
+                    entry.Entity.GetType() == typeof(JobState) ||
+                    entry.Entity.GetType() == typeof(JobSkill)
+                )
                 {
                     switch (entry.State)
                     {
@@ -512,19 +512,19 @@ namespace RJM.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Document) ||
-					entry.Entity.GetType() == typeof(DocumentType) ||
-					entry.Entity.GetType() == typeof(DocumentContent) ||
-					entry.Entity.GetType() == typeof(DocumentResume) ||
+                    entry.Entity.GetType() == typeof(Document) ||
+                    entry.Entity.GetType() == typeof(DocumentType) ||
+                    entry.Entity.GetType() == typeof(DocumentContent) ||
+                    entry.Entity.GetType() == typeof(DocumentResume) ||
                     entry.Entity.GetType() == typeof(Resume) ||
-					entry.Entity.GetType() == typeof(ResumeState) ||
-					entry.Entity.GetType() == typeof(Skill) ||
-					entry.Entity.GetType() == typeof(SkillAlias) ||
-					entry.Entity.GetType() == typeof(ResumeSkill) ||
-					entry.Entity.GetType() == typeof(Job) ||
-					entry.Entity.GetType() == typeof(JobState) ||
-					entry.Entity.GetType() == typeof(JobSkill)
-				)
+                    entry.Entity.GetType() == typeof(ResumeState) ||
+                    entry.Entity.GetType() == typeof(Skill) ||
+                    entry.Entity.GetType() == typeof(SkillAlias) ||
+                    entry.Entity.GetType() == typeof(ResumeSkill) ||
+                    entry.Entity.GetType() == typeof(Job) ||
+                    entry.Entity.GetType() == typeof(JobState) ||
+                    entry.Entity.GetType() == typeof(JobSkill)
+                )
                 {
                     switch (entry.State)
                     {
@@ -551,18 +551,18 @@ namespace RJM.API.DAL
                 {
                     Type entityType = entry.Entity.GetType();
                     if (
-					    entry.Entity.GetType() == typeof(Document) ||
-					    entry.Entity.GetType() == typeof(DocumentType) ||
-					    //entry.Entity.GetType() == typeof(DocumentContent) ||
-					    entry.Entity.GetType() == typeof(DocumentResume) ||
+                        entry.Entity.GetType() == typeof(Document) ||
+                        entry.Entity.GetType() == typeof(DocumentType) ||
+                        //entry.Entity.GetType() == typeof(DocumentContent) ||
+                        entry.Entity.GetType() == typeof(DocumentResume) ||
                         entry.Entity.GetType() == typeof(Resume) ||
-					    entry.Entity.GetType() == typeof(ResumeState) ||
-					    entry.Entity.GetType() == typeof(Skill) ||
-					    entry.Entity.GetType() == typeof(SkillAlias) ||
-					    entry.Entity.GetType() == typeof(ResumeSkill) ||
-					    entry.Entity.GetType() == typeof(Job) ||
-					    entry.Entity.GetType() == typeof(JobState) ||
-					    entry.Entity.GetType() == typeof(JobSkill)
+                        entry.Entity.GetType() == typeof(ResumeState) ||
+                        entry.Entity.GetType() == typeof(Skill) ||
+                        entry.Entity.GetType() == typeof(SkillAlias) ||
+                        entry.Entity.GetType() == typeof(ResumeSkill) ||
+                        entry.Entity.GetType() == typeof(Job) ||
+                        entry.Entity.GetType() == typeof(JobState) ||
+                        entry.Entity.GetType() == typeof(JobSkill)
                     )
                     {
                         switch (entry.State)
@@ -579,5 +579,5 @@ namespace RJM.API.DAL
                 }
             }
         }
-	}
+    }
 }

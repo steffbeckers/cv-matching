@@ -8,9 +8,9 @@ namespace RJM.API.GraphQL.Types
         {
             Name = "resumeInput";
             Field<IdGraphType>("id");
-		    Field<StringGraphType>("jobTitle");
-		    Field<StringGraphType>("description");
-		    Field<NonNullGraphType<IdGraphType>>("resumeStateId");
+            Field<StringGraphType>("jobTitle");
+            Field<StringGraphType>("description");
+            Field<NonNullGraphType<IdGraphType>>("resumeStateId");
 
             // To create a link with Document directly on create of Resume.
             //Field<IdGraphType>("documentId");

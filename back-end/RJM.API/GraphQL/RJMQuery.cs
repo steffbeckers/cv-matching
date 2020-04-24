@@ -1,5 +1,5 @@
-using GraphQL.Types;
 using GraphQL.Server.Authorization.AspNetCore;
+using GraphQL.Types;
 using RJM.API.DAL.Repositories;
 using RJM.API.GraphQL.Types;
 using System;
@@ -10,20 +10,20 @@ namespace RJM.API.GraphQL
     public class RJMQuery : ObjectGraphType
     {
         public RJMQuery(
-			DocumentRepository documentRepository,
-			DocumentTypeRepository documentTypeRepository,
-			ResumeRepository resumeRepository,
-			ResumeStateRepository resumeStateRepository,
-			SkillRepository skillRepository,
-			SkillAliasRepository skillAliasRepository,
-			JobRepository jobRepository,
-			JobStateRepository jobStateRepository
+            DocumentRepository documentRepository,
+            DocumentTypeRepository documentTypeRepository,
+            ResumeRepository resumeRepository,
+            ResumeStateRepository resumeStateRepository,
+            SkillRepository skillRepository,
+            SkillAliasRepository skillAliasRepository,
+            JobRepository jobRepository,
+            JobStateRepository jobStateRepository
         )
         {
             this.AuthorizeWith("Authorized");
 
-			// Documents
-            
+            // Documents
+
             Field<ListGraphType<DocumentType>>(
                 "documents",
                 resolve: context => documentRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -58,8 +58,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// DocumentTypes
-            
+            // DocumentTypes
+
             Field<ListGraphType<DocumentTypeType>>(
                 "documentTypes",
                 resolve: context => documentTypeRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -94,8 +94,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// Resumes
-            
+            // Resumes
+
             Field<ListGraphType<ResumeType>>(
                 "resumes",
                 resolve: context => resumeRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -130,8 +130,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// ResumeStates
-            
+            // ResumeStates
+
             Field<ListGraphType<ResumeStateType>>(
                 "resumeStates",
                 resolve: context => resumeStateRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -166,8 +166,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// Skills
-            
+            // Skills
+
             Field<ListGraphType<SkillType>>(
                 "skills",
                 resolve: context => skillRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -202,8 +202,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// SkillAliases
-            
+            // SkillAliases
+
             Field<ListGraphType<SkillAliasType>>(
                 "skillAliases",
                 resolve: context => skillAliasRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -238,8 +238,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// Jobs
-            
+            // Jobs
+
             Field<ListGraphType<JobType>>(
                 "jobs",
                 resolve: context => jobRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -274,8 +274,8 @@ namespace RJM.API.GraphQL
             //    }
             //);
 
-			// JobStates
-            
+            // JobStates
+
             Field<ListGraphType<JobStateType>>(
                 "jobStates",
                 resolve: context => jobStateRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))

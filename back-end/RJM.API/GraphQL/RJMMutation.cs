@@ -1,30 +1,30 @@
 using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
-using System;
 using RJM.API.BLL;
-using GraphQLTypes = RJM.API.GraphQL.Types;
 using RJM.API.GraphQL.Types;
 using RJM.API.Models;
+using System;
 using APIModels = RJM.API.Models;
+using GraphQLTypes = RJM.API.GraphQL.Types;
 
 namespace RJM.API.GraphQL
 {
     public class RJMMutation : ObjectGraphType
     {
         public RJMMutation(
-			DocumentBLL documentBLL,
-			DocumentTypeBLL documentTypeBLL,
-			ResumeBLL resumeBLL,
-			ResumeStateBLL resumeStateBLL,
-			SkillBLL skillBLL,
-			SkillAliasBLL skillAliasBLL,
-			JobBLL jobBLL,
-			JobStateBLL jobStateBLL
+            DocumentBLL documentBLL,
+            DocumentTypeBLL documentTypeBLL,
+            ResumeBLL resumeBLL,
+            ResumeStateBLL resumeStateBLL,
+            SkillBLL skillBLL,
+            SkillAliasBLL skillAliasBLL,
+            JobBLL jobBLL,
+            JobStateBLL jobStateBLL
         )
         {
             this.AuthorizeWith("Authorized");
 
-			// Documents
+            // Documents
             //FieldAsync<DocumentType>(
             //    "createDocument",
             //    arguments: new QueryArguments(
@@ -120,7 +120,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// DocumentTypes
+            // DocumentTypes
             FieldAsync<DocumentTypeType>(
                 "createDocumentType",
                 arguments: new QueryArguments(
@@ -180,7 +180,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// Resumes
+            // Resumes
             FieldAsync<ResumeType>(
                 "createResume",
                 arguments: new QueryArguments(
@@ -312,7 +312,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// ResumeStates
+            // ResumeStates
             FieldAsync<ResumeStateType>(
                 "createResumeState",
                 arguments: new QueryArguments(
@@ -372,7 +372,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// Skills
+            // Skills
             FieldAsync<SkillType>(
                 "createSkill",
                 arguments: new QueryArguments(
@@ -504,7 +504,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// SkillAliases
+            // SkillAliases
             FieldAsync<SkillAliasType>(
                 "createSkillAlias",
                 arguments: new QueryArguments(
@@ -564,7 +564,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// Jobs
+            // Jobs
             FieldAsync<JobType>(
                 "createJob",
                 arguments: new QueryArguments(
@@ -660,7 +660,7 @@ namespace RJM.API.GraphQL
                 }
             );
 
-			// JobStates
+            // JobStates
             FieldAsync<JobStateType>(
                 "createJobState",
                 arguments: new QueryArguments(

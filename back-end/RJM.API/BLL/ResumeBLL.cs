@@ -1,21 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
-using RJM.API.Framework.Extensions;
 using RJM.API.Models;
-using RJM.API.Services.Files;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RJM.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Resumes.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Resumes.
+    /// </summary>
     public class ResumeBLL
     {
         private readonly IConfiguration configuration;
@@ -32,17 +29,17 @@ namespace RJM.API.BLL
 
         private readonly SkillRepository skillRepository;
 
-		/// <summary>
-		/// The constructor of the Resume business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Resume business logic layer.
+        /// </summary>
         public ResumeBLL(
             IConfiguration configuration,
             ILogger<DocumentBLL> logger,
             IHttpContextAccessor httpContextAccessor,
             UserManager<User> userManager,
             ResumeRepository resumeRepository,
-			ResumeStateRepository resumeStateRepository,
-			ResumeSkillRepository resumeSkillRepository,
+            ResumeStateRepository resumeStateRepository,
+            ResumeSkillRepository resumeSkillRepository,
             DocumentResumeRepository documentResumeRepository,
             DocumentRepository documentRepository,
             SkillRepository skillRepository
@@ -55,7 +52,7 @@ namespace RJM.API.BLL
 
             this.resumeRepository = resumeRepository;
             this.resumeStateRepository = resumeStateRepository;
-			this.resumeSkillRepository = resumeSkillRepository;
+            this.resumeSkillRepository = resumeSkillRepository;
 
             this.documentResumeRepository = documentResumeRepository;
             this.documentRepository = documentRepository;
@@ -63,25 +60,25 @@ namespace RJM.API.BLL
             this.skillRepository = skillRepository;
         }
 
-		/// <summary>
-		/// Retrieves all resumes.
-		/// </summary>
-		public async Task<IEnumerable<Resume>> GetAllResumesAsync()
+        /// <summary>
+        /// Retrieves all resumes.
+        /// </summary>
+        public async Task<IEnumerable<Resume>> GetAllResumesAsync()
         {
             return await this.resumeRepository.GetWithLinkedEntitiesAsync();
         }
 
-		/// <summary>
-		/// Retrieves one resume by Id.
-		/// </summary>
-		public async Task<Resume> GetResumeByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one resume by Id.
+        /// </summary>
+        public async Task<Resume> GetResumeByIdAsync(Guid id)
         {
             return await this.resumeRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
-		/// <summary>
-		/// Creates a new resume record.
-		/// </summary>
+        /// <summary>
+        /// Creates a new resume record.
+        /// </summary>
         public async Task<Resume> CreateResumeAsync(Resume resume)
         {
             // Validation
@@ -133,7 +130,7 @@ namespace RJM.API.BLL
                 return null;
             }
 
-			// Trimming strings
+            // Trimming strings
             if (!string.IsNullOrEmpty(resumeUpdate.JobTitle))
                 resumeUpdate.JobTitle = resumeUpdate.JobTitle.Trim();
             if (!string.IsNullOrEmpty(resumeUpdate.Description))
@@ -145,7 +142,7 @@ namespace RJM.API.BLL
             if (resumeUpdate.ResumeStateId != Guid.Empty)
                 resume.ResumeStateId = resumeUpdate.ResumeStateId;
 
-			resume = await this.resumeRepository.UpdateAsync(resume);
+            resume = await this.resumeRepository.UpdateAsync(resume);
 
             return resume;
         }
@@ -231,7 +228,7 @@ namespace RJM.API.BLL
 
             // Retrieve existing link
             DocumentResume documentResumeLink = this.documentResumeRepository.GetByResumeAndDocumentId(documentResume.ResumeId, documentResume.DocumentId);
-		
+
             if (documentResumeLink != null)
             {
                 await this.documentResumeRepository.DeleteAsync(documentResumeLink);
@@ -247,7 +244,7 @@ namespace RJM.API.BLL
 
             // Retrieve existing link
             ResumeSkill resumeSkillLink = this.resumeSkillRepository.GetByResumeAndSkillId(resumeSkill.ResumeId, resumeSkill.SkillId);
-		
+
             if (resumeSkillLink != null)
             {
                 await this.resumeSkillRepository.DeleteAsync(resumeSkillLink);
@@ -256,9 +253,9 @@ namespace RJM.API.BLL
             return await this.GetResumeByIdAsync(resumeSkill.ResumeId);
         }
 
-		/// <summary>
-		/// Deletes an existing resume record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing resume record by Id.
+        /// </summary>
         public async Task<Resume> DeleteResumeByIdAsync(Guid resumeId)
         {
             Resume resume = await this.resumeRepository.GetByIdAsync(resumeId);
@@ -266,23 +263,23 @@ namespace RJM.API.BLL
             return await this.DeleteResumeAsync(resume);
         }
 
-		/// <summary>
-		/// Deletes an existing resume record.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing resume record.
+        /// </summary>
         public async Task<Resume> DeleteResumeAsync(Resume resume)
         {
             // Validation
             if (resume == null) { return null; }
 
-			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
-			// Before deletion
-			// #-#-#
+            // #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
+            // Before deletion
+            // #-#-#
 
             await this.resumeRepository.DeleteAsync(resume);
 
-			// #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
-			// After deletion
-			// #-#-#
+            // #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
+            // After deletion
+            // #-#-#
 
             return resume;
         }

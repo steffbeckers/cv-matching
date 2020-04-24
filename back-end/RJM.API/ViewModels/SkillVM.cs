@@ -1,106 +1,106 @@
+using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Skill view model
     /// </summary>
     public class SkillVM
     {
-		public SkillVM()
+        public SkillVM()
         {
             // Relations
 
-			//// One-to-many
-			this.Aliases = new List<SkillAliasVM>();
+            //// One-to-many
+            this.Aliases = new List<SkillAliasVM>();
 
-			//// Many-to-many
-			this.Resumes = new List<ResumeVM>();
-			this.Jobs = new List<JobVM>();
+            //// Many-to-many
+            this.Resumes = new List<ResumeVM>();
+            this.Jobs = new List<JobVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Skill.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of Skill.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of Skill.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// One-to-many
+        //// One-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Aliases of Skill.
         /// </summary>
-		public IList<SkillAliasVM> Aliases { get; set; }
+        public IList<SkillAliasVM> Aliases { get; set; }
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Resumes of Skill.
         /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
+        public IList<ResumeVM> Resumes { get; set; }
 
         ////// To create a link with Resume directly on create of Skill.
         public Guid? ResumeId { get; set; }
         public int? ResumeLevel { get; set; }
         public string ResumeDescription { get; set; }
-		/// <summary>
+        /// <summary>
         /// The related Jobs of Skill.
         /// </summary>
-		public IList<JobVM> Jobs { get; set; }
+        public IList<JobVM> Jobs { get; set; }
 
         ////// To create a link with Job directly on create of Skill.
         public Guid? JobId { get; set; }
         public int? JobLevel { get; set; }
         public string JobDescription { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
     }
 }

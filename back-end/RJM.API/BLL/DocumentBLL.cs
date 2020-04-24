@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -12,12 +8,16 @@ using RJM.API.Framework.Extensions;
 using RJM.API.Models;
 using RJM.API.Services.Files;
 using RJM.API.Services.RabbitMQ;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace RJM.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Documents.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Documents.
+    /// </summary>
     public class DocumentBLL
     {
         private readonly IConfiguration configuration;
@@ -49,7 +49,7 @@ namespace RJM.API.BLL
             DocumentTypeRepository documentTypeRepository,
             ResumeBLL resumeBLL,
             ResumeRepository resumeRepository,
-			DocumentResumeRepository documentResumeRepository
+            DocumentResumeRepository documentResumeRepository
         )
         {
             this.configuration = configuration;
@@ -65,7 +65,7 @@ namespace RJM.API.BLL
 
             this.resumeBLL = resumeBLL;
             this.resumeRepository = resumeRepository;
-			this.documentResumeRepository = documentResumeRepository;
+            this.documentResumeRepository = documentResumeRepository;
         }
 
         /// <summary>
@@ -73,28 +73,29 @@ namespace RJM.API.BLL
         /// </summary>
         public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
-			// Before retrieval
+            // Before retrieval
 
             return await this.documentRepository.GetWithLinkedEntitiesAsync();
         }
 
-		/// <summary>
-		/// Retrieves one document by Id.
-		/// </summary>
-		public async Task<Document> GetDocumentByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one document by Id.
+        /// </summary>
+        public async Task<Document> GetDocumentByIdAsync(Guid id)
         {
-			// Before retrieval
+            // Before retrieval
 
             return await this.documentRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
-		/// <summary>
-		/// Uploads a new document.
-		/// </summary>
+        /// <summary>
+        /// Uploads a new document.
+        /// </summary>
         public async Task<Document> UploadDocumentAsync(IFormFile file, DateTime? fileLastModified, string typeName)
         {
             // Validation
-            if (file == null) {
+            if (file == null)
+            {
                 // TODO: Check for better exception/error handling implementation?
                 throw new DocumentException("File should be present");
             }
@@ -230,7 +231,7 @@ namespace RJM.API.BLL
                 return null;
             }
 
-			// Trimming strings
+            // Trimming strings
             if (!string.IsNullOrEmpty(documentUpdate.Name))
                 documentUpdate.Name = documentUpdate.Name.Trim();
             if (!string.IsNullOrEmpty(documentUpdate.DisplayName))
@@ -255,15 +256,15 @@ namespace RJM.API.BLL
             document.MimeType = documentUpdate.MimeType;
             document.DocumentTypeId = documentUpdate.DocumentTypeId;
 
-			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
-			// Before update
-			// #-#-#
+            // #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
+            // Before update
+            // #-#-#
 
-			document = await this.documentRepository.UpdateAsync(document);
+            document = await this.documentRepository.UpdateAsync(document);
 
-			// #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
-			// After update
-			// #-#-#
+            // #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
+            // After update
+            // #-#-#
 
             return document;
         }
@@ -311,7 +312,7 @@ namespace RJM.API.BLL
 
             // Retrieve existing link
             DocumentResume documentResumeLink = this.documentResumeRepository.GetByDocumentAndResumeId(documentResume.DocumentId, documentResume.ResumeId);
-		
+
             if (documentResumeLink != null)
             {
                 await this.documentResumeRepository.DeleteAsync(documentResumeLink);
@@ -320,9 +321,9 @@ namespace RJM.API.BLL
             return await this.GetDocumentByIdAsync(documentResume.DocumentId);
         }
 
-		/// <summary>
-		/// Deletes an existing document record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing document record by Id.
+        /// </summary>
         public async Task<Document> DeleteDocumentByIdAsync(Guid documentId)
         {
             Document document = await this.documentRepository.GetByIdAsync(documentId);
@@ -330,23 +331,23 @@ namespace RJM.API.BLL
             return await this.DeleteDocumentAsync(document);
         }
 
-		/// <summary>
-		/// Deletes an existing document record.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing document record.
+        /// </summary>
         public async Task<Document> DeleteDocumentAsync(Document document)
         {
             // Validation
             if (document == null) { return null; }
 
-			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
-			// Before deletion
-			// #-#-#
+            // #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
+            // Before deletion
+            // #-#-#
 
             await this.documentRepository.DeleteAsync(document);
 
-			// #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
-			// After deletion
-			// #-#-#
+            // #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
+            // After deletion
+            // #-#-#
 
             return document;
         }

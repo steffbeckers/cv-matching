@@ -1,82 +1,82 @@
+using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// JobState view model
     /// </summary>
     public class JobStateVM
     {
-		public JobStateVM()
+        public JobStateVM()
         {
             // Relations
 
-			//// One-to-many
-			this.Jobs = new List<JobVM>();
+            //// One-to-many
+            this.Jobs = new List<JobVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of JobState.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of JobState.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The DisplayName property of JobState.
         /// </summary>
         [Required]
-		public string DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
-		// Relations
+        // Relations
 
-		//// One-to-many
+        //// One-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Jobs of JobState.
         /// </summary>
-		public IList<JobVM> Jobs { get; set; }
+        public IList<JobVM> Jobs { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
     }
 }

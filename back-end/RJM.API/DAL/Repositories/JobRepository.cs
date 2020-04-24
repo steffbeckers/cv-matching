@@ -1,23 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using RJM.API.Framework;
+using RJM.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RJM.API.Framework;
-using RJM.API.Models;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for Jobs in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for Jobs in the data access layer.
+    /// </summary>
     public class JobRepository : Repository<Job>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the Job repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Job repository.
+        /// </summary>
         public JobRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace RJM.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Job>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<Job>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Jobs
                 .Include(x => x.JobState)
@@ -36,7 +36,7 @@ namespace RJM.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<Job> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<Job> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Jobs
                 .Include(x => x.JobState)
@@ -53,7 +53,7 @@ namespace RJM.API.DAL.Repositories
                 .Where(t => t.JobStateId == jobStateId)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Job>> GetByJobStateIdAsync(Guid jobStateId)
         //{
@@ -70,7 +70,7 @@ namespace RJM.API.DAL.Repositories
                 .Select(x => x.Job)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Job>> GetBySkillIdAsync(Guid skillId)
         //{

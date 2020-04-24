@@ -1,7 +1,7 @@
 using GraphQL.Types;
-using System;
 using RJM.API.DAL.Repositories;
 using RJM.API.Models;
+using System;
 
 namespace RJM.API.GraphQL.Types
 {
@@ -9,9 +9,9 @@ namespace RJM.API.GraphQL.Types
     {
         public JobType(
             JobStateRepository jobStateRepository,
-			JobRepository jobRepository,
+            JobRepository jobRepository,
             SkillRepository skillRepository,
-			JobSkillRepository jobSkillRepository
+            JobSkillRepository jobSkillRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));

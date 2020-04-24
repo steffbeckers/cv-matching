@@ -1,7 +1,5 @@
 using GraphQL.Types;
-using System;
 using RJM.API.DAL.Repositories;
-using RJM.API.Models;
 using APIModels = RJM.API.Models;
 
 namespace RJM.API.GraphQL.Types
@@ -10,7 +8,7 @@ namespace RJM.API.GraphQL.Types
     {
         public DocumentTypeType(
             DocumentRepository documentRepository,
-			DocumentTypeRepository documentTypeRepository
+            DocumentTypeRepository documentTypeRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));

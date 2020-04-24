@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace RJM.API.Controllers
 {
@@ -12,7 +7,7 @@ namespace RJM.API.Controllers
     public class RootController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Healthcheck()
         {
             return Ok();
         }

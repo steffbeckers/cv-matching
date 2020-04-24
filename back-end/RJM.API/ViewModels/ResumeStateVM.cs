@@ -1,30 +1,28 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// ResumeState view model
     /// </summary>
     public class ResumeStateVM
     {
-		/// <summary>
+        /// <summary>
         /// The identifier of ResumeState.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of ResumeState.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The DisplayName property of ResumeState.
         /// </summary>
         [Required]
-		public string DisplayName { get; set; }
+        public string DisplayName { get; set; }
     }
 }

@@ -8,8 +8,8 @@ namespace RJM.API.GraphQL.Types
         {
             Name = "documentTypeInput";
             Field<IdGraphType>("id");
-		    Field<NonNullGraphType<StringGraphType>>("name");
-		    Field<NonNullGraphType<StringGraphType>>("displayName");
+            Field<NonNullGraphType<StringGraphType>>("name");
+            Field<NonNullGraphType<StringGraphType>>("displayName");
         }
     }
 }

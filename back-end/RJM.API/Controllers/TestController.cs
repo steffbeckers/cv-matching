@@ -1,14 +1,6 @@
-﻿using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
-using Amazon.S3.Transfer;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using RJM.API.Services.Files;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace RJM.API.Controllers
 {
@@ -23,7 +15,7 @@ namespace RJM.API.Controllers
         public TestController(
             IConfiguration configuration,
             ILogger<TestController> logger//,
-            //FileService fileService
+                                          //FileService fileService
         )
         {
             this.configuration = configuration;
