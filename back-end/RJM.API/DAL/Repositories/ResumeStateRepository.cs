@@ -1,23 +1,22 @@
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using RJM.API.Framework;
 using RJM.API.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for ResumeStates in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for ResumeStates in the data access layer.
+    /// </summary>
     public class ResumeStateRepository : Repository<ResumeState>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the ResumeState repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the ResumeState repository.
+        /// </summary>
         public ResumeStateRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -39,7 +38,7 @@ namespace RJM.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<ResumeState> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<ResumeState> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.ResumeStates
                 .Include(x => x.Resumes)

@@ -1,23 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using RJM.API.Framework;
+using RJM.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RJM.API.Framework;
-using RJM.API.Models;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for Documents in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for Documents in the data access layer.
+    /// </summary>
     public class DocumentRepository : Repository<Document>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the Document repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Document repository.
+        /// </summary>
         public DocumentRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace RJM.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Document>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<Document>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Documents
                 .Include(x => x.DocumentType)
@@ -37,7 +37,7 @@ namespace RJM.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<Document> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<Document> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Documents
                 .Include(x => x.DocumentType)
@@ -54,7 +54,7 @@ namespace RJM.API.DAL.Repositories
                 .Where(t => t.DocumentTypeId == documentTypeId)
                 .ToList();
         }
-        
+
         public IEnumerable<Document> GetByResumeId(Guid resumeId)
         {
             return this.context.DocumentResume

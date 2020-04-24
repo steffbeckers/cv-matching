@@ -1,23 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using RJM.API.Framework;
+using RJM.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RJM.API.Framework;
-using RJM.API.Models;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for SkillAliases in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for SkillAliases in the data access layer.
+    /// </summary>
     public class SkillAliasRepository : Repository<SkillAlias>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the SkillAlias repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the SkillAlias repository.
+        /// </summary>
         public SkillAliasRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace RJM.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<SkillAlias>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<SkillAlias>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.SkillAliases
                 .Include(x => x.Skill)
@@ -34,7 +34,7 @@ namespace RJM.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<SkillAlias> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<SkillAlias> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.SkillAliases
                 .Include(x => x.Skill)
@@ -49,7 +49,7 @@ namespace RJM.API.DAL.Repositories
                 .Where(t => t.SkillId == skillId)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<SkillAlias>> GetBySkillIdAsync(Guid skillId)
         //{

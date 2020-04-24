@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 using RJM.API.BLL;
 using RJM.API.Models;
 using RJM.API.ViewModels.Identity;
+using System.Threading.Tasks;
 
 namespace RJM.API.Controllers
 {

@@ -1,23 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using RJM.API.Framework;
+using RJM.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RJM.API.Framework;
-using RJM.API.Models;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for Resumes in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for Resumes in the data access layer.
+    /// </summary>
     public class ResumeRepository : Repository<Resume>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the Resume repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Resume repository.
+        /// </summary>
         public ResumeRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace RJM.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Resume>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<Resume>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Resumes
                 .Include(x => x.ResumeState)
@@ -40,7 +40,7 @@ namespace RJM.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<Resume> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<Resume> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Resumes
                 .Include(x => x.ResumeState)
@@ -60,7 +60,7 @@ namespace RJM.API.DAL.Repositories
                 .Where(t => t.ResumeStateId == resumeStateId)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Resume>> GetByResumeStateIdAsync(Guid resumeStateId)
         //{
@@ -77,7 +77,7 @@ namespace RJM.API.DAL.Repositories
                 .Select(x => x.Resume)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Resume>> GetByDocumentIdAsync(Guid documentId)
         //{
@@ -96,7 +96,7 @@ namespace RJM.API.DAL.Repositories
                 .Select(x => x.Resume)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Resume>> GetBySkillIdAsync(Guid skillId)
         //{

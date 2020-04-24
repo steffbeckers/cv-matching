@@ -8,8 +8,8 @@ namespace RJM.API.GraphQL.Types
         {
             Name = "documentResumeInput";
             Field<IdGraphType>("id");
-		    Field<NonNullGraphType<IdGraphType>>("documentId");
-		    Field<NonNullGraphType<IdGraphType>>("resumeId");
+            Field<NonNullGraphType<IdGraphType>>("documentId");
+            Field<NonNullGraphType<IdGraphType>>("resumeId");
 
         }
     }

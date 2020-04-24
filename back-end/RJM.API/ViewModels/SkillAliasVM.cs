@@ -1,84 +1,83 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using RJM.API.ViewModels.Identity;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// SkillAlias view model
     /// </summary>
     public class SkillAliasVM
     {
-		public SkillAliasVM()
+        public SkillAliasVM()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of SkillAlias.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of SkillAlias.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of SkillAlias.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key SkillId for Skill of SkillAlias.
         /// </summary>
-		public Guid SkillId { get; set; }
+        public Guid SkillId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Skill of SkillAlias.
         /// </summary>
-		public SkillVM Skill { get; set; }
+        public SkillVM Skill { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
     }
 }

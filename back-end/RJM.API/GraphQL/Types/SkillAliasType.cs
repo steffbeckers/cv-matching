@@ -1,7 +1,7 @@
 using GraphQL.Types;
-using System;
 using RJM.API.DAL.Repositories;
 using RJM.API.Models;
+using System;
 
 namespace RJM.API.GraphQL.Types
 {
@@ -9,7 +9,7 @@ namespace RJM.API.GraphQL.Types
     {
         public SkillAliasType(
             SkillRepository skillRepository,
-			SkillAliasRepository skillAliasRepository
+            SkillAliasRepository skillAliasRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));

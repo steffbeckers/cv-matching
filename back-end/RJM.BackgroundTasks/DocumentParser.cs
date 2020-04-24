@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Amazon;
-using Amazon.Extensions.NETCore.Setup;
-using Amazon.Runtime.CredentialManagement;
 using Amazon.Textract;
 using Amazon.Textract.Model;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +6,15 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RJM.API.ViewModels;
+using RJM.BackgroundTasks.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RJM.BackgroundTasks
 {
@@ -22,6 +22,11 @@ namespace RJM.BackgroundTasks
     {
         private readonly IConfiguration configuration;
         private readonly ILogger<DocumentParser> logger;
+
+        // RJM.API
+        private readonly APIService apiService;
+
+        // RabbitMQ
         private IConnection connection;
         private IModel channel;
         private string exchange = "rjm.background.tasks";
@@ -31,28 +36,16 @@ namespace RJM.BackgroundTasks
         // Amazon AWS Textract
         private AmazonTextractTextDetectionService textDetectionService;
 
-        public DocumentParser(IConfiguration configuration, ILogger<DocumentParser> logger)
+        public DocumentParser(IConfiguration configuration, ILogger<DocumentParser> logger, APIService apiService, AmazonTextractTextDetectionService textDetectionService)
         {
             this.configuration = configuration;
             this.logger = logger;
 
-            // Amazon AWS Textract config
-            CredentialProfileOptions credentialProfileOptions = new CredentialProfileOptions
-            {
-                AccessKey = this.configuration.GetSection("AWS")
-                                              .GetValue<string>("AccessKey"),
-                SecretKey = this.configuration.GetSection("AWS")
-                                              .GetValue<string>("SecretAccessKey")
-            };
+            // RJM.API
+            this.apiService = apiService;
 
-            CredentialProfile credentialProfile = new CredentialProfile("default", credentialProfileOptions);
-            credentialProfile.Region = RegionEndpoint.EUWest2;
-
-            NetSDKCredentialsFile netSDKCredentialsFile = new NetSDKCredentialsFile();
-            netSDKCredentialsFile.RegisterProfile(credentialProfile);
-
-            AWSOptions awsOptions = this.configuration.GetAWSOptions("AWS");
-            this.textDetectionService = new AmazonTextractTextDetectionService(awsOptions.CreateServiceClient<IAmazonTextract>());
+            // Amazon AWS Textract
+            this.textDetectionService = textDetectionService;
 
             // RabbitMQ
             InitRabbitMQ();
@@ -138,6 +131,8 @@ namespace RJM.BackgroundTasks
 
         private async Task HandleMessage(string content)
         {
+            List<DocumentContentVM> documentContentVMs = new List<DocumentContentVM>();
+
             this.logger.LogInformation($"Received content: {content}");
             this.logger.LogInformation("Parsing content to Document");
 
@@ -152,12 +147,15 @@ namespace RJM.BackgroundTasks
                 case "text/plain":
                     // TODO: Retrieve file check contents, save in database
                     break;
-                // Images, PDF
-                default:
+                // PDF, JPG, PNG
+                case "application/pdf":
+                case "image/jpeg":
+                case "image/png":
                     this.logger.LogInformation($"Amazon Textract - Start text detection of document with ID: {document.Id}");
 
                     string jobId = await this.textDetectionService.StartDocumentTextDetection(
                         this.configuration.GetSection("AWS")
+                            .GetSection("S3")
                             .GetSection("Bucket")
                             .GetValue<string>("Name"),
                         document.Path
@@ -171,18 +169,51 @@ namespace RJM.BackgroundTasks
                     this.logger.LogInformation($"Amazon Textract - Job with ID: {jobId} is completed");
                     this.logger.LogInformation($"Amazon Textract - Retrieving results for job with ID: {jobId}");
 
-                    List<GetDocumentTextDetectionResponse> response = await this.textDetectionService.GetJobResult(jobId);
+                    List<GetDocumentTextDetectionResponse> textDetectionResponses = await this.textDetectionService.GetJobResult(jobId);
 
-                    this.logger.LogInformation($"Amazon Textract - Saving results to JSON text file");
+                    this.logger.LogInformation("Amazon Textract - Saving results to JSON text file");
 
-                    string jsonResponse = JsonConvert.SerializeObject(response, Formatting.Indented);
-                    File.WriteAllText($"DocumentParser/{document.Id}.result.json", jsonResponse);
+                    string jsonResponse = JsonConvert.SerializeObject(textDetectionResponses, Formatting.Indented);
+                    File.WriteAllText($"Results/DocumentParser/{DateTime.Now.ToString("yyyyMMdd_HHmmss")}_{document.Id}.textracted.json", jsonResponse);
 
-                    this.logger.LogInformation($"Text detected in document with ID: {document.Id}");
+                    this.logger.LogInformation("Amazon Textract - Converting results to document contents");
 
-                    // TODO: Save response in database
+                    foreach (GetDocumentTextDetectionResponse textDetectionResponse in textDetectionResponses)
+                    {
+                        foreach (Block block in textDetectionResponse.Blocks)
+                        {
+                            if (block.BlockType.Equals("LINE") && !string.IsNullOrEmpty(block.Text))
+                            {
+                                DocumentContentVM newDocumentContentVM = new DocumentContentVM()
+                                {
+                                    DocumentId = document.Id,
+                                    Text = block.Text,
+                                    Confidence = block.Confidence
+                                };
+
+                                documentContentVMs.Add(newDocumentContentVM);
+                            }
+                        }
+                    }
 
                     break;
+            }
+
+            if (documentContentVMs.Any())
+            {
+                this.logger.LogInformation($"Text detected in document with ID: {document.Id}");
+
+                this.logger.LogInformation($"Saving results in database through API");
+
+                HttpResponseMessage httpResponseMessage = await this.apiService.DocumentsCreateDocumentContents(document.Id, documentContentVMs);
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    this.logger.LogInformation($"Saved in database");
+                }
+            }
+            else
+            {
+                this.logger.LogInformation($"No text detected in document with ID: {document.Id}");
             }
 
             this.logger.LogInformation($"Document with ID: {document.Id} parsed");
@@ -205,11 +236,11 @@ namespace RJM.BackgroundTasks
 
     public class AmazonTextractTextDetectionService
     {
-        private IAmazonTextract textract;
+        private IAmazonTextract amazonTextract;
 
-        public AmazonTextractTextDetectionService(IAmazonTextract textract)
+        public AmazonTextractTextDetectionService(IAmazonTextract amazonTextract)
         {
-            this.textract = textract;
+            this.amazonTextract = amazonTextract;
         }
 
         public async Task<string> StartDocumentTextDetection(string bucketName, string key)
@@ -225,8 +256,8 @@ namespace RJM.BackgroundTasks
                 }
             };
 
-            StartDocumentTextDetectionResponse response = await this.textract.StartDocumentTextDetectionAsync(request);
-            
+            StartDocumentTextDetectionResponse response = await this.amazonTextract.StartDocumentTextDetectionAsync(request);
+
             return response.JobId;
         }
 
@@ -240,7 +271,7 @@ namespace RJM.BackgroundTasks
 
         public async Task<bool> IsJobComplete(string jobId)
         {
-            GetDocumentTextDetectionResponse response = await this.textract.GetDocumentTextDetectionAsync(new GetDocumentTextDetectionRequest
+            GetDocumentTextDetectionResponse response = await this.amazonTextract.GetDocumentTextDetectionAsync(new GetDocumentTextDetectionRequest
             {
                 JobId = jobId
             });
@@ -253,7 +284,7 @@ namespace RJM.BackgroundTasks
             List<GetDocumentTextDetectionResponse> result = new List<GetDocumentTextDetectionResponse>();
 
             // Wait for response of Amazon Textract
-            GetDocumentTextDetectionResponse response = await this.textract.GetDocumentTextDetectionAsync(new GetDocumentTextDetectionRequest
+            GetDocumentTextDetectionResponse response = await this.amazonTextract.GetDocumentTextDetectionAsync(new GetDocumentTextDetectionRequest
             {
                 JobId = jobId
             });
@@ -266,7 +297,7 @@ namespace RJM.BackgroundTasks
             while (nextToken != null)
             {
                 this.Wait();
-                response = await this.textract.GetDocumentTextDetectionAsync(new GetDocumentTextDetectionRequest
+                response = await this.amazonTextract.GetDocumentTextDetectionAsync(new GetDocumentTextDetectionRequest
                 {
                     JobId = jobId,
                     NextToken = response.NextToken
@@ -286,26 +317,6 @@ namespace RJM.BackgroundTasks
         {
             Task.Delay(delay).Wait();
             Console.Write(".");
-        }
-
-        // TODO: Check what this does
-        public async Task<DetectDocumentTextResponse> DetectTextS3(string bucketName, string key)
-        {
-            DetectDocumentTextResponse result = new DetectDocumentTextResponse();
-
-            S3Object s3Object = new S3Object
-            {
-                Bucket = bucketName,
-                Name = key
-            };
-
-            DetectDocumentTextRequest request = new DetectDocumentTextRequest();
-            request.Document = new Document
-            {
-                S3Object = s3Object
-            };
-
-            return await this.textract.DetectDocumentTextAsync(request);
         }
     }
 }

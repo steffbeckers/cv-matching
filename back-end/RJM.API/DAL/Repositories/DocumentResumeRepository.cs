@@ -1,23 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using RJM.API.Framework;
 using RJM.API.Models;
+using System;
+using System.Linq;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for DocumentResumes in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for DocumentResumes in the data access layer.
+    /// </summary>
     public class DocumentResumeRepository : Repository<DocumentResume>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the DocumentResume repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the DocumentResume repository.
+        /// </summary>
         public DocumentResumeRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -32,7 +29,7 @@ namespace RJM.API.DAL.Repositories
                 .SingleOrDefault();
         }
 
-		public DocumentResume GetByResumeAndDocumentId(Guid resumeId, Guid documentId)
+        public DocumentResume GetByResumeAndDocumentId(Guid resumeId, Guid documentId)
         {
             return this.context.DocumentResume
                 .Where(x => x.ResumeId == resumeId && x.DocumentId == documentId)

@@ -1,98 +1,97 @@
+using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Job view model
     /// </summary>
     public class JobVM
     {
-		public JobVM()
+        public JobVM()
         {
             // Relations
 
-			//// Many-to-many
-			this.Skills = new List<SkillVM>();
+            //// Many-to-many
+            this.Skills = new List<SkillVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Job.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Title property of Job.
         /// </summary>
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of Job.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key JobStateId for JobState of Job.
         /// </summary>
-		public Guid JobStateId { get; set; }
+        public Guid JobStateId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related JobState of Job.
         /// </summary>
-		public JobStateVM JobState { get; set; }
+        public JobStateVM JobState { get; set; }
 
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Skills of Job.
         /// </summary>
-		public IList<SkillVM> Skills { get; set; }
+        public IList<SkillVM> Skills { get; set; }
 
         ////// To create a link with Skill directly on create of Job.
         public Guid? SkillId { get; set; }
         public int? SkillLevel { get; set; }
         public string SkillDescription { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
     }
 }

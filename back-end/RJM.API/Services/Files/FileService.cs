@@ -1,13 +1,9 @@
 ﻿using Amazon.S3.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using RJM.API.DAL.Repositories;
 using RJM.API.Framework.Exceptions;
 using RJM.API.Models;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RJM.API.Services.Files
@@ -43,8 +39,8 @@ namespace RJM.API.Services.Files
             switch (uploadLocation)
             {
                 case "AWSS3":
-                    string pathInBucket = this.configuration.GetSection("FileService")
-                                              .GetSection("AWSS3Service")
+                    string pathInBucket = this.configuration.GetSection("AWS")
+                                              .GetSection("S3")
                                               .GetSection("Bucket")
                                               .GetValue<string>("DocumentsPath");
                     pathInBucket += "/" + document.Id.ToString().ToUpper();
@@ -74,8 +70,8 @@ namespace RJM.API.Services.Files
             switch (downloadLocation)
             {
                 case "AWSS3":
-                    string pathInBucket = this.configuration.GetSection("FileService")
-                                              .GetSection("AWSS3Service")
+                    string pathInBucket = this.configuration.GetSection("AWS")
+                                              .GetSection("S3")
                                               .GetSection("Bucket")
                                               .GetValue<string>("DocumentsPath");
                     pathInBucket += "/" + document.Id.ToString().ToUpper();

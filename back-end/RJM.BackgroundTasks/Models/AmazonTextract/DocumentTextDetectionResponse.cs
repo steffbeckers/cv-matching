@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RJM.BackgroundTasks.Models.AmazonTextract
+﻿namespace RJM.BackgroundTasks.Models.AmazonTextract
 {
     public class DocumentTextDetectionResponse
     {

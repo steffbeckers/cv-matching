@@ -1,135 +1,135 @@
+using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Document view model
     /// </summary>
     public class DocumentVM
     {
-		public DocumentVM()
+        public DocumentVM()
         {
             // Relations
 
-			//// Many-to-many
-			this.Resumes = new List<ResumeVM>();
+            //// Many-to-many
+            this.Resumes = new List<ResumeVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Document.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of Document.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The DisplayName property of Document.
         /// </summary>
-		public string DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of Document.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Path property of Document.
         /// </summary>
-		public string Path { get; set; }
+        public string Path { get; set; }
 
-		/// <summary>
-		/// The URL property of Document.
-		/// </summary>
-		public string URL { get; set; }
+        /// <summary>
+        /// The URL property of Document.
+        /// </summary>
+        public string URL { get; set; }
 
-		/// <summary>
-		/// The SizeInBytes property of Document.
-		/// </summary>
-		public long? SizeInBytes { get; set; }
+        /// <summary>
+        /// The SizeInBytes property of Document.
+        /// </summary>
+        public long? SizeInBytes { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The FileLastModifiedOn property of Document.
         /// </summary>
-		public DateTime? FileLastModifiedOn { get; set; }
+        public DateTime? FileLastModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The MimeType property of Document.
         /// </summary>
-		public string MimeType { get; set; }
+        public string MimeType { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-		/// <summary>
-		/// The related foreign key UserId for User of Document.
-		/// </summary>
-		public Guid UserId { get; set; }
+        /// <summary>
+        /// The related foreign key UserId for User of Document.
+        /// </summary>
+        public Guid UserId { get; set; }
 
-		/// <summary>
-		/// The related User of Document.
-		/// </summary>
-		public UserVM User { get; set; }
+        /// <summary>
+        /// The related User of Document.
+        /// </summary>
+        public UserVM User { get; set; }
 
-		/// <summary>
-		/// The related foreign key DocumentTypeId for DocumentType of Document.
-		/// </summary>
-		public Guid? DocumentTypeId { get; set; }
+        /// <summary>
+        /// The related foreign key DocumentTypeId for DocumentType of Document.
+        /// </summary>
+        public Guid? DocumentTypeId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related DocumentType of Document.
         /// </summary>
-		public DocumentTypeVM DocumentType { get; set; }
+        public DocumentTypeVM DocumentType { get; set; }
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Resumes of Document.
         /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
+        public IList<ResumeVM> Resumes { get; set; }
 
         ////// To create a link with Resume directly on create of Document.
         public Guid? ResumeId { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
     }
 }

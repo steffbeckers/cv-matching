@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using RJM.API.Framework.Exceptions;
+using RJM.API.Models;
+using RJM.API.Services.Emails;
+using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,16 +15,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using RJM.API.Framework.Exceptions;
-using RJM.API.Models;
-using RJM.API.ViewModels.Identity;
-using RJM.API.Services.Emails;
 
 namespace RJM.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for authentication.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for authentication.
+    /// </summary>
     public class AuthBLL
     {
         private readonly IConfiguration configuration;
@@ -75,7 +75,7 @@ namespace RJM.API.BLL
 
             // Log the user in by password
             SignInResult signInResult = await signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
-            
+
             // Success
             if (signInResult.Succeeded)
             {
@@ -129,7 +129,7 @@ namespace RJM.API.BLL
             if (signInResult.IsLockedOut)
             {
                 logger.LogWarning("User is locked out", user);
-                
+
                 throw new LoginFailedException("locked-out");
             }
             else if (signInResult.IsNotAllowed)
@@ -338,7 +338,7 @@ namespace RJM.API.BLL
 
                 throw new ResetPasswordFailedException("invalid");
             }
-            
+
             // Validate email address
             if (user.Email != resetPasswordVM.Email)
             {
@@ -374,7 +374,7 @@ namespace RJM.API.BLL
 
                 return passwordResettedVM;
             }
-            
+
             logger.LogWarning("Reset password is invalid", user);
 
             throw new ResetPasswordFailedException("invalid");

@@ -1,23 +1,22 @@
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using RJM.API.Framework;
 using RJM.API.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RJM.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for DocumentTypes in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for DocumentTypes in the data access layer.
+    /// </summary>
     public class DocumentTypeRepository : Repository<DocumentType>
     {
         private new readonly RJMContext context;
 
-		/// <summary>
-		/// The constructor of the DocumentType repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the DocumentType repository.
+        /// </summary>
         public DocumentTypeRepository(RJMContext context) : base(context)
         {
             this.context = context;
@@ -39,7 +38,7 @@ namespace RJM.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<DocumentType> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<DocumentType> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.DocumentTypes
                 .Include(x => x.Documents)

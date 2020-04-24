@@ -1,98 +1,97 @@
 using System;
-using System.Collections.Generic;
 
 namespace RJM.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// JobSkill model
     /// </summary>
     public class JobSkill
     {
-		public JobSkill()
+        public JobSkill()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of JobSkill.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Level property of JobSkill.
         /// </summary>
-		public int? Level { get; set; }
+        public int? Level { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of JobSkill.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key JobId for Job of JobSkill.
         /// </summary>
-		public Guid JobId { get; set; }
+        public Guid JobId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Job of JobSkill.
         /// </summary>
-		public Job Job { get; set; }
+        public Job Job { get; set; }
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key SkillId for Skill of JobSkill.
         /// </summary>
-		public Guid SkillId { get; set; }
+        public Guid SkillId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Skill of JobSkill.
         /// </summary>
-		public Skill Skill { get; set; }
+        public Skill Skill { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public User CreatedByUser { get; set; }
+        public User CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public User ModifiedByUser { get; set; }
+        public User ModifiedByUser { get; set; }
 
-		// TODO: Multi-tenancy
-		//public Guid TenantId { get; set; }
+        // TODO: Multi-tenancy
+        //public Guid TenantId { get; set; }
     }
 }

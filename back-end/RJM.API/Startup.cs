@@ -1,4 +1,6 @@
+using Amazon.S3;
 using AutoMapper;
+using Elastic.Apm.NetCoreAll;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Authorization.AspNetCore;
@@ -11,15 +13,28 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.ObjectPool;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RJM.API.BLL;
+using RJM.API.DAL;
+using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Exceptions;
+using RJM.API.GraphQL;
+using RJM.API.Mappers;
+using RJM.API.Models;
+using RJM.API.Services.Emails;
+using RJM.API.Services.Files;
+using RJM.API.Services.RabbitMQ;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,21 +42,6 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using RJM.API.BLL;
-using RJM.API.DAL;
-using RJM.API.DAL.Repositories;
-using RJM.API.Framework.Exceptions;
-using RJM.API.GraphQL;
-using RJM.API.Models;
-using RJM.API.Services;
-using Microsoft.AspNetCore.Http.Features;
-using RJM.API.Mappers;
-using Elastic.Apm.NetCoreAll;
-using RJM.API.Services.Files;
-using RJM.API.Services.Emails;
-using Microsoft.Extensions.ObjectPool;
-using RJM.API.Services.RabbitMQ;
-using RabbitMQ.Client;
 
 namespace RJM.API
 {
@@ -57,13 +57,13 @@ namespace RJM.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-		    // CORS
+            // CORS
             services.AddCors();
 
             // Connection to the RJM database
             services.AddDbContext<RJMContext>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("RJMContext")));
-            
+
             // Repositories
             services.AddScoped<DocumentRepository>();
             services.AddScoped<DocumentTypeRepository>();
@@ -92,9 +92,13 @@ namespace RJM.API
             // Services
             services.AddSingleton<IEmailService, EmailService>();
 
+            // AWS
+            services.AddDefaultAWSOptions(this.configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonS3>();
+            services.AddSingleton<AWSS3Service>();
+
             // Uploads
             services.AddSingleton<FileService>();
-            services.AddSingleton<AWSS3Service>();
             services.Configure<FormOptions>(options =>
             {
                 // Set the upload limit
@@ -196,7 +200,7 @@ namespace RJM.API
             .AddUserContextBuilder(httpContext => httpContext.User)
             .AddWebSockets();
 
-			// AutoMapper
+            // AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperProfile());
@@ -204,17 +208,18 @@ namespace RJM.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-			// MVC
+            // MVC
             services.AddControllers()
-                .AddNewtonsoftJson(options => {
+                .AddNewtonsoftJson(options =>
+                {
                     options.SerializerSettings.MaxDepth = 10;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
             );
 
-			// Swagger
-			// Register the Swagger generator, defining 1 or more Swagger documents
+            // Swagger
+            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -278,9 +283,9 @@ namespace RJM.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-		    // CORS
+            // CORS
             app.UseCors(options =>
-			{
+            {
                 options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
@@ -320,7 +325,7 @@ namespace RJM.API
 
             app.UseRouting();
 
-			// Authorization
+            // Authorization
             app.UseAuthorization();
 
             // Web sockets
@@ -338,9 +343,10 @@ namespace RJM.API
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
             app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
-			// Swagger
+            // Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger(c => {
+            app.UseSwagger(c =>
+            {
                 c.RouteTemplate = "ui/swagger/{documentName}/swagger.json";
             })
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 

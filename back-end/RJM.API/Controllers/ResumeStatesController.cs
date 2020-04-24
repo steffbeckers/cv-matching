@@ -2,60 +2,60 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using RJM.API.BLL;
 using RJM.API.Models;
 using RJM.API.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RJM.API.Controllers
 {
-	/// <summary>
-	/// The ResumeStates controller.
-	/// </summary>
+    /// <summary>
+    /// The ResumeStates controller.
+    /// </summary>
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class ResumeStatesController : ControllerBase
     {
         private readonly ILogger<ResumeStatesController> logger;
         private readonly IMapper mapper;
         private readonly ResumeStateBLL bll;
 
-		/// <summary>
-		/// The constructor of the ResumeStates controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the ResumeStates controller.
+        /// </summary>
         public ResumeStatesController(
             ILogger<ResumeStatesController> logger,
-			IMapper mapper,
+            IMapper mapper,
             ResumeStateBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/resumestates
-		/// <summary>
-		/// Retrieves all resumestates.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all resumestates.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ResumeStateVM>>> GetResumeStates()
         {
             IEnumerable<ResumeState> resumestates = await this.bll.GetAllResumeStatesAsync();
 
-			// Mapping
+            // Mapping
             return Ok(this.mapper.Map<IEnumerable<ResumeState>, List<ResumeStateVM>>(resumestates));
         }
 
         // GET: api/resumestates/{id}
-		/// <summary>
-		/// Retrieves a specific resumestate.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific resumestate.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<ResumeStateVM>> GetResumeState([FromRoute] Guid id)
         {
@@ -65,19 +65,19 @@ namespace RJM.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             return Ok(this.mapper.Map<ResumeState, ResumeStateVM>(resumestate));
         }
 
         // POST: api/resumestates
-		/// <summary>
-		/// Creates a new resumestate.
-		/// </summary>
-		/// <param name="resumestateVM"></param>
+        /// <summary>
+        /// Creates a new resumestate.
+        /// </summary>
+        /// <param name="resumestateVM"></param>
         [HttpPost]
         public async Task<ActionResult<ResumeStateVM>> CreateResumeState([FromBody] ResumeStateVM resumestateVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -88,43 +88,43 @@ namespace RJM.API.Controllers
 
             resumestate = await this.bll.CreateResumeStateAsync(resumestate);
 
-			// Mapping
+            // Mapping
             return CreatedAtAction(
-				"GetResumeState",
-				new { id = resumestate.Id },
-				this.mapper.Map<ResumeState, ResumeStateVM>(resumestate)
-			);
+                "GetResumeState",
+                new { id = resumestate.Id },
+                this.mapper.Map<ResumeState, ResumeStateVM>(resumestate)
+            );
         }
 
-		// PUT: api/resumestates/{id}
-		/// <summary>
-		/// Updates a specific resumestate.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="resumeStateVM"></param>
+        // PUT: api/resumestates/{id}
+        /// <summary>
+        /// Updates a specific resumestate.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="resumeStateVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<ResumeStateVM>> UpdateResumeState([FromRoute] Guid id, [FromBody] ResumeStateVM resumeStateVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != resumeStateVM.Id)
             {
                 return BadRequest(ModelState);
             }
 
-			// Mapping
+            // Mapping
             ResumeState resumeState = this.mapper.Map<ResumeStateVM, ResumeState>(resumeStateVM);
 
             resumeState = await this.bll.UpdateResumeStateAsync(resumeState);
 
-			// Mapping
-			return Ok(this.mapper.Map<ResumeState, ResumeStateVM>(resumeState));
+            // Mapping
+            return Ok(this.mapper.Map<ResumeState, ResumeStateVM>(resumeState));
         }
 
         // DELETE: api/resumestates/{id}
-		/// <summary>
-		/// Deletes a specific resumestate.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific resumestate.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<ResumeStateVM>> DeleteResumeState([FromRoute] Guid id)
         {
