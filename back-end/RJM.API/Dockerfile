@@ -16,4 +16,8 @@ RUN dotnet publish "RJM.API.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+
+# AWS Credentials
+COPY --from=publish /app/Configuration/AWS/credentials /root/.aws/credentials
+
 ENTRYPOINT ["dotnet", "RJM.API.dll"]

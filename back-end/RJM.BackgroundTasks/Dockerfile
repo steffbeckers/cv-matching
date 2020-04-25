@@ -16,4 +16,8 @@ RUN dotnet publish "RJM.BackgroundTasks.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+
+# AWS Credentials
+COPY --from=publish /app/Configuration/AWS/credentials /root/.aws/credentials
+
 ENTRYPOINT ["dotnet", "RJM.BackgroundTasks.dll"]
