@@ -17,12 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="appsettings.Production.json">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Configuration\AWS\credentials">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

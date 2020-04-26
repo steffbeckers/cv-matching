@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: 'UploadResumeCard',
   data: () => ({
@@ -35,11 +33,6 @@ export default {
     resumeToUpload: null,
     resumeToUploadRules: [(v) => !!v || 'Resume is required'],
   }),
-  computed: {
-    ...mapState({
-      uploadedResume: (state) => state.uploadedResume,
-    }),
-  },
   methods: {
     upload() {
       if (this.$refs.uploadForm.validate()) {

@@ -25,6 +25,10 @@ namespace RJM.API.Mappers
                     x => x.MapFrom(
                         y => y.DocumentResume.Select(z => z.Resume)
                     )
+                )
+                .ForMember(
+                    x => x.Contents,
+                    x => x.MapFrom(y => y.DocumentContents)
                 );
             CreateMap<DocumentVM, Document>()
                 .ForMember(

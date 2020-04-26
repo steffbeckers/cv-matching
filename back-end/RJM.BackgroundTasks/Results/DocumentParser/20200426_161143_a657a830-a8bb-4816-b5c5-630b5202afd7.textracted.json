@@ -1,0 +1,3694 @@
+[
+  {
+    "Blocks": [
+      {
+        "BlockType": {
+          "Value": "PAGE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 0.0,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 1.0,
+            "Left": 0.0,
+            "Top": 0.0,
+            "Width": 1.0
+          },
+          "Polygon": [
+            {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            {
+              "X": 1.0,
+              "Y": 0.0
+            },
+            {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            {
+              "X": 0.0,
+              "Y": 1.0
+            }
+          ]
+        },
+        "Id": "5a888308-e29a-4cf4-a486-9617ef40f49b",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "11f9d267-b920-4c0c-82a2-eb9411fbeced",
+              "b2079c27-597a-4cf7-89eb-fb8ec838e9fc",
+              "237a4abd-ecc4-475f-988e-77cf2a7b58b7",
+              "8d64b3aa-121d-407b-8144-aae2475a0758",
+              "3105a94d-43ac-4254-a912-695a1ea57552",
+              "05f02da2-0b90-4d3a-9360-5256a9465a0d",
+              "3459c3a9-9770-4bbc-bf54-c1b4c8311c3a",
+              "e0574152-8f3d-40bd-ade4-d03ad70ecef7",
+              "d24e482a-95ce-4d20-8602-c92d46b27a3e",
+              "80ad0131-498c-470d-abec-13e8c3b40566",
+              "c28a435a-cc42-4bc2-a047-5ed673de3fb4",
+              "59dc83c7-0301-45b0-bcd3-21775cee62b8"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": null
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.950424,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.08038046,
+            "Left": 0.03865515,
+            "Top": 0.058887597,
+            "Width": 0.27357194
+          },
+          "Polygon": [
+            {
+              "X": 0.03865515,
+              "Y": 0.058887597
+            },
+            {
+              "X": 0.31222707,
+              "Y": 0.058887597
+            },
+            {
+              "X": 0.31222707,
+              "Y": 0.13926806
+            },
+            {
+              "X": 0.03865515,
+              "Y": 0.13926806
+            }
+          ]
+        },
+        "Id": "11f9d267-b920-4c0c-82a2-eb9411fbeced",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "a713926a-e89f-497c-8d9d-654f124413eb",
+              "64538a07-2d7f-48bf-864f-f985fb1b7d3c"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "STEFF BECKERS"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.381325,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05511516,
+            "Left": 0.37962085,
+            "Top": 0.0590716,
+            "Width": 0.12405819
+          },
+          "Polygon": [
+            {
+              "X": 0.37962085,
+              "Y": 0.0590716
+            },
+            {
+              "X": 0.50367904,
+              "Y": 0.0590716
+            },
+            {
+              "X": 0.50367904,
+              "Y": 0.11418676
+            },
+            {
+              "X": 0.37962085,
+              "Y": 0.11418676
+            }
+          ]
+        },
+        "Id": "b2079c27-597a-4cf7-89eb-fb8ec838e9fc",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "3cfe608e-895f-4f31-a441-39e3cadf6a19",
+              "f327ac4b-fa7a-40e0-8e22-8a5d80b862d4"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "ABOUT ME"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 93.94431,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.08315276,
+            "Left": 0.040393706,
+            "Top": 0.17691536,
+            "Width": 0.27162722
+          },
+          "Polygon": [
+            {
+              "X": 0.040393706,
+              "Y": 0.17691536
+            },
+            {
+              "X": 0.31202093,
+              "Y": 0.17691536
+            },
+            {
+              "X": 0.31202093,
+              "Y": 0.26006812
+            },
+            {
+              "X": 0.040393706,
+              "Y": 0.26006812
+            }
+          ]
+        },
+        "Id": "237a4abd-ecc4-475f-988e-77cf2a7b58b7",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "c7738a8d-9cdb-4921-a3b2-d45900e3758e",
+              "f0dfe232-3776-477a-8551-0f49f31a0c98",
+              "533cf800-ba71-4915-ad8f-baa7a4ebc9e0",
+              "9d39787d-760d-4229-8bd1-69380f2eb07b",
+              "c1013d9a-5377-4ecc-a2a2-b3db64222b7e",
+              "322de394-3b91-4321-8385-bc4406ec43da",
+              "344975dd-1967-4bab-a697-c1839725b2a3",
+              "4c246dc7-2fa9-4f91-ae64-13308551e84b",
+              "06df1893-76af-42ae-937d-8c968e4723ab"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "D E V E L O P E R"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.827126,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.057279825,
+            "Left": 0.35755944,
+            "Top": 0.16791368,
+            "Width": 0.52066535
+          },
+          "Polygon": [
+            {
+              "X": 0.35755944,
+              "Y": 0.16791368
+            },
+            {
+              "X": 0.8782248,
+              "Y": 0.16791368
+            },
+            {
+              "X": 0.8782248,
+              "Y": 0.2251935
+            },
+            {
+              "X": 0.35755944,
+              "Y": 0.2251935
+            }
+          ]
+        },
+        "Id": "8d64b3aa-121d-407b-8144-aae2475a0758",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "3ad8dd96-4317-4f22-9d66-63b2f8a3edf5",
+              "34804548-8340-4739-bf45-318e05088311",
+              "a3c51096-4c26-4102-89f5-3ff2bdb6a2e6",
+              "b5c44879-60dd-4a1c-97c4-d6db4030f8a6",
+              "80df0bc8-5cc9-412a-b860-53200f8abe23",
+              "dbb82229-6499-4ecf-8c7d-7e2386c1d0a4",
+              "cd72f5ec-bc68-4789-8dd9-0196706c0a9d",
+              "7270f168-5093-41a2-89b2-2b0996b42f48",
+              "6740a351-11e8-4ee1-b4da-21a1fcb26f7d",
+              "1722a353-b240-4632-aa84-ee5178f82ebc"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Developer with a passion for web development and big data."
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.73598,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.055548698,
+            "Left": 0.35739255,
+            "Top": 0.23296997,
+            "Width": 0.60873735
+          },
+          "Polygon": [
+            {
+              "X": 0.35739255,
+              "Y": 0.23296997
+            },
+            {
+              "X": 0.9661299,
+              "Y": 0.23296997
+            },
+            {
+              "X": 0.9661299,
+              "Y": 0.28851867
+            },
+            {
+              "X": 0.35739255,
+              "Y": 0.28851867
+            }
+          ]
+        },
+        "Id": "3105a94d-43ac-4254-a912-695a1ea57552",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "bbfa8001-5b84-44bc-9e8b-8bfbdc65052d",
+              "427cb8bc-e9e8-4fc1-a92a-2e4bd44a39e4",
+              "32a9941e-1cbe-4e13-a9e1-651379cc81d6",
+              "3e8f3412-7046-40f3-afea-e1ad2fa258c6",
+              "2e4c76d6-7b25-4c03-a7b3-a87cb8102986",
+              "68730421-00ec-4b84-886d-1f5631a64b3f",
+              "05121836-24d5-4b7b-a4df-9ee46b81a93e",
+              "2a4b4b4c-38ae-49eb-894a-e7809d82e1f9",
+              "8ca5d824-79cd-436c-8453-ba8bde4de91d",
+              "04acb021-535c-4837-83ff-17e29282a1ca"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Motivated to expand knowledge and skills with the latest technologies"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.65295,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.047199577,
+            "Left": 0.3565561,
+            "Top": 0.2995978,
+            "Width": 0.14703806
+          },
+          "Polygon": [
+            {
+              "X": 0.3565561,
+              "Y": 0.2995978
+            },
+            {
+              "X": 0.50359416,
+              "Y": 0.2995978
+            },
+            {
+              "X": 0.50359416,
+              "Y": 0.34679738
+            },
+            {
+              "X": 0.3565561,
+              "Y": 0.34679738
+            }
+          ]
+        },
+        "Id": "05f02da2-0b90-4d3a-9360-5256a9465a0d",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "735f99b7-6815-41ed-9aef-c442176a6c21",
+              "68ee4122-d07a-4b42-99a6-1b0efca2042e"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "and frameworks."
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.795364,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.055959195,
+            "Left": 0.35698527,
+            "Top": 0.3892496,
+            "Width": 0.57724994
+          },
+          "Polygon": [
+            {
+              "X": 0.35698527,
+              "Y": 0.3892496
+            },
+            {
+              "X": 0.9342352,
+              "Y": 0.3892496
+            },
+            {
+              "X": 0.9342352,
+              "Y": 0.4452088
+            },
+            {
+              "X": 0.35698527,
+              "Y": 0.4452088
+            }
+          ]
+        },
+        "Id": "3459c3a9-9770-4bbc-bf54-c1b4c8311c3a",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "69fb4e2b-7375-4d1a-99c0-31c3ef5f165f",
+              "262178c4-f7d2-4dca-b9d9-b9f89c5c84ff",
+              "f398c793-367f-40fc-a4bb-5eb49470873d",
+              "f4b55590-ea33-420a-847b-2cd2f5d1f33f",
+              "2decb7af-32dc-47b8-a1f6-a8d4499fadab",
+              "b0e3f9ba-5319-46ba-a2d2-a01539f8145f",
+              "0cfad50f-0918-4457-a6b4-6582d123ff71",
+              "e854e90b-bc52-45c4-8e28-79439ead6ec5",
+              "46b7d242-b9b8-4406-85ac-d81bf993c1f6",
+              "6f034818-d0e2-4bff-a2f0-821e4e2bbf9b",
+              "653bb5db-71be-4d49-a9b8-5ccba4898b9e"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Loves working on projects as a teamplayer in an agile environment."
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 98.85072,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.056022618,
+            "Left": 0.3574044,
+            "Top": 0.4549314,
+            "Width": 0.6011915
+          },
+          "Polygon": [
+            {
+              "X": 0.3574044,
+              "Y": 0.4549314
+            },
+            {
+              "X": 0.95859593,
+              "Y": 0.4549314
+            },
+            {
+              "X": 0.95859593,
+              "Y": 0.510954
+            },
+            {
+              "X": 0.3574044,
+              "Y": 0.510954
+            }
+          ]
+        },
+        "Id": "e0574152-8f3d-40bd-ade4-d03ad70ecef7",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "87e6e5ed-6b74-4563-a532-923220aa2ad9",
+              "c78d5320-2234-4e58-a1ce-bb752c55543f",
+              "9b4580dd-5765-42bd-8491-35b809c5fa45",
+              "35cfa319-dbec-4770-bf6a-4c0d2e4673cb",
+              "542228bc-f724-4027-995a-2ec038c3b726",
+              "b5281be8-f448-4e2b-9930-4216d503ace9",
+              "491b6b7d-388b-4702-8270-da9817cdc548",
+              "5ad5faf5-e14a-4b1a-b33e-9b1290afb11c",
+              "0290edcf-ae76-4708-af6b-e192495eb34b",
+              "2f3f65b8-54c1-4b86-a9a8-36348ba4d3a2",
+              "cffc4aa5-4865-40ca-a858-d488d66dca49",
+              "e6c24d0c-3b8c-4310-ac1e-1bad943e227d",
+              "65c7449d-57a2-4840-aefc-882ac7942270",
+              "37fcb4e5-f1bf-4a65-941a-caaa1be731f8"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Focused on getting it right, and aware that small details can have a big"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.95109,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05350715,
+            "Left": 0.35700166,
+            "Top": 0.52041674,
+            "Width": 0.06370658
+          },
+          "Polygon": [
+            {
+              "X": 0.35700166,
+              "Y": 0.52041674
+            },
+            {
+              "X": 0.42070824,
+              "Y": 0.52041674
+            },
+            {
+              "X": 0.42070824,
+              "Y": 0.5739239
+            },
+            {
+              "X": 0.35700166,
+              "Y": 0.5739239
+            }
+          ]
+        },
+        "Id": "d24e482a-95ce-4d20-8602-c92d46b27a3e",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "fbbd3f4a-188a-4ec8-9a38-4241a28c2222"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "impact"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.76169,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05356143,
+            "Left": 0.38835186,
+            "Top": 0.69705373,
+            "Width": 0.2257638
+          },
+          "Polygon": [
+            {
+              "X": 0.38835186,
+              "Y": 0.69705373
+            },
+            {
+              "X": 0.61411566,
+              "Y": 0.69705373
+            },
+            {
+              "X": 0.61411566,
+              "Y": 0.7506152
+            },
+            {
+              "X": 0.38835186,
+              "Y": 0.7506152
+            }
+          ]
+        },
+        "Id": "80ad0131-498c-470d-abec-13e8c3b40566",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "56d21cc1-48a4-495e-b666-f4aa09943b76",
+              "81f20ef3-e8a6-442c-bffb-aa314fc0ff16"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "WORK EXPERIENCE"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.51883,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.050244454,
+            "Left": 0.35655582,
+            "Top": 0.80629414,
+            "Width": 0.28232136
+          },
+          "Polygon": [
+            {
+              "X": 0.35655582,
+              "Y": 0.80629414
+            },
+            {
+              "X": 0.6388772,
+              "Y": 0.80629414
+            },
+            {
+              "X": 0.6388772,
+              "Y": 0.8565386
+            },
+            {
+              "X": 0.35655582,
+              "Y": 0.8565386
+            }
+          ]
+        },
+        "Id": "c28a435a-cc42-4bc2-a047-5ed673de3fb4",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "c9be86ca-2c32-4510-9e99-6b749ccce45c",
+              "68c4983c-80b1-4620-9e38-d194ae76363d",
+              "d3bf8b76-01ed-4819-800d-f230238e31a5",
+              "11f9b79d-b3a5-4fa1-a3f8-50653a5baa18",
+              "849bfaa7-272c-4d33-a698-4c9217a051b0",
+              "3a42f12b-fade-4189-a3c5-31bf43194308"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "October 2016 May 2017 (8 months)"
+      },
+      {
+        "BlockType": {
+          "Value": "LINE"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 90.28594,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07039064,
+            "Left": 0.4067303,
+            "Top": 0.89663976,
+            "Width": 0.18363327
+          },
+          "Polygon": [
+            {
+              "X": 0.4067303,
+              "Y": 0.89663976
+            },
+            {
+              "X": 0.59036356,
+              "Y": 0.89663976
+            },
+            {
+              "X": 0.59036356,
+              "Y": 0.9670304
+            },
+            {
+              "X": 0.4067303,
+              "Y": 0.9670304
+            }
+          ]
+        },
+        "Id": "59dc83c7-0301-45b0-bcd3-21775cee62b8",
+        "Page": 1,
+        "Relationships": [
+          {
+            "Ids": [
+              "c1c00251-d38b-40d3-9a4f-549d1cd7b659"
+            ],
+            "Type": {
+              "Value": "CHILD"
+            }
+          }
+        ],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "BRIDGESTONE"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.96425,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07914814,
+            "Left": 0.03865515,
+            "Top": 0.058887597,
+            "Width": 0.10494788
+          },
+          "Polygon": [
+            {
+              "X": 0.03865515,
+              "Y": 0.058887597
+            },
+            {
+              "X": 0.14360303,
+              "Y": 0.058887597
+            },
+            {
+              "X": 0.14360303,
+              "Y": 0.13803574
+            },
+            {
+              "X": 0.03865515,
+              "Y": 0.13803574
+            }
+          ]
+        },
+        "Id": "a713926a-e89f-497c-8d9d-654f124413eb",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "STEFF"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.93661,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.080255106,
+            "Left": 0.15283825,
+            "Top": 0.059012953,
+            "Width": 0.15938883
+          },
+          "Polygon": [
+            {
+              "X": 0.15283825,
+              "Y": 0.059012953
+            },
+            {
+              "X": 0.31222707,
+              "Y": 0.059012953
+            },
+            {
+              "X": 0.31222707,
+              "Y": 0.13926806
+            },
+            {
+              "X": 0.15283825,
+              "Y": 0.13926806
+            }
+          ]
+        },
+        "Id": "64538a07-2d7f-48bf-864f-f985fb1b7d3c",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "BECKERS"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.89648,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.053294532,
+            "Left": 0.37962085,
+            "Top": 0.060892228,
+            "Width": 0.08270115
+          },
+          "Polygon": [
+            {
+              "X": 0.37962085,
+              "Y": 0.060892228
+            },
+            {
+              "X": 0.462322,
+              "Y": 0.060892228
+            },
+            {
+              "X": 0.462322,
+              "Y": 0.11418676
+            },
+            {
+              "X": 0.37962085,
+              "Y": 0.11418676
+            }
+          ]
+        },
+        "Id": "3cfe608e-895f-4f31-a441-39e3cadf6a19",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "ABOUT"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 98.86616,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05433128,
+            "Left": 0.467145,
+            "Top": 0.0590716,
+            "Width": 0.036534
+          },
+          "Polygon": [
+            {
+              "X": 0.467145,
+              "Y": 0.0590716
+            },
+            {
+              "X": 0.503679,
+              "Y": 0.0590716
+            },
+            {
+              "X": 0.503679,
+              "Y": 0.11340288
+            },
+            {
+              "X": 0.467145,
+              "Y": 0.11340288
+            }
+          ]
+        },
+        "Id": "f327ac4b-fa7a-40e0-8e22-8a5d80b862d4",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "ME"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 91.789375,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07554193,
+            "Left": 0.040393706,
+            "Top": 0.18017755,
+            "Width": 0.025600653
+          },
+          "Polygon": [
+            {
+              "X": 0.040393706,
+              "Y": 0.18017755
+            },
+            {
+              "X": 0.06599436,
+              "Y": 0.18017755
+            },
+            {
+              "X": 0.06599436,
+              "Y": 0.25571948
+            },
+            {
+              "X": 0.040393706,
+              "Y": 0.25571948
+            }
+          ]
+        },
+        "Id": "c7738a8d-9cdb-4921-a3b2-d45900e3758e",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "D"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 93.208275,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.08110943,
+            "Left": 0.07631468,
+            "Top": 0.1781258,
+            "Width": 0.01739993
+          },
+          "Polygon": [
+            {
+              "X": 0.07631468,
+              "Y": 0.1781258
+            },
+            {
+              "X": 0.09371461,
+              "Y": 0.1781258
+            },
+            {
+              "X": 0.09371461,
+              "Y": 0.25923523
+            },
+            {
+              "X": 0.07631468,
+              "Y": 0.25923523
+            }
+          ]
+        },
+        "Id": "f0dfe232-3776-477a-8551-0f49f31a0c98",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "E"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 93.58567,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.08154597,
+            "Left": 0.10306487,
+            "Top": 0.17691536,
+            "Width": 0.02538933
+          },
+          "Polygon": [
+            {
+              "X": 0.10306487,
+              "Y": 0.17691536
+            },
+            {
+              "X": 0.1284542,
+              "Y": 0.17691536
+            },
+            {
+              "X": 0.1284542,
+              "Y": 0.25846133
+            },
+            {
+              "X": 0.10306487,
+              "Y": 0.25846133
+            }
+          ]
+        },
+        "Id": "533cf800-ba71-4915-ad8f-baa7a4ebc9e0",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "V"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 96.23657,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.08134337,
+            "Left": 0.13822569,
+            "Top": 0.17872475,
+            "Width": 0.01845816
+          },
+          "Polygon": [
+            {
+              "X": 0.13822569,
+              "Y": 0.17872475
+            },
+            {
+              "X": 0.15668385,
+              "Y": 0.17872475
+            },
+            {
+              "X": 0.15668385,
+              "Y": 0.26006812
+            },
+            {
+              "X": 0.13822569,
+              "Y": 0.26006812
+            }
+          ]
+        },
+        "Id": "9d39787d-760d-4229-8bd1-69380f2eb07b",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "E"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 90.60832,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07290414,
+            "Left": 0.16810319,
+            "Top": 0.18406028,
+            "Width": 0.01759161
+          },
+          "Polygon": [
+            {
+              "X": 0.16810319,
+              "Y": 0.18406028
+            },
+            {
+              "X": 0.1856948,
+              "Y": 0.18406028
+            },
+            {
+              "X": 0.1856948,
+              "Y": 0.25696442
+            },
+            {
+              "X": 0.16810319,
+              "Y": 0.25696442
+            }
+          ]
+        },
+        "Id": "c1013d9a-5377-4ecc-a2a2-b3db64222b7e",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "L"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 92.48005,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07838972,
+            "Left": 0.19190279,
+            "Top": 0.17945032,
+            "Width": 0.02843634
+          },
+          "Polygon": [
+            {
+              "X": 0.19190279,
+              "Y": 0.17945032
+            },
+            {
+              "X": 0.22033913,
+              "Y": 0.17945032
+            },
+            {
+              "X": 0.22033913,
+              "Y": 0.25784004
+            },
+            {
+              "X": 0.19190279,
+              "Y": 0.25784004
+            }
+          ]
+        },
+        "Id": "322de394-3b91-4321-8385-bc4406ec43da",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "O"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 92.8375,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07851702,
+            "Left": 0.23069933,
+            "Top": 0.17914566,
+            "Width": 0.02044189
+          },
+          "Polygon": [
+            {
+              "X": 0.23069933,
+              "Y": 0.17914566
+            },
+            {
+              "X": 0.25114122,
+              "Y": 0.17914566
+            },
+            {
+              "X": 0.25114122,
+              "Y": 0.25766268
+            },
+            {
+              "X": 0.23069933,
+              "Y": 0.25766268
+            }
+          ]
+        },
+        "Id": "344975dd-1967-4bab-a697-c1839725b2a3",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "P"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 96.33382,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.08187133,
+            "Left": 0.26254514,
+            "Top": 0.17795008,
+            "Width": 0.01661186
+          },
+          "Polygon": [
+            {
+              "X": 0.26254514,
+              "Y": 0.17795008
+            },
+            {
+              "X": 0.279157,
+              "Y": 0.17795008
+            },
+            {
+              "X": 0.279157,
+              "Y": 0.25982141
+            },
+            {
+              "X": 0.26254514,
+              "Y": 0.25982141
+            }
+          ]
+        },
+        "Id": "4c246dc7-2fa9-4f91-ae64-13308551e84b",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "E"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 98.41924,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07748574,
+            "Left": 0.29109943,
+            "Top": 0.1804629,
+            "Width": 0.02092153
+          },
+          "Polygon": [
+            {
+              "X": 0.29109943,
+              "Y": 0.1804629
+            },
+            {
+              "X": 0.31202096,
+              "Y": 0.1804629
+            },
+            {
+              "X": 0.31202096,
+              "Y": 0.25794864
+            },
+            {
+              "X": 0.29109943,
+              "Y": 0.25794864
+            }
+          ]
+        },
+        "Id": "06df1893-76af-42ae-937d-8c968e4723ab",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "R"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.93222,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05604881,
+            "Left": 0.35755944,
+            "Top": 0.16791368,
+            "Width": 0.09105746
+          },
+          "Polygon": [
+            {
+              "X": 0.35755944,
+              "Y": 0.16791368
+            },
+            {
+              "X": 0.4486169,
+              "Y": 0.16791368
+            },
+            {
+              "X": 0.4486169,
+              "Y": 0.22396249
+            },
+            {
+              "X": 0.35755944,
+              "Y": 0.22396249
+            }
+          ]
+        },
+        "Id": "3ad8dd96-4317-4f22-9d66-63b2f8a3edf5",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Developer"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.715256,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04834154,
+            "Left": 0.45108587,
+            "Top": 0.16871347,
+            "Width": 0.04066473
+          },
+          "Polygon": [
+            {
+              "X": 0.45108587,
+              "Y": 0.16871347
+            },
+            {
+              "X": 0.4917506,
+              "Y": 0.16871347
+            },
+            {
+              "X": 0.4917506,
+              "Y": 0.21705501
+            },
+            {
+              "X": 0.45108587,
+              "Y": 0.21705501
+            }
+          ]
+        },
+        "Id": "34804548-8340-4739-bf45-318e05088311",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "with"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.8754,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03618111,
+            "Left": 0.49497968,
+            "Top": 0.18113872,
+            "Width": 0.01118982
+          },
+          "Polygon": [
+            {
+              "X": 0.49497968,
+              "Y": 0.18113872
+            },
+            {
+              "X": 0.5061695,
+              "Y": 0.18113872
+            },
+            {
+              "X": 0.5061695,
+              "Y": 0.21731983
+            },
+            {
+              "X": 0.49497968,
+              "Y": 0.21731983
+            }
+          ]
+        },
+        "Id": "a3c51096-4c26-4102-89f5-3ff2bdb6a2e6",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "a"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.97576,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.054477,
+            "Left": 0.50953346,
+            "Top": 0.17002437,
+            "Width": 0.06537134
+          },
+          "Polygon": [
+            {
+              "X": 0.50953346,
+              "Y": 0.17002437
+            },
+            {
+              "X": 0.5749048,
+              "Y": 0.17002437
+            },
+            {
+              "X": 0.5749048,
+              "Y": 0.22450137
+            },
+            {
+              "X": 0.50953346,
+              "Y": 0.22450137
+            }
+          ]
+        },
+        "Id": "b5c44879-60dd-4a1c-97c4-d6db4030f8a6",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "passion"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.96209,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04522486,
+            "Left": 0.5783819,
+            "Top": 0.16998237,
+            "Width": 0.02664244
+          },
+          "Polygon": [
+            {
+              "X": 0.5783819,
+              "Y": 0.16998237
+            },
+            {
+              "X": 0.60502434,
+              "Y": 0.16998237
+            },
+            {
+              "X": 0.60502434,
+              "Y": 0.21520723
+            },
+            {
+              "X": 0.5783819,
+              "Y": 0.21520723
+            }
+          ]
+        },
+        "Id": "80df0bc8-5cc9-412a-b860-53200f8abe23",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "for"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.579254,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04653227,
+            "Left": 0.6077781,
+            "Top": 0.16936213,
+            "Width": 0.0377793
+          },
+          "Polygon": [
+            {
+              "X": 0.6077781,
+              "Y": 0.16936213
+            },
+            {
+              "X": 0.6455574,
+              "Y": 0.16936213
+            },
+            {
+              "X": 0.6455574,
+              "Y": 0.2158944
+            },
+            {
+              "X": 0.6077781,
+              "Y": 0.2158944
+            }
+          ]
+        },
+        "Id": "dbb82229-6499-4ecf-8c7d-7e2386c1d0a4",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "web"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.91805,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05388298,
+            "Left": 0.64970237,
+            "Top": 0.1683392,
+            "Width": 0.11273123
+          },
+          "Polygon": [
+            {
+              "X": 0.64970237,
+              "Y": 0.1683392
+            },
+            {
+              "X": 0.7624336,
+              "Y": 0.1683392
+            },
+            {
+              "X": 0.7624336,
+              "Y": 0.22222218
+            },
+            {
+              "X": 0.64970237,
+              "Y": 0.22222218
+            }
+          ]
+        },
+        "Id": "cd72f5ec-bc68-4789-8dd9-0196706c0a9d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "development"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.6851,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04582329,
+            "Left": 0.7676244,
+            "Top": 0.17018545,
+            "Width": 0.03288076
+          },
+          "Polygon": [
+            {
+              "X": 0.7676244,
+              "Y": 0.17018545
+            },
+            {
+              "X": 0.80050516,
+              "Y": 0.17018545
+            },
+            {
+              "X": 0.80050516,
+              "Y": 0.21600874
+            },
+            {
+              "X": 0.7676244,
+              "Y": 0.21600874
+            }
+          ]
+        },
+        "Id": "7270f168-5093-41a2-89b2-2b0996b42f48",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "and"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.810555,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05599533,
+            "Left": 0.8037071,
+            "Top": 0.16919819,
+            "Width": 0.0271729
+          },
+          "Polygon": [
+            {
+              "X": 0.8037071,
+              "Y": 0.16919819
+            },
+            {
+              "X": 0.83088,
+              "Y": 0.16919819
+            },
+            {
+              "X": 0.83088,
+              "Y": 0.22519352
+            },
+            {
+              "X": 0.8037071,
+              "Y": 0.22519352
+            }
+          ]
+        },
+        "Id": "6740a351-11e8-4ee1-b4da-21a1fcb26f7d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "big"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.81762,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04826592,
+            "Left": 0.83411485,
+            "Top": 0.16937634,
+            "Width": 0.04410995
+          },
+          "Polygon": [
+            {
+              "X": 0.83411485,
+              "Y": 0.16937634
+            },
+            {
+              "X": 0.8782248,
+              "Y": 0.16937634
+            },
+            {
+              "X": 0.8782248,
+              "Y": 0.21764226
+            },
+            {
+              "X": 0.83411485,
+              "Y": 0.21764226
+            }
+          ]
+        },
+        "Id": "1722a353-b240-4632-aa84-ee5178f82ebc",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "data."
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.935814,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0467393,
+            "Left": 0.35739255,
+            "Top": 0.23326705,
+            "Width": 0.09134085
+          },
+          "Polygon": [
+            {
+              "X": 0.35739255,
+              "Y": 0.23326705
+            },
+            {
+              "X": 0.4487334,
+              "Y": 0.23326705
+            },
+            {
+              "X": 0.4487334,
+              "Y": 0.28000635
+            },
+            {
+              "X": 0.35739255,
+              "Y": 0.28000635
+            }
+          ]
+        },
+        "Id": "bbfa8001-5b84-44bc-9e8b-8bfbdc65052d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Motivated"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.79271,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04290883,
+            "Left": 0.45207158,
+            "Top": 0.23626937,
+            "Width": 0.01867512
+          },
+          "Polygon": [
+            {
+              "X": 0.45207158,
+              "Y": 0.23626937
+            },
+            {
+              "X": 0.4707467,
+              "Y": 0.23626937
+            },
+            {
+              "X": 0.4707467,
+              "Y": 0.2791782
+            },
+            {
+              "X": 0.45207158,
+              "Y": 0.2791782
+            }
+          ]
+        },
+        "Id": "427cb8bc-e9e8-4fc1-a92a-2e4bd44a39e4",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "to"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.884155,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05410029,
+            "Left": 0.47397843,
+            "Top": 0.23358886,
+            "Width": 0.06374362
+          },
+          "Polygon": [
+            {
+              "X": 0.47397843,
+              "Y": 0.23358886
+            },
+            {
+              "X": 0.53772205,
+              "Y": 0.23358886
+            },
+            {
+              "X": 0.53772205,
+              "Y": 0.28768915
+            },
+            {
+              "X": 0.47397843,
+              "Y": 0.28768915
+            }
+          ]
+        },
+        "Id": "32a9941e-1cbe-4e13-a9e1-651379cc81d6",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "expand"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.91176,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0555487,
+            "Left": 0.54258263,
+            "Top": 0.23296997,
+            "Width": 0.09513517
+          },
+          "Polygon": [
+            {
+              "X": 0.54258263,
+              "Y": 0.23296997
+            },
+            {
+              "X": 0.6377178,
+              "Y": 0.23296997
+            },
+            {
+              "X": 0.6377178,
+              "Y": 0.28851867
+            },
+            {
+              "X": 0.54258263,
+              "Y": 0.28851867
+            }
+          ]
+        },
+        "Id": "3e8f3412-7046-40f3-afea-e1ad2fa258c6",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "knowledge"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.6499,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04535314,
+            "Left": 0.64119655,
+            "Top": 0.23369852,
+            "Width": 0.03277855
+          },
+          "Polygon": [
+            {
+              "X": 0.64119655,
+              "Y": 0.23369852
+            },
+            {
+              "X": 0.6739751,
+              "Y": 0.23369852
+            },
+            {
+              "X": 0.6739751,
+              "Y": 0.27905166
+            },
+            {
+              "X": 0.64119655,
+              "Y": 0.27905166
+            }
+          ]
+        },
+        "Id": "2e4c76d6-7b25-4c03-a7b3-a87cb8102986",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "and"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.38554,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04539378,
+            "Left": 0.67745155,
+            "Top": 0.23346256,
+            "Width": 0.04347745
+          },
+          "Polygon": [
+            {
+              "X": 0.67745155,
+              "Y": 0.23346256
+            },
+            {
+              "X": 0.720929,
+              "Y": 0.23346256
+            },
+            {
+              "X": 0.720929,
+              "Y": 0.27885634
+            },
+            {
+              "X": 0.67745155,
+              "Y": 0.27885634
+            }
+          ]
+        },
+        "Id": "68730421-00ec-4b84-886d-1f5631a64b3f",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "skills"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.62492,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04692125,
+            "Left": 0.72458917,
+            "Top": 0.23306397,
+            "Width": 0.04018523
+          },
+          "Polygon": [
+            {
+              "X": 0.72458917,
+              "Y": 0.23306397
+            },
+            {
+              "X": 0.7647744,
+              "Y": 0.23306397
+            },
+            {
+              "X": 0.7647744,
+              "Y": 0.27998522
+            },
+            {
+              "X": 0.72458917,
+              "Y": 0.27998522
+            }
+          ]
+        },
+        "Id": "05121836-24d5-4b7b-a4df-9ee46b81a93e",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "with"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.564095,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04539154,
+            "Left": 0.7678075,
+            "Top": 0.2339689,
+            "Width": 0.0293548
+          },
+          "Polygon": [
+            {
+              "X": 0.7678075,
+              "Y": 0.2339689
+            },
+            {
+              "X": 0.7971623,
+              "Y": 0.2339689
+            },
+            {
+              "X": 0.7971623,
+              "Y": 0.27936044
+            },
+            {
+              "X": 0.7678075,
+              "Y": 0.27936044
+            }
+          ]
+        },
+        "Id": "2a4b4b4c-38ae-49eb-894a-e7809d82e1f9",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "the"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.71787,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04649154,
+            "Left": 0.8009279,
+            "Top": 0.23348653,
+            "Width": 0.04851357
+          },
+          "Polygon": [
+            {
+              "X": 0.8009279,
+              "Y": 0.23348653
+            },
+            {
+              "X": 0.84944147,
+              "Y": 0.23348653
+            },
+            {
+              "X": 0.84944147,
+              "Y": 0.27997807
+            },
+            {
+              "X": 0.8009279,
+              "Y": 0.27997807
+            }
+          ]
+        },
+        "Id": "8ca5d824-79cd-436c-8453-ba8bde4de91d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "latest"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.89302,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.054114,
+            "Left": 0.851302,
+            "Top": 0.2340825,
+            "Width": 0.1148279
+          },
+          "Polygon": [
+            {
+              "X": 0.851302,
+              "Y": 0.2340825
+            },
+            {
+              "X": 0.9661299,
+              "Y": 0.2340825
+            },
+            {
+              "X": 0.9661299,
+              "Y": 0.2881965
+            },
+            {
+              "X": 0.851302,
+              "Y": 0.2881965
+            }
+          ]
+        },
+        "Id": "04acb021-535c-4837-83ff-17e29282a1ca",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "technologies"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.491165,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04620888,
+            "Left": 0.3565561,
+            "Top": 0.2998283,
+            "Width": 0.03271385
+          },
+          "Polygon": [
+            {
+              "X": 0.3565561,
+              "Y": 0.2998283
+            },
+            {
+              "X": 0.38926995,
+              "Y": 0.2998283
+            },
+            {
+              "X": 0.38926995,
+              "Y": 0.34603718
+            },
+            {
+              "X": 0.3565561,
+              "Y": 0.34603718
+            }
+          ]
+        },
+        "Id": "735f99b7-6815-41ed-9aef-c442176a6c21",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "and"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.81472,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04719955,
+            "Left": 0.39217472,
+            "Top": 0.2995978,
+            "Width": 0.11141948
+          },
+          "Polygon": [
+            {
+              "X": 0.39217472,
+              "Y": 0.2995978
+            },
+            {
+              "X": 0.5035942,
+              "Y": 0.2995978
+            },
+            {
+              "X": 0.5035942,
+              "Y": 0.34679735
+            },
+            {
+              "X": 0.39217472,
+              "Y": 0.34679735
+            }
+          ]
+        },
+        "Id": "68ee4122-d07a-4b42-99a6-1b0efca2042e",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "frameworks."
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.52708,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04629745,
+            "Left": 0.35698527,
+            "Top": 0.3893779,
+            "Width": 0.04913515
+          },
+          "Polygon": [
+            {
+              "X": 0.35698527,
+              "Y": 0.3893779
+            },
+            {
+              "X": 0.40612042,
+              "Y": 0.3893779
+            },
+            {
+              "X": 0.40612042,
+              "Y": 0.43567535
+            },
+            {
+              "X": 0.35698527,
+              "Y": 0.43567535
+            }
+          ]
+        },
+        "Id": "69fb4e2b-7375-4d1a-99c0-31c3ef5f165f",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Loves"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.8632,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0545659,
+            "Left": 0.41003284,
+            "Top": 0.3892709,
+            "Width": 0.07227698
+          },
+          "Polygon": [
+            {
+              "X": 0.41003284,
+              "Y": 0.3892709
+            },
+            {
+              "X": 0.48230982,
+              "Y": 0.3892709
+            },
+            {
+              "X": 0.48230982,
+              "Y": 0.4438368
+            },
+            {
+              "X": 0.41003284,
+              "Y": 0.4438368
+            }
+          ]
+        },
+        "Id": "262178c4-f7d2-4dca-b9d9-b9f89c5c84ff",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "working"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.800125,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03357327,
+            "Left": 0.4857636,
+            "Top": 0.40165415,
+            "Width": 0.02225364
+          },
+          "Polygon": [
+            {
+              "X": 0.4857636,
+              "Y": 0.40165415
+            },
+            {
+              "X": 0.50801724,
+              "Y": 0.40165415
+            },
+            {
+              "X": 0.50801724,
+              "Y": 0.43522742
+            },
+            {
+              "X": 0.4857636,
+              "Y": 0.43522742
+            }
+          ]
+        },
+        "Id": "f398c793-367f-40fc-a4bb-5eb49470873d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "on"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.93175,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05508376,
+            "Left": 0.51210016,
+            "Top": 0.38939252,
+            "Width": 0.07130074
+          },
+          "Polygon": [
+            {
+              "X": 0.51210016,
+              "Y": 0.38939252
+            },
+            {
+              "X": 0.5834009,
+              "Y": 0.38939252
+            },
+            {
+              "X": 0.5834009,
+              "Y": 0.44447628
+            },
+            {
+              "X": 0.51210016,
+              "Y": 0.44447628
+            }
+          ]
+        },
+        "Id": "f4b55590-ea33-420a-847b-2cd2f5d1f33f",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "projects"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.49656,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03659329,
+            "Left": 0.5872326,
+            "Top": 0.40025368,
+            "Width": 0.01881426
+          },
+          "Polygon": [
+            {
+              "X": 0.5872326,
+              "Y": 0.40025368
+            },
+            {
+              "X": 0.60604686,
+              "Y": 0.40025368
+            },
+            {
+              "X": 0.60604686,
+              "Y": 0.43684697
+            },
+            {
+              "X": 0.5872326,
+              "Y": 0.43684697
+            }
+          ]
+        },
+        "Id": "2decb7af-32dc-47b8-a1f6-a8d4499fadab",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "as"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.80546,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03512818,
+            "Left": 0.6096041,
+            "Top": 0.4006972,
+            "Width": 0.01006766
+          },
+          "Polygon": [
+            {
+              "X": 0.6096041,
+              "Y": 0.4006972
+            },
+            {
+              "X": 0.61967176,
+              "Y": 0.4006972
+            },
+            {
+              "X": 0.61967176,
+              "Y": 0.43582538
+            },
+            {
+              "X": 0.6096041,
+              "Y": 0.43582538
+            }
+          ]
+        },
+        "Id": "b0e3f9ba-5319-46ba-a2d2-a01539f8145f",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "a"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.96683,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05490242,
+            "Left": 0.62400955,
+            "Top": 0.3894036,
+            "Width": 0.09886105
+          },
+          "Polygon": [
+            {
+              "X": 0.62400955,
+              "Y": 0.3894036
+            },
+            {
+              "X": 0.7228706,
+              "Y": 0.3894036
+            },
+            {
+              "X": 0.7228706,
+              "Y": 0.44430602
+            },
+            {
+              "X": 0.62400955,
+              "Y": 0.44430602
+            }
+          ]
+        },
+        "Id": "0cfad50f-0918-4457-a6b4-6582d123ff71",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "teamplayer"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.7544,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04518089,
+            "Left": 0.7265953,
+            "Top": 0.38939753,
+            "Width": 0.01625477
+          },
+          "Polygon": [
+            {
+              "X": 0.7265953,
+              "Y": 0.38939753
+            },
+            {
+              "X": 0.74285007,
+              "Y": 0.38939753
+            },
+            {
+              "X": 0.74285007,
+              "Y": 0.43457842
+            },
+            {
+              "X": 0.7265953,
+              "Y": 0.43457842
+            }
+          ]
+        },
+        "Id": "e854e90b-bc52-45c4-8e28-79439ead6ec5",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "in"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.87007,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03464097,
+            "Left": 0.74645936,
+            "Top": 0.40097803,
+            "Width": 0.02131069
+          },
+          "Polygon": [
+            {
+              "X": 0.74645936,
+              "Y": 0.40097803
+            },
+            {
+              "X": 0.76777005,
+              "Y": 0.40097803
+            },
+            {
+              "X": 0.76777005,
+              "Y": 0.435619
+            },
+            {
+              "X": 0.74645936,
+              "Y": 0.435619
+            }
+          ]
+        },
+        "Id": "46b7d242-b9b8-4406-85ac-d81bf993c1f6",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "an"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.92278,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0559592,
+            "Left": 0.77143717,
+            "Top": 0.3892496,
+            "Width": 0.04169953
+          },
+          "Polygon": [
+            {
+              "X": 0.77143717,
+              "Y": 0.3892496
+            },
+            {
+              "X": 0.8131367,
+              "Y": 0.3892496
+            },
+            {
+              "X": 0.8131367,
+              "Y": 0.4452088
+            },
+            {
+              "X": 0.77143717,
+              "Y": 0.4452088
+            }
+          ]
+        },
+        "Id": "6f034818-d0e2-4bff-a2f0-821e4e2bbf9b",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "agile"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.81075,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04638264,
+            "Left": 0.8174391,
+            "Top": 0.38947004,
+            "Width": 0.1167962
+          },
+          "Polygon": [
+            {
+              "X": 0.8174391,
+              "Y": 0.38947004
+            },
+            {
+              "X": 0.9342353,
+              "Y": 0.38947004
+            },
+            {
+              "X": 0.9342353,
+              "Y": 0.43585268
+            },
+            {
+              "X": 0.8174391,
+              "Y": 0.43585268
+            }
+          ]
+        },
+        "Id": "653bb5db-71be-4d49-a9b8-5ccba4898b9e",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "environment."
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 95.41427,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04696766,
+            "Left": 0.3574044,
+            "Top": 0.4549314,
+            "Width": 0.07191477
+          },
+          "Polygon": [
+            {
+              "X": 0.3574044,
+              "Y": 0.4549314
+            },
+            {
+              "X": 0.42931917,
+              "Y": 0.4549314
+            },
+            {
+              "X": 0.42931917,
+              "Y": 0.50189906
+            },
+            {
+              "X": 0.3574044,
+              "Y": 0.50189906
+            }
+          ]
+        },
+        "Id": "87e6e5ed-6b74-4563-a532-923220aa2ad9",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "Focused"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.834045,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03399483,
+            "Left": 0.432885,
+            "Top": 0.46794677,
+            "Width": 0.02258124
+          },
+          "Polygon": [
+            {
+              "X": 0.432885,
+              "Y": 0.46794677
+            },
+            {
+              "X": 0.45546624,
+              "Y": 0.46794677
+            },
+            {
+              "X": 0.45546624,
+              "Y": 0.5019416
+            },
+            {
+              "X": 0.432885,
+              "Y": 0.5019416
+            }
+          ]
+        },
+        "Id": "c78d5320-2234-4e58-a1ce-bb752c55543f",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "on"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 91.63411,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0536507,
+            "Left": 0.45900705,
+            "Top": 0.4564226,
+            "Width": 0.0625262
+          },
+          "Polygon": [
+            {
+              "X": 0.45900705,
+              "Y": 0.4564226
+            },
+            {
+              "X": 0.52153325,
+              "Y": 0.4564226
+            },
+            {
+              "X": 0.52153325,
+              "Y": 0.5100733
+            },
+            {
+              "X": 0.45900705,
+              "Y": 0.5100733
+            }
+          ]
+        },
+        "Id": "9b4580dd-5765-42bd-8491-35b809c5fa45",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "getting"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.891396,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04829902,
+            "Left": 0.5251459,
+            "Top": 0.45647484,
+            "Width": 0.01281636
+          },
+          "Polygon": [
+            {
+              "X": 0.5251459,
+              "Y": 0.45647484
+            },
+            {
+              "X": 0.53796226,
+              "Y": 0.45647484
+            },
+            {
+              "X": 0.53796226,
+              "Y": 0.50477386
+            },
+            {
+              "X": 0.5251459,
+              "Y": 0.50477386
+            }
+          ]
+        },
+        "Id": "35cfa319-dbec-4770-bf6a-4c0d2e4673cb",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "it"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.79173,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05456905,
+            "Left": 0.54151475,
+            "Top": 0.45621535,
+            "Width": 0.0462882
+          },
+          "Polygon": [
+            {
+              "X": 0.54151475,
+              "Y": 0.45621535
+            },
+            {
+              "X": 0.58780295,
+              "Y": 0.45621535
+            },
+            {
+              "X": 0.58780295,
+              "Y": 0.5107844
+            },
+            {
+              "X": 0.54151475,
+              "Y": 0.5107844
+            }
+          ]
+        },
+        "Id": "542228bc-f724-4027-995a-2ec038c3b726",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "right,"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.571205,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04521437,
+            "Left": 0.5916237,
+            "Top": 0.4572811,
+            "Width": 0.03276327
+          },
+          "Polygon": [
+            {
+              "X": 0.5916237,
+              "Y": 0.4572811
+            },
+            {
+              "X": 0.62438697,
+              "Y": 0.4572811
+            },
+            {
+              "X": 0.62438697,
+              "Y": 0.50249547
+            },
+            {
+              "X": 0.5916237,
+              "Y": 0.50249547
+            }
+          ]
+        },
+        "Id": "b5281be8-f448-4e2b-9930-4216d503ace9",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "and"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.90399,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03506606,
+            "Left": 0.6279684,
+            "Top": 0.4668758,
+            "Width": 0.0544862
+          },
+          "Polygon": [
+            {
+              "X": 0.6279684,
+              "Y": 0.4668758
+            },
+            {
+              "X": 0.6824546,
+              "Y": 0.4668758
+            },
+            {
+              "X": 0.6824546,
+              "Y": 0.50194186
+            },
+            {
+              "X": 0.6279684,
+              "Y": 0.50194186
+            }
+          ]
+        },
+        "Id": "491b6b7d-388b-4702-8270-da9817cdc548",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "aware"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.445015,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04524687,
+            "Left": 0.6854717,
+            "Top": 0.45704803,
+            "Width": 0.0368891
+          },
+          "Polygon": [
+            {
+              "X": 0.6854717,
+              "Y": 0.45704803
+            },
+            {
+              "X": 0.7223608,
+              "Y": 0.45704803
+            },
+            {
+              "X": 0.7223608,
+              "Y": 0.5022949
+            },
+            {
+              "X": 0.6854717,
+              "Y": 0.5022949
+            }
+          ]
+        },
+        "Id": "5ad5faf5-e14a-4b1a-b33e-9b1290afb11c",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "that"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.59432,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04602157,
+            "Left": 0.7258754,
+            "Top": 0.45643413,
+            "Width": 0.04519013
+          },
+          "Polygon": [
+            {
+              "X": 0.7258754,
+              "Y": 0.45643413
+            },
+            {
+              "X": 0.77106553,
+              "Y": 0.45643413
+            },
+            {
+              "X": 0.77106553,
+              "Y": 0.5024557
+            },
+            {
+              "X": 0.7258754,
+              "Y": 0.5024557
+            }
+          ]
+        },
+        "Id": "0290edcf-ae76-4708-af6b-e192495eb34b",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "small"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.86111,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0458056,
+            "Left": 0.77468115,
+            "Top": 0.4564534,
+            "Width": 0.05877635
+          },
+          "Polygon": [
+            {
+              "X": 0.77468115,
+              "Y": 0.4564534
+            },
+            {
+              "X": 0.8334575,
+              "Y": 0.4564534
+            },
+            {
+              "X": 0.8334575,
+              "Y": 0.502259
+            },
+            {
+              "X": 0.77468115,
+              "Y": 0.502259
+            }
+          ]
+        },
+        "Id": "2f3f65b8-54c1-4b86-a9a8-36348ba4d3a2",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "details"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.59271,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0346364,
+            "Left": 0.8371999,
+            "Top": 0.4673045,
+            "Width": 0.0309737
+          },
+          "Polygon": [
+            {
+              "X": 0.8371999,
+              "Y": 0.4673045
+            },
+            {
+              "X": 0.8681736,
+              "Y": 0.4673045
+            },
+            {
+              "X": 0.8681736,
+              "Y": 0.5019409
+            },
+            {
+              "X": 0.8371999,
+              "Y": 0.5019409
+            }
+          ]
+        },
+        "Id": "cffc4aa5-4865-40ca-a858-d488d66dca49",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "can"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.66792,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04761589,
+            "Left": 0.8713674,
+            "Top": 0.45520496,
+            "Width": 0.0415938
+          },
+          "Polygon": [
+            {
+              "X": 0.8713674,
+              "Y": 0.45520496
+            },
+            {
+              "X": 0.9129612,
+              "Y": 0.45520496
+            },
+            {
+              "X": 0.9129612,
+              "Y": 0.50282085
+            },
+            {
+              "X": 0.8713674,
+              "Y": 0.50282085
+            }
+          ]
+        },
+        "Id": "e6c24d0c-3b8c-4310-ac1e-1bad943e227d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "have"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.76637,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.03556485,
+            "Left": 0.9169625,
+            "Top": 0.46677375,
+            "Width": 0.0101615
+          },
+          "Polygon": [
+            {
+              "X": 0.9169625,
+              "Y": 0.46677375
+            },
+            {
+              "X": 0.927124,
+              "Y": 0.46677375
+            },
+            {
+              "X": 0.927124,
+              "Y": 0.5023386
+            },
+            {
+              "X": 0.9169625,
+              "Y": 0.5023386
+            }
+          ]
+        },
+        "Id": "65c7449d-57a2-4840-aefc-882ac7942270",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "a"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.94198,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05548995,
+            "Left": 0.9314028,
+            "Top": 0.45546415,
+            "Width": 0.02719313
+          },
+          "Polygon": [
+            {
+              "X": 0.9314028,
+              "Y": 0.45546415
+            },
+            {
+              "X": 0.95859593,
+              "Y": 0.45546415
+            },
+            {
+              "X": 0.95859593,
+              "Y": 0.5109541
+            },
+            {
+              "X": 0.9314028,
+              "Y": 0.5109541
+            }
+          ]
+        },
+        "Id": "37fcb4e5-f1bf-4a65-941a-caaa1be731f8",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "big"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.95109,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05350716,
+            "Left": 0.35700166,
+            "Top": 0.52041674,
+            "Width": 0.06370658
+          },
+          "Polygon": [
+            {
+              "X": 0.35700166,
+              "Y": 0.52041674
+            },
+            {
+              "X": 0.42070824,
+              "Y": 0.52041674
+            },
+            {
+              "X": 0.42070824,
+              "Y": 0.5739239
+            },
+            {
+              "X": 0.35700166,
+              "Y": 0.5739239
+            }
+          ]
+        },
+        "Id": "fbbd3f4a-188a-4ec8-9a38-4241a28c2222",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "impact"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.686066,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05295964,
+            "Left": 0.38835186,
+            "Top": 0.6976556,
+            "Width": 0.0770632
+          },
+          "Polygon": [
+            {
+              "X": 0.38835186,
+              "Y": 0.6976556
+            },
+            {
+              "X": 0.46541506,
+              "Y": 0.6976556
+            },
+            {
+              "X": 0.46541506,
+              "Y": 0.75061524
+            },
+            {
+              "X": 0.38835186,
+              "Y": 0.75061524
+            }
+          ]
+        },
+        "Id": "56d21cc1-48a4-495e-b666-f4aa09943b76",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "WORK"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.83732,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.05355097,
+            "Left": 0.46868283,
+            "Top": 0.69705373,
+            "Width": 0.14543283
+          },
+          "Polygon": [
+            {
+              "X": 0.46868283,
+              "Y": 0.69705373
+            },
+            {
+              "X": 0.61411566,
+              "Y": 0.69705373
+            },
+            {
+              "X": 0.61411566,
+              "Y": 0.7506047
+            },
+            {
+              "X": 0.46868283,
+              "Y": 0.7506047
+            }
+          ]
+        },
+        "Id": "81f20ef3-e8a6-442c-bffb-aa314fc0ff16",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "EXPERIENCE"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.6872,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0422808,
+            "Left": 0.35655582,
+            "Top": 0.8069328,
+            "Width": 0.0625838
+          },
+          "Polygon": [
+            {
+              "X": 0.35655582,
+              "Y": 0.8069328
+            },
+            {
+              "X": 0.41913962,
+              "Y": 0.8069328
+            },
+            {
+              "X": 0.41913962,
+              "Y": 0.8492136
+            },
+            {
+              "X": 0.35655582,
+              "Y": 0.8492136
+            }
+          ]
+        },
+        "Id": "c9be86ca-2c32-4510-9e99-6b749ccce45c",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "October"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.611275,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0415817,
+            "Left": 0.42137888,
+            "Top": 0.8078461,
+            "Width": 0.04220525
+          },
+          "Polygon": [
+            {
+              "X": 0.42137888,
+              "Y": 0.8078461
+            },
+            {
+              "X": 0.46358413,
+              "Y": 0.8078461
+            },
+            {
+              "X": 0.46358413,
+              "Y": 0.8494278
+            },
+            {
+              "X": 0.42137888,
+              "Y": 0.8494278
+            }
+          ]
+        },
+        "Id": "68c4983c-80b1-4620-9e38-d194ae76363d",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "2016"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.76528,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.0491314,
+            "Left": 0.47549516,
+            "Top": 0.8074072,
+            "Width": 0.03523189
+          },
+          "Polygon": [
+            {
+              "X": 0.47549516,
+              "Y": 0.8074072
+            },
+            {
+              "X": 0.51072705,
+              "Y": 0.8074072
+            },
+            {
+              "X": 0.51072705,
+              "Y": 0.8565386
+            },
+            {
+              "X": 0.47549516,
+              "Y": 0.8565386
+            }
+          ]
+        },
+        "Id": "d3bf8b76-01ed-4819-800d-f230238e31a5",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "May"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.44462,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04116202,
+            "Left": 0.51331747,
+            "Top": 0.80805683,
+            "Width": 0.04336667
+          },
+          "Polygon": [
+            {
+              "X": 0.51331747,
+              "Y": 0.80805683
+            },
+            {
+              "X": 0.55668414,
+              "Y": 0.80805683
+            },
+            {
+              "X": 0.55668414,
+              "Y": 0.84921885
+            },
+            {
+              "X": 0.51331747,
+              "Y": 0.84921885
+            }
+          ]
+        },
+        "Id": "11f9b79d-b3a5-4fa1-a3f8-50653a5baa18",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "2017"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 98.77339,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04849147,
+            "Left": 0.5589666,
+            "Top": 0.80653787,
+            "Width": 0.0155675
+          },
+          "Polygon": [
+            {
+              "X": 0.5589666,
+              "Y": 0.80653787
+            },
+            {
+              "X": 0.5745341,
+              "Y": 0.80653787
+            },
+            {
+              "X": 0.5745341,
+              "Y": 0.85502934
+            },
+            {
+              "X": 0.5589666,
+              "Y": 0.85502934
+            }
+          ]
+        },
+        "Id": "849bfaa7-272c-4d33-a698-4c9217a051b0",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "(8"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 99.83124,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.04701926,
+            "Left": 0.5774046,
+            "Top": 0.80629414,
+            "Width": 0.0614727
+          },
+          "Polygon": [
+            {
+              "X": 0.5774046,
+              "Y": 0.80629414
+            },
+            {
+              "X": 0.6388773,
+              "Y": 0.80629414
+            },
+            {
+              "X": 0.6388773,
+              "Y": 0.8533134
+            },
+            {
+              "X": 0.5774046,
+              "Y": 0.8533134
+            }
+          ]
+        },
+        "Id": "3a42f12b-fade-4189-a3c5-31bf43194308",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "months)"
+      },
+      {
+        "BlockType": {
+          "Value": "WORD"
+        },
+        "ColumnIndex": 0,
+        "ColumnSpan": 0,
+        "Confidence": 90.28594,
+        "EntityTypes": [],
+        "Geometry": {
+          "BoundingBox": {
+            "Height": 0.07039064,
+            "Left": 0.4067303,
+            "Top": 0.89663976,
+            "Width": 0.18363325
+          },
+          "Polygon": [
+            {
+              "X": 0.4067303,
+              "Y": 0.89663976
+            },
+            {
+              "X": 0.59036356,
+              "Y": 0.89663976
+            },
+            {
+              "X": 0.59036356,
+              "Y": 0.9670304
+            },
+            {
+              "X": 0.4067303,
+              "Y": 0.9670304
+            }
+          ]
+        },
+        "Id": "c1c00251-d38b-40d3-9a4f-549d1cd7b659",
+        "Page": 1,
+        "Relationships": [],
+        "RowIndex": 0,
+        "RowSpan": 0,
+        "SelectionStatus": null,
+        "Text": "BRIDGESTONE"
+      }
+    ],
+    "DetectDocumentTextModelVersion": "1.0",
+    "DocumentMetadata": {
+      "Pages": 1
+    },
+    "JobStatus": {
+      "Value": "SUCCEEDED"
+    },
+    "NextToken": null,
+    "StatusMessage": null,
+    "Warnings": [],
+    "ResponseMetadata": {
+      "RequestId": "4d366b3a-089f-41f9-92e7-b389648f5366",
+      "Metadata": {}
+    },
+    "ContentLength": 42422,
+    "HttpStatusCode": 200
+  }
+]

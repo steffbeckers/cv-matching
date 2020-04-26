@@ -2,10 +2,22 @@
   <v-app>
     <v-app-bar v-if="$store.state.ui.topNav && authenticated" color="primary" dark clipped-left app>
       <v-app-bar-nav-icon @click.stop="toggleLeftDrawer()" />
-      <v-toolbar-title class="pl-2">Resume Job Matcher</v-toolbar-title>
+      <v-toolbar-title class="pa-2">Resume Job Matcher</v-toolbar-title>
+      <v-btn class="mr-1" to="/" icon>
+        <v-icon>mdi-view-dashboard</v-icon>
+      </v-btn>
+      <v-btn class="mr-1" to="/resumes" icon>
+        <v-icon>mdi-file-account</v-icon>
+      </v-btn>
+      <v-btn to="/jobs" icon>
+        <v-icon>mdi-briefcase</v-icon>
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn v-if="isAdmin" text to="admin" dark>Admin</v-btn>
       <v-btn text @click="logout" dark>Logout</v-btn>
+      <v-avatar class="ml-2" color="white" size="36">
+        <span class="primary--text">{{ user.firstName.substring(0, 1) }}{{ user.lastName.substring(0, 1) }}</span>
+      </v-avatar>
     </v-app-bar>
     <v-navigation-drawer v-if="$store.state.ui.drawerLeft && authenticated" v-model="$store.state.ui.drawerLeft" clipped app>
       <v-list dense>

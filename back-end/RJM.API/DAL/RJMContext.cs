@@ -197,6 +197,10 @@ namespace RJM.API.DAL
                 .Property(e => e.Text)
                 .IsRequired();
 
+            modelBuilder.Entity<DocumentContent>()
+                .Property(e => e.TextType)
+                .IsRequired();
+
             #endregion
 
             #region DocumentResume

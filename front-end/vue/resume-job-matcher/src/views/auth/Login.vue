@@ -14,7 +14,7 @@
             </v-card-title>
             <v-card-text>
               <v-text-field
-                label="Email or username"
+                label="E-mail or username"
                 v-model="emailOrUsername"
                 :rules="emailOrUsernameRules"
                 required
