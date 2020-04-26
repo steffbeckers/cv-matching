@@ -41,7 +41,6 @@ namespace RJM.API.DAL.Repositories
         {
             return await this.context.Documents
                 .Include(x => x.DocumentType)
-                .Include(x => x.DocumentContents)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Resume)
                 .Include(x => x.CreatedByUser)
