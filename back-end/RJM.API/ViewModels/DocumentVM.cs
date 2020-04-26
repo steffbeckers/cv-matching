@@ -14,6 +14,9 @@ namespace RJM.API.ViewModels
         {
             // Relations
 
+            //// One-to-many
+            this.Contents = new List<DocumentContentVM>();
+
             //// Many-to-many
             this.Resumes = new List<ResumeVM>();
         }
@@ -89,6 +92,13 @@ namespace RJM.API.ViewModels
         /// The related DocumentType of Document.
         /// </summary>
         public DocumentTypeVM DocumentType { get; set; }
+
+        //// One-to-many
+
+        /// <summary>
+        /// The related Contents of Document.
+        /// </summary>
+        public IList<DocumentContentVM> Contents { get; set; }
 
         //// Many-to-many
 

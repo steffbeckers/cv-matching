@@ -1747,6 +1747,11 @@
             The related DocumentType of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.Contents">
+            <summary>
+            The related Contents of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.Resumes">
             <summary>
             The related Resumes of Document.

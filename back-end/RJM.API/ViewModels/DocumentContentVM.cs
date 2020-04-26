@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RJM.API.Models;
+using System;
 
 namespace RJM.API.ViewModels
 {
@@ -6,13 +7,10 @@ namespace RJM.API.ViewModels
     {
         public Guid Id { get; set; }
         public string Text { get; set; }
+        public DocumentContentTextType TextType { get; set; }
         public double? Confidence { get; set; }
 
         public Guid DocumentId { get; set; }
         public DocumentVM Document { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-        public DateTime ModifiedOn { get; set; }
-        public DateTime? DeletedOn { get; set; }
     }
 }
