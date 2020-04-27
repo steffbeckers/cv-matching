@@ -1,7 +1,10 @@
 <template>
   <div>
     <v-toolbar flat>
-      <v-toolbar-title class="grey--text">My resumes</v-toolbar-title>
+      <v-toolbar-title>
+        <v-icon class="mr-2">mdi-file-account</v-icon>
+        <span>My resumes</span>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <UploadResumeForToolbar />
       <v-btn class="mr-1" icon>
@@ -18,9 +21,9 @@
       <v-row>
         <v-col cols="4" v-for="resume in resumes" :key="resume.id">
           <v-card :to="{ name: 'ResumeDetail', params: { id: resume.id } }">
-            <v-card-title class="pb-0" primary-title>
+            <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{ resume.jobTitle }}</h3>
+                <h3 class="headline mb-0">{{ resume.displayName }}</h3>
               </div>
             </v-card-title>
             <v-card-text>

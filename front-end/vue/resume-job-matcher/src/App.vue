@@ -6,10 +6,10 @@
       <v-btn class="mr-1" to="/" icon>
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
-      <v-btn class="mr-1" to="/resumes" icon>
+      <v-btn class="mr-1" to="resumes" icon>
         <v-icon>mdi-file-account</v-icon>
       </v-btn>
-      <v-btn to="/jobs" icon>
+      <v-btn to="jobs" icon>
         <v-icon>mdi-briefcase</v-icon>
       </v-btn>
       <v-spacer></v-spacer>

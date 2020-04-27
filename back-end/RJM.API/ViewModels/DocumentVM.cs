@@ -31,12 +31,12 @@ namespace RJM.API.ViewModels
         /// <summary>
         /// The Name property of Document.
         /// </summary>
-        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// The DisplayName property of Document.
         /// </summary>
+        [Required]
         public string DisplayName { get; set; }
 
         /// <summary>

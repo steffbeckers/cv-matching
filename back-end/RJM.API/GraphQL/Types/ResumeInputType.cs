@@ -8,6 +8,7 @@ namespace RJM.API.GraphQL.Types
         {
             Name = "resumeInput";
             Field<IdGraphType>("id");
+            Field<NonNullGraphType<StringGraphType>>("displayName");
             Field<StringGraphType>("jobTitle");
             Field<StringGraphType>("description");
             Field<NonNullGraphType<IdGraphType>>("resumeStateId");

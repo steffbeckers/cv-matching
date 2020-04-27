@@ -1,6 +1,7 @@
 using RJM.API.ViewModels.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RJM.API.ViewModels
 {
@@ -24,6 +25,17 @@ namespace RJM.API.ViewModels
         /// The identifier of Resume.
         /// </summary>
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// The Name property of Resume.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The DisplayName property of Resume.
+        /// </summary>
+        [Required]
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// The JobTitle property of Resume.
@@ -59,7 +71,6 @@ namespace RJM.API.ViewModels
         /// </summary>
         public ResumeStateVM ResumeState { get; set; }
 
-
         //// Many-to-many
 
         /// <summary>
@@ -69,6 +80,7 @@ namespace RJM.API.ViewModels
 
         ////// To create a link with Document directly on create of Resume.
         public Guid? DocumentId { get; set; }
+
         /// <summary>
         /// The related Skills of Resume.
         /// </summary>
@@ -76,6 +88,7 @@ namespace RJM.API.ViewModels
 
         ////// To create a link with Skill directly on create of Resume.
         public Guid? SkillId { get; set; }
+
         public int? SkillLevel { get; set; }
         public string SkillDescription { get; set; }
 

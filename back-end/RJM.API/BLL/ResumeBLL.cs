@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Extensions;
 using RJM.API.Models;
 using System;
 using System.Collections.Generic;
@@ -87,10 +88,15 @@ namespace RJM.API.BLL
             // Before creation
 
             // Trimming strings
+            if (!string.IsNullOrEmpty(resume.DisplayName))
+                resume.DisplayName = resume.DisplayName.Trim();
             if (!string.IsNullOrEmpty(resume.JobTitle))
                 resume.JobTitle = resume.JobTitle.Trim();
             if (!string.IsNullOrEmpty(resume.Description))
                 resume.Description = resume.Description.Trim();
+
+            // Name field
+            resume.Name = resume.DisplayName.ToSlug();
 
             // Default resume state
             if (resume.ResumeStateId == Guid.Empty)
