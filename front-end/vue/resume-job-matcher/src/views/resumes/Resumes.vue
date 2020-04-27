@@ -17,7 +17,7 @@
     <v-container v-if="authenticated" fluid>
       <v-row>
         <v-col cols="4" v-for="resume in resumes" :key="resume.id">
-          <v-card>
+          <v-card :to="{ name: 'ResumeDetail', params: { id: resume.id } }">
             <v-card-title class="pb-0" primary-title>
               <div>
                 <h3 class="headline mb-0">{{ resume.jobTitle }}</h3>
@@ -37,7 +37,7 @@
 import { mapGetters, mapState } from 'vuex';
 
 // Components
-import UploadResumeForToolbar from '../components/resumes/UploadResumeForToolbar';
+import UploadResumeForToolbar from '../../components/resumes/UploadResumeForToolbar';
 
 export default {
   name: 'Resumes',
