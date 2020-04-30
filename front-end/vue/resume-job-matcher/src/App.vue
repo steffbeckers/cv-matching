@@ -2,22 +2,51 @@
   <v-app>
     <v-app-bar v-if="$store.state.ui.topNav && authenticated" color="primary" dark clipped-left app>
       <v-app-bar-nav-icon @click.stop="toggleLeftDrawer()" />
-      <v-toolbar-title class="pa-2">Resume Job Matcher</v-toolbar-title>
-      <v-btn class="mr-1" to="/" icon>
-        <v-icon>mdi-view-dashboard</v-icon>
+      <v-toolbar-title class="px-3">RJM</v-toolbar-title>
+      <v-btn text class="mr-1 px-2" to="/">
+        <v-icon class="mr-2">mdi-view-dashboard</v-icon>
+        <span>Dashboard</span>
       </v-btn>
-      <v-btn class="mr-1" to="/resumes" icon>
-        <v-icon>mdi-file-account</v-icon>
+      <v-btn text class="mr-1 px-2" to="/resumes">
+        <v-icon class="mr-2">mdi-file-account</v-icon>
+        <span>Resumes</span>
       </v-btn>
-      <v-btn to="/jobs" icon>
-        <v-icon>mdi-briefcase</v-icon>
+      <v-btn text class="px-2" to="/jobs">
+        <v-icon class="mr-2">mdi-briefcase</v-icon>
+        <span>Jobs</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn v-if="isAdmin" text to="admin" dark>Admin</v-btn>
-      <v-btn text @click="logout" dark>Logout</v-btn>
-      <v-avatar class="ml-2" color="white" size="36">
-        <span class="primary--text">{{ user.firstName.substring(0, 1) }}{{ user.lastName.substring(0, 1) }}</span>
-      </v-avatar>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <div v-on="on" class="d-inline-flex">
+            <div class="align-self-center mr-3">
+              <v-avatar color="white" size="36">
+                <span class="primary--text pa-2">{{ user.firstName.substring(0, 1) }}{{ user.lastName.substring(0, 1) }}</span>
+              </v-avatar>
+            </div>
+            <div class="flex-column">
+              <div class="title">{{ user.firstName }} {{ user.lastName }}</div>
+              <div class="body-2">
+                {{ user.email }}
+              </div>
+            </div>
+          </div>
+        </template>
+        <v-list>
+          <v-list-item link to="/admin">
+            <v-list-item-icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Admin</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="logout">
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-navigation-drawer v-if="$store.state.ui.drawerLeft && authenticated" v-model="$store.state.ui.drawerLeft" clipped app>
       <v-list dense>
@@ -29,12 +58,20 @@
             <v-list-item-title>Dashboard</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link to="resumes">
+        <v-list-item link to="/resumes">
           <v-list-item-action>
             <v-icon>mdi-file-account</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Resumes</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link to="/jobs">
+          <v-list-item-action>
+            <v-icon>mdi-briefcase</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Jobs</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

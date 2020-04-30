@@ -234,16 +234,29 @@ namespace RJM.API.DAL
             #region Resumes
 
             // Soft delete query filter
-            modelBuilder.Entity<Resume>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<Resume>()
+                .HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Resume>().ToTable("Resumes");
+            modelBuilder.Entity<Resume>()
+                .ToTable("Resumes");
 
             // Key
-            modelBuilder.Entity<Resume>().HasKey(e => e.Id);
+            modelBuilder.Entity<Resume>()
+                .HasKey(e => e.Id);
 
-            // Required properties
-            modelBuilder.Entity<Resume>().Property(e => e.ResumeStateId).IsRequired();
+            // Properties
+            modelBuilder.Entity<Resume>()
+                .Property(e => e.Name)
+                .HasMaxLength(256)
+                .IsRequired();
+            modelBuilder.Entity<Resume>()
+                .Property(e => e.DisplayName)
+                .HasMaxLength(256)
+                .IsRequired();
+            modelBuilder.Entity<Resume>()
+                .Property(e => e.ResumeStateId)
+                .IsRequired();
 
             // User
             modelBuilder.Entity<Resume>()
@@ -302,8 +315,16 @@ namespace RJM.API.DAL
             // Key
             modelBuilder.Entity<Skill>().HasKey(e => e.Id);
 
-            // Required properties
-            modelBuilder.Entity<Skill>().Property(e => e.Name).IsRequired();
+            // Properties
+            modelBuilder.Entity<Skill>()
+                .Property(e => e.Name)
+                .HasMaxLength(256)
+                .IsRequired();
+
+            modelBuilder.Entity<Skill>()
+                .Property(e => e.DisplayName)
+                .HasMaxLength(256)
+                .IsRequired();
 
             // User
             modelBuilder.Entity<Skill>()

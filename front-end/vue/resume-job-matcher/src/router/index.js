@@ -10,11 +10,31 @@ const routes = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "auth-login" */ '@/views/auth/Login.vue'),
   },
+  // Admin
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/Admin.vue'),
+    children: [
+      {
+        path: 'skills',
+        name: 'AdminSkills',
+        component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/skills/Skills.vue'),
+      },
+    ],
+  },
+  // Resumes
+  {
+    path: '/resumes/:id',
+    name: 'ResumeDetail',
+    component: () => import(/* webpackChunkName: "resumes" */ '@/views/resumes/ResumeDetail.vue'),
+  },
   {
     path: '/resumes',
     name: 'Resumes',
-    component: () => import(/* webpackChunkName: "resumes" */ '@/views/Resumes.vue'),
+    component: () => import(/* webpackChunkName: "resumes" */ '@/views/resumes/Resumes.vue'),
   },
+  // Dashboard
   {
     path: '/',
     name: 'Dashboard',

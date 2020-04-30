@@ -144,7 +144,8 @@ namespace RJM.API.BLL
             {
                 Resume resume = new Resume()
                 {
-                    Description = "Resume created during upload of document: " + document.DisplayName,
+                    DisplayName = document.DisplayName,
+                    Description = "Resume created during upload of document.",
                     DocumentResume = new List<DocumentResume>() {
                         new DocumentResume()
                         {
@@ -200,6 +201,9 @@ namespace RJM.API.BLL
             document.DocumentContents.Add(documentContent);
 
             document = await this.documentRepository.UpdateAsync(document);
+
+            // After
+            // TODO: Start matching the contents with existing skills, certificates, ...?
 
             return document;
         }

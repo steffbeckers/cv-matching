@@ -1,9 +1,12 @@
 <template>
   <div>
     <v-toolbar flat>
-      <v-toolbar-title class="grey--text">My resumes</v-toolbar-title>
+      <v-toolbar-title>
+        <v-icon class="mr-2">mdi-file-account</v-icon>
+        <span>My resumes</span>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <UploadResumeForToolbar />
+      <UploadResumeForToolbar v-if="resumes && resumes.length > 0" />
       <v-btn class="mr-1" icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -16,11 +19,14 @@
     </v-toolbar>
     <v-container v-if="authenticated" fluid>
       <v-row>
+        <v-col v-if="resumes && resumes.length === 0" cols="12" sm="6" md="4">
+          <UploadResumeCard />
+        </v-col>
         <v-col cols="4" v-for="resume in resumes" :key="resume.id">
-          <v-card>
-            <v-card-title class="pb-0" primary-title>
+          <v-card :to="{ name: 'ResumeDetail', params: { id: resume.id } }">
+            <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{ resume.jobTitle }}</h3>
+                <h3 class="headline mb-0">{{ resume.displayName }}</h3>
               </div>
             </v-card-title>
             <v-card-text>
@@ -37,7 +43,8 @@
 import { mapGetters, mapState } from 'vuex';
 
 // Components
-import UploadResumeForToolbar from '../components/resumes/UploadResumeForToolbar';
+import UploadResumeCard from '../../components/resumes/UploadResumeCard';
+import UploadResumeForToolbar from '../../components/resumes/UploadResumeForToolbar';
 
 export default {
   name: 'Resumes',
@@ -59,6 +66,7 @@ export default {
     this.$store.dispatch('resumes/getAll');
   },
   components: {
+    UploadResumeCard,
     UploadResumeForToolbar,
   },
 };
