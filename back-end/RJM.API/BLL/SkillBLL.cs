@@ -1,4 +1,5 @@
 using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Extensions;
 using RJM.API.Models;
 using System;
 using System.Collections.Generic;
@@ -67,21 +68,20 @@ namespace RJM.API.BLL
             // Validation
             if (skill == null) { return null; }
 
+            // Before creation
+
             // Trimming strings
-            if (!string.IsNullOrEmpty(skill.Name))
-                skill.Name = skill.Name.Trim();
+            if (!string.IsNullOrEmpty(skill.DisplayName))
+                skill.DisplayName = skill.DisplayName.Trim();
             if (!string.IsNullOrEmpty(skill.Description))
                 skill.Description = skill.Description.Trim();
 
-            // #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-            // Before creation
-            // #-#-#
+            // Name
+            skill.Name = skill.DisplayName.ToSlug();
 
             skill = await this.skillRepository.InsertAsync(skill);
 
-            // #-#-# {1972C619-D2F2-48FD-8474-3A69621B1F78}
             // After creation
-            // #-#-#
 
             return skill;
         }
@@ -102,13 +102,16 @@ namespace RJM.API.BLL
             }
 
             // Trimming strings
-            if (!string.IsNullOrEmpty(skillUpdate.Name))
-                skillUpdate.Name = skillUpdate.Name.Trim();
+            if (!string.IsNullOrEmpty(skillUpdate.DisplayName))
+                skillUpdate.DisplayName = skillUpdate.DisplayName.Trim();
             if (!string.IsNullOrEmpty(skillUpdate.Description))
                 skillUpdate.Description = skillUpdate.Description.Trim();
 
+            // Name
+            skill.Name = skillUpdate.DisplayName.ToSlug();
+
             // Mapping
-            skill.Name = skillUpdate.Name;
+            skill.DisplayName = skillUpdate.DisplayName;
             skill.Description = skillUpdate.Description;
 
             // #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}

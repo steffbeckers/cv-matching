@@ -315,8 +315,16 @@ namespace RJM.API.DAL
             // Key
             modelBuilder.Entity<Skill>().HasKey(e => e.Id);
 
-            // Required properties
-            modelBuilder.Entity<Skill>().Property(e => e.Name).IsRequired();
+            // Properties
+            modelBuilder.Entity<Skill>()
+                .Property(e => e.Name)
+                .HasMaxLength(256)
+                .IsRequired();
+
+            modelBuilder.Entity<Skill>()
+                .Property(e => e.DisplayName)
+                .HasMaxLength(256)
+                .IsRequired();
 
             // User
             modelBuilder.Entity<Skill>()

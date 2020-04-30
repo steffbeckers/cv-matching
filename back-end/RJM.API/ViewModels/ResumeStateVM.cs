@@ -16,7 +16,6 @@ namespace RJM.API.ViewModels
         /// <summary>
         /// The Name property of ResumeState.
         /// </summary>
-        [Required]
         public string Name { get; set; }
 
         /// <summary>
