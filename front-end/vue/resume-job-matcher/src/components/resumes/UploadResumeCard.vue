@@ -2,9 +2,7 @@
   <v-form v-model="uploadFormValid" ref="uploadForm" lazy-validation>
     <v-card>
       <v-card-title class="pb-0" primary-title>
-        <div>
-          <h3 class="headline mb-0">Upload your own resume</h3>
-        </div>
+        <h3 class="headline mb-0">Upload your own resume</h3>
       </v-card-title>
       <v-card-text>
         <v-file-input

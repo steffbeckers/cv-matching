@@ -33,6 +33,20 @@ const actions = {
         commit('GET_SKILL_BY_ID_FAILED', error);
       });
   },
+  addSkillAliasToSkill({ commit }, payload) {
+    commit('ADD_SKILL_ALIAS_TO_SKILL');
+
+    let alias = { displayName: payload.alias, skillId: payload.skill.id };
+
+    Vue.axios
+      .post('/skillaliases', alias)
+      .then((result) => {
+        commit('ADD_SKILL_ALIAS_TO_SKILL_SUCCESS', result.data);
+      })
+      .catch((error) => {
+        commit('ADD_SKILL_ALIAS_TO_SKILL_FAILED', error);
+      });
+  },
 };
 
 // mutations
@@ -56,7 +70,7 @@ const mutations = {
   GET_SKILL_BY_ID_SUCCESS(state, skill) {
     state.loading = false;
 
-    if (state.resumes) {
+    if (state.skills) {
       var skillIndex = state.skills.findIndex((r) => r.id === skill.id);
       if (skillIndex !== -1) {
         state.skills[skillIndex] = skill;
@@ -68,6 +82,10 @@ const mutations = {
   GET_SKILL_BY_ID_FAILED(state, error) {
     state.loading = false;
     state.error = error;
+  },
+  ADD_SKILL_ALIAS_TO_SKILL(state) {
+    state.loading = true;
+    state.error = null;
   },
 };
 

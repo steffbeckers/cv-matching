@@ -17,8 +17,18 @@
           <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
         </v-toolbar>
       </template>
-      <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">More info about {{ item.name }}</td>
+      <template v-slot:expanded-item="{ headers, item: skill }">
+        <td :colspan="headers.length">
+          <div>
+            <v-combobox v-model="skill.aliases" @change="addSkillAlias(skill)" chips clearable label="Aliases" multiple>
+              <template v-slot:selection="{ attrs, item: alias, select, selected }">
+                <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="removeSkillAlias(skill, alias)">
+                  {{ alias.displayName || alias }}
+                </v-chip>
+              </template>
+            </v-combobox>
+          </div>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -59,6 +69,21 @@ export default {
   mounted() {
     // Load skills
     this.$store.dispatch('admin/getAllSkills');
+  },
+  methods: {
+    addSkillAlias(skill) {
+      let alias;
+
+      if (skill.aliases) {
+        let aliasIndex = skill.aliases.findIndex((a) => !a.id);
+        alias = skill.aliases.splice(aliasIndex, 1)[0];
+      }
+
+      this.$store.dispatch('admin/addSkillAliasToSkill', { skill, alias });
+    },
+    removeSkillAlias(skill, alias) {
+      this.$store.dispatch('admin/removeSkillAliasFromSkill', { skill, alias });
+    },
   },
 };
 </script>
