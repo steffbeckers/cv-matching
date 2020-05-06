@@ -10,11 +10,22 @@
       show-expand
       class="elevation-2"
     >
+      <!-- <v-data-table
+      :headers="headers"
+      :items="skills"
+      :expanded.sync="expanded"
+      :search="search"
+      :custom-filter="customSkillsFilter"
+      item-key="id"
+      :single-expand="true"
+      show-expand
+      class="elevation-2"
+    > -->
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Skills</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
+          <v-text-field v-model="search" label="Search" single-line clearable hide-details></v-text-field>
         </v-toolbar>
       </template>
       <template v-slot:expanded-item="{ headers, item: skill }">
@@ -71,6 +82,15 @@ export default {
     this.$store.dispatch('admin/getAllSkills');
   },
   methods: {
+    // customSkillsFilter(items, search, filter) {
+    //   console.log(search, filter);
+
+    //   if (!search) {
+    //     return items;
+    //   }
+
+    //   search = search.toLowerCase();
+    // },
     addSkillAlias(skill) {
       let alias;
 

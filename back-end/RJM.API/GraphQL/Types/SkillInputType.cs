@@ -8,7 +8,6 @@ namespace RJM.API.GraphQL.Types
         {
             Name = "skillInput";
             Field<IdGraphType>("id");
-            Field<NonNullGraphType<StringGraphType>>("name");
 		    Field<NonNullGraphType<StringGraphType>>("displayName");
             Field<StringGraphType>("description");
 
