@@ -10,15 +10,36 @@
       show-expand
       class="elevation-2"
     >
+      <!-- <v-data-table
+      :headers="headers"
+      :items="skills"
+      :expanded.sync="expanded"
+      :search="search"
+      :custom-filter="customSkillsFilter"
+      item-key="id"
+      :single-expand="true"
+      show-expand
+      class="elevation-2"
+    > -->
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Skills</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
+          <v-text-field v-model="search" label="Search" single-line clearable hide-details></v-text-field>
         </v-toolbar>
       </template>
-      <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">More info about {{ item.name }}</td>
+      <template v-slot:expanded-item="{ headers, item: skill }">
+        <td :colspan="headers.length">
+          <div>
+            <v-combobox v-model="skill.aliases" @change="addSkillAlias(skill)" chips label="Aliases" multiple>
+              <template v-slot:selection="{ attrs, item: alias, select, selected }">
+                <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="removeSkillAlias(alias)">
+                  {{ alias.name || alias }}
+                </v-chip>
+              </template>
+            </v-combobox>
+          </div>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -59,6 +80,34 @@ export default {
   mounted() {
     // Load skills
     this.$store.dispatch('admin/getAllSkills');
+  },
+  methods: {
+    // customSkillsFilter(items, search, filter) {
+    //   console.log(search, filter);
+
+    //   if (!search) {
+    //     return items;
+    //   }
+
+    //   search = search.toLowerCase();
+    // },
+    addSkillAlias(skill) {
+      let alias;
+
+      if (skill.aliases) {
+        let aliasIndex = skill.aliases.findIndex((a) => !a.id);
+        alias = skill.aliases.splice(aliasIndex, 1)[0];
+      }
+
+      if (!alias) {
+        return;
+      }
+
+      this.$store.dispatch('admin/addSkillAliasToSkill', { skill, alias });
+    },
+    removeSkillAlias(alias) {
+      this.$store.dispatch('admin/removeSkillAliasFromSkill', { alias });
+    },
   },
 };
 </script>

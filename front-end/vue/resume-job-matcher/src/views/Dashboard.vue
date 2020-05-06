@@ -10,7 +10,7 @@
       <v-col v-if="resumes && resumes.length === 0" cols="12" sm="6" md="4">
         <UploadResumeCard />
       </v-col>
-      <v-col cols="12" sm="6" md="8">
+      <v-col cols="12">
         <h2>My latest resumes</h2>
         <v-row>
           <v-col cols="4" v-for="resume in resumes" :key="resume.id">

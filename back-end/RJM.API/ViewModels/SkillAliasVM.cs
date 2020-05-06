@@ -9,11 +9,6 @@ namespace RJM.API.ViewModels
     /// </summary>
     public class SkillAliasVM
     {
-        public SkillAliasVM()
-        {
-            // Relations
-        }
-
         // Properties
 
         /// <summary>
@@ -78,6 +73,5 @@ namespace RJM.API.ViewModels
         /// The user who last modified the record
         /// </summary>
         public UserVM ModifiedByUser { get; set; }
-
     }
 }
