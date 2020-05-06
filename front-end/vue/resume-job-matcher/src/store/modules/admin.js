@@ -36,7 +36,7 @@ const actions = {
   addSkillAliasToSkill({ commit }, payload) {
     commit('ADD_SKILL_ALIAS_TO_SKILL');
 
-    let alias = { displayName: payload.alias, skillId: payload.skill.id };
+    let alias = { name: payload.alias, skillId: payload.skill.id };
 
     Vue.axios
       .post('/skillaliases', alias)
@@ -45,6 +45,18 @@ const actions = {
       })
       .catch((error) => {
         commit('ADD_SKILL_ALIAS_TO_SKILL_FAILED', error);
+      });
+  },
+  removeSkillAliasFromSkill({ commit }, payload) {
+    commit('REMOVE_SKILL_ALIAS_FROM_SKILL');
+
+    Vue.axios
+      .delete('/skillaliases/' + payload.alias.id)
+      .then((result) => {
+        commit('REMOVE_SKILL_ALIAS_FROM_SKILL_SUCCESS', result.data);
+      })
+      .catch((error) => {
+        commit('REMOVE_SKILL_ALIAS_FROM_SKILL_FAILED', error);
       });
   },
 };
@@ -86,6 +98,45 @@ const mutations = {
   ADD_SKILL_ALIAS_TO_SKILL(state) {
     state.loading = true;
     state.error = null;
+  },
+  ADD_SKILL_ALIAS_TO_SKILL_SUCCESS(state, skillAlias) {
+    state.loading = false;
+
+    var skillIndex = state.skills.findIndex((r) => r.id === skillAlias.skillId);
+    if (skillIndex !== -1) {
+      let skill = { ...state.skills[skillIndex] };
+
+      skill.aliases.push(skillAlias);
+
+      state.skills[skillIndex] = skill;
+    }
+  },
+  ADD_SKILL_ALIAS_TO_SKILL_FAILED(state, error) {
+    state.loading = false;
+    state.error = error;
+  },
+  REMOVE_SKILL_ALIAS_FROM_SKILL(state) {
+    state.loading = true;
+    state.error = null;
+  },
+  REMOVE_SKILL_ALIAS_FROM_SKILL_SUCCESS(state, skillAlias) {
+    state.loading = false;
+
+    var skillIndex = state.skills.findIndex((r) => r.id === skillAlias.skillId);
+    if (skillIndex !== -1) {
+      let skill = { ...state.skills[skillIndex] };
+
+      let skillAliasIndex = skill.aliases.findIndex((a) => a.id === skillAlias.id);
+      if (skillAliasIndex !== -1) {
+        skill.aliases.splice(skillAliasIndex, 1);
+      }
+
+      state.skills[skillIndex] = skill;
+    }
+  },
+  REMOVE_SKILL_ALIAS_FROM_SKILL_FAILED(state, error) {
+    state.loading = false;
+    state.error = error;
   },
 };
 

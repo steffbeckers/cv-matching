@@ -20,10 +20,10 @@
       <template v-slot:expanded-item="{ headers, item: skill }">
         <td :colspan="headers.length">
           <div>
-            <v-combobox v-model="skill.aliases" @change="addSkillAlias(skill)" chips clearable label="Aliases" multiple>
+            <v-combobox v-model="skill.aliases" @change="addSkillAlias(skill)" chips label="Aliases" multiple>
               <template v-slot:selection="{ attrs, item: alias, select, selected }">
-                <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="removeSkillAlias(skill, alias)">
-                  {{ alias.displayName || alias }}
+                <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="removeSkillAlias(alias)">
+                  {{ alias.name || alias }}
                 </v-chip>
               </template>
             </v-combobox>
@@ -79,10 +79,14 @@ export default {
         alias = skill.aliases.splice(aliasIndex, 1)[0];
       }
 
+      if (!alias) {
+        return;
+      }
+
       this.$store.dispatch('admin/addSkillAliasToSkill', { skill, alias });
     },
-    removeSkillAlias(skill, alias) {
-      this.$store.dispatch('admin/removeSkillAliasFromSkill', { skill, alias });
+    removeSkillAlias(alias) {
+      this.$store.dispatch('admin/removeSkillAliasFromSkill', { alias });
     },
   },
 };
