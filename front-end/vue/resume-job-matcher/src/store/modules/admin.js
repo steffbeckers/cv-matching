@@ -5,6 +5,22 @@ const state = {
   loading: false,
   error: null,
   skills: null,
+  resumes: null,
+};
+
+// getters
+const getters = {
+  resumesByDateCreatedAsc: (state) => {
+    return (
+      state.resumes &&
+      state.resumes.sort(function(a, b) {
+        return new Date(b.createdOn) - new Date(a.createdOn);
+      })
+    );
+  },
+  resumeById: (state) => (id) => {
+    return state.resumes && state.resumes.find((r) => r.id === id);
+  },
 };
 
 // actions
@@ -57,6 +73,30 @@ const actions = {
       })
       .catch((error) => {
         commit('REMOVE_SKILL_ALIAS_FROM_SKILL_FAILED', error);
+      });
+  },
+  getAllResumes({ commit }) {
+    commit('GET_RESUMES');
+
+    Vue.axios
+      .get('/resumes')
+      .then((result) => {
+        commit('GET_RESUMES_SUCCESS', result.data);
+      })
+      .catch((error) => {
+        commit('GET_RESUMES_FAILED', error);
+      });
+  },
+  getResumeById({ commit }, id) {
+    commit('GET_RESUME_BY_ID');
+
+    Vue.axios
+      .get('/resumes/' + id)
+      .then((result) => {
+        commit('GET_RESUME_BY_ID_SUCCESS', result.data);
+      })
+      .catch((error) => {
+        commit('GET_RESUME_BY_ID_FAILED', error);
       });
   },
 };
@@ -138,12 +178,44 @@ const mutations = {
     state.loading = false;
     state.error = error;
   },
+  GET_RESUMES(state) {
+    state.loading = true;
+    state.error = null;
+  },
+  GET_RESUMES_SUCCESS(state, resumes) {
+    state.loading = false;
+    state.resumes = resumes;
+  },
+  GET_RESUMES_FAILED(state, error) {
+    state.loading = false;
+    state.error = error;
+  },
+  GET_RESUME_BY_ID(state) {
+    state.loading = true;
+    state.error = null;
+  },
+  GET_RESUME_BY_ID_SUCCESS(state, resume) {
+    state.loading = false;
+
+    if (state.resumes) {
+      var resumeIndex = state.resumes.findIndex((r) => r.id === resume.id);
+      if (resumeIndex !== -1) {
+        state.resumes[resumeIndex] = resume;
+      }
+    } else {
+      state.resumes = [resume];
+    }
+  },
+  GET_RESUME_BY_ID_FAILED(state, error) {
+    state.loading = false;
+    state.error = error;
+  },
 };
 
 export default {
   namespaced: true,
   state,
-  // getters,
+  getters,
   actions,
   mutations,
 };

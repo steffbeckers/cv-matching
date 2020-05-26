@@ -8,7 +8,7 @@
     </v-toolbar>
     <v-container v-if="authenticated" fluid>
       <v-row>
-        <v-col cols="3">
+        <v-col cols="2">
           <v-list nav>
             <v-list-item-group color="primary">
               <v-list-item to="/admin/skills">
@@ -16,9 +16,9 @@
                   <v-list-item-title>Skills</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item to="/admin/documents">
+              <v-list-item to="/admin/resumes">
                 <v-list-item-content>
-                  <v-list-item-title>Documents</v-list-item-title>
+                  <v-list-item-title>Resumes</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item to="/admin/system">
@@ -29,7 +29,7 @@
             </v-list-item-group>
           </v-list>
         </v-col>
-        <v-col cols="9">
+        <v-col cols="10">
           <router-view></router-view>
         </v-col>
       </v-row>
