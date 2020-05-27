@@ -31,6 +31,11 @@ const routes = [
         name: 'AdminResumeDetail',
         component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/resumes/ResumeDetail.vue'),
       },
+      {
+        path: 'documents/:id',
+        name: 'AdminDocumentDetail',
+        component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/documents/DocumentDetail.vue'),
+      },
     ],
   },
   // Resumes
