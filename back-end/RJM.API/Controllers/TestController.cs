@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using PuppeteerSharp;
+using System.Threading.Tasks;
 
 namespace RJM.API.Controllers
 {
@@ -21,6 +23,25 @@ namespace RJM.API.Controllers
             this.configuration = configuration;
             this.logger = logger;
             //this.fileService = fileService;
+        }
+
+        [HttpGet("puppeteer")]
+        public async Task TestPuppeteerPDFGeneration()
+        {
+            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+
+            Browser browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = true
+            });
+
+            Page page = await browser.NewPageAsync();
+
+            await page.GoToAsync("https://steffbeckers.eu/experience");
+
+            await page.PdfAsync("puppeteer-test.pdf", new PdfOptions() {
+                DisplayHeaderFooter = true
+            });
         }
 
         //[HttpGet("aws-s3-bucket-read")]
