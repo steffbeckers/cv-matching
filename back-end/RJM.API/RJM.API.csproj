@@ -65,4 +65,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\templates\resumes\srt\" />
+  </ItemGroup>
+
 </Project>

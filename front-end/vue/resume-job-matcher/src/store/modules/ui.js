@@ -10,6 +10,11 @@ const getters = {};
 
 // actions
 const actions = {
+  setAll({ commit }, payload) {
+    actions.setTopNav({ commit }, payload);
+    actions.setDrawerLeft({ commit }, payload);
+    actions.setFooter({ commit }, payload);
+  },
   setTopNav({ commit }, payload) {
     commit('SET_TOP_NAV', payload);
   },
@@ -24,13 +29,13 @@ const actions = {
 // mutations
 const mutations = {
   SET_TOP_NAV(state, payload) {
-    state.drawerLeft = payload;
+    state.topNav = payload;
   },
   SET_DRAWER_LEFT(state, payload) {
     state.drawerLeft = payload;
   },
   SET_FOOTER(state, payload) {
-    state.drawerLeft = payload;
+    state.footer = payload;
   },
 };
 

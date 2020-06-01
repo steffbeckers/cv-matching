@@ -317,6 +317,9 @@ namespace RJM.API
                 app.UseAllElasticApm(this.configuration);
             }
 
+            // Static files, most likely for resumes templates now
+            app.UseStaticFiles();
+
             // Update database migrations on startup
             UpdateDatabase(app);
 

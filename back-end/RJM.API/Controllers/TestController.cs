@@ -26,7 +26,7 @@ namespace RJM.API.Controllers
         }
 
         [HttpGet("puppeteer")]
-        public async Task TestPuppeteerPDFGeneration()
+        public async Task<IActionResult> TestPuppeteerPDFGeneration()
         {
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
 
@@ -37,11 +37,32 @@ namespace RJM.API.Controllers
 
             Page page = await browser.NewPageAsync();
 
-            await page.GoToAsync("https://steffbeckers.eu/experience");
+            //await page.GoToAsync("http://localhost:5000/templates/resumes/github-mnjul-html-resume/index.html");
+            await page.GoToAsync("http://localhost:5000/templates/resumes/srt/index.html");
+            //await page.GoToAsync("http://localhost:8080/resumes/cede8784-3f52-44fe-c955-08d7ed22a16b/print");
 
-            await page.PdfAsync("puppeteer-test.pdf", new PdfOptions() {
-                DisplayHeaderFooter = true
+            await page.PdfAsync("puppeteer-test.pdf");
+
+            return Ok();
+        }
+
+        [HttpGet("puppeteer-2")]
+        public async Task<IActionResult> TestPuppeteer2PDFGeneration()
+        {
+            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+
+            Browser browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = true
             });
+
+            Page page = await browser.NewPageAsync();
+
+            await page.SetContentAsync("<div>My Receipt</div>");
+
+            await page.PdfAsync("puppeteer-2-test.pdf");
+
+            return Ok();
         }
 
         //[HttpGet("aws-s3-bucket-read")]
