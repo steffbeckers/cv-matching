@@ -26,6 +26,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RJM.API.BLL;
+using RJM.API.Cronjobs;
 using RJM.API.DAL;
 using RJM.API.DAL.Repositories;
 using RJM.API.Framework.Exceptions;
@@ -278,6 +279,9 @@ namespace RJM.API
                 options.MaxRequestBodySize = 52428800;
                 options.AllowSynchronousIO = true;
             });
+
+            // Cronjobs
+            services.AddHostedService<TestCronjob>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -316,6 +320,9 @@ namespace RJM.API
             {
                 app.UseAllElasticApm(this.configuration);
             }
+
+            // Static files, most likely for resumes templates now
+            app.UseStaticFiles();
 
             // Update database migrations on startup
             UpdateDatabase(app);

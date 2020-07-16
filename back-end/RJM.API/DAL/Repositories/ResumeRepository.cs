@@ -31,7 +31,6 @@ namespace RJM.API.DAL.Repositories
                 .Include(x => x.ResumeState)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Document)
-                        .ThenInclude(x => x.DocumentType)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)
@@ -44,6 +43,9 @@ namespace RJM.API.DAL.Repositories
         {
             return await this.context.Resumes
                 .Include(x => x.ResumeState)
+                .Include(x => x.DocumentResume)
+                    .ThenInclude(x => x.Document)
+                        .ThenInclude(x => x.DocumentContents)
                 .Include(x => x.DocumentResume)
                     .ThenInclude(x => x.Document)
                         .ThenInclude(x => x.DocumentType)

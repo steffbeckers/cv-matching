@@ -21,6 +21,21 @@ const routes = [
         name: 'AdminSkills',
         component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/skills/Skills.vue'),
       },
+      {
+        path: 'resumes',
+        name: 'AdminResumes',
+        component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/resumes/Resumes.vue'),
+      },
+      {
+        path: 'resumes/:id',
+        name: 'AdminResumeDetail',
+        component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/resumes/ResumeDetail.vue'),
+      },
+      {
+        path: 'documents/:id',
+        name: 'AdminDocumentDetail',
+        component: () => import(/* webpackChunkName: "admin" */ '@/views/admin/documents/DocumentDetail.vue'),
+      },
     ],
   },
   // Resumes
