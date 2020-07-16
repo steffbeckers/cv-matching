@@ -9,12 +9,21 @@ const state = {
 
 // getters
 const getters = {
+  getMy: (state, getters, rootState) => {
+    // Authenticated?
+    if (!rootState.auth || !rootState.auth.authenticated) {
+      return null;
+    }
+
+    return state.resumes && state.resumes.filter((r) => r.userId === rootState.auth.user.id);
+  },
   getMyLatest: (state, getters, rootState) => {
     // Authenticated?
     if (!rootState.auth || !rootState.auth.authenticated) {
       return null;
     }
 
+    // TODO: Add sort?
     return state.resumes && state.resumes.filter((r) => r.userId === rootState.auth.user.id).slice(0, 5);
   },
   getById: (state, getters, rootState) => (id) => {

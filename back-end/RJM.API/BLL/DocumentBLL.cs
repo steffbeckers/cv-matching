@@ -203,7 +203,19 @@ namespace RJM.API.BLL
             document = await this.documentRepository.UpdateAsync(document);
 
             // After
-            // TODO: Start matching the contents with existing skills, certificates, ...?
+
+            // Start matching the contents with existing skills, certificates, ...
+            // Add document content to matching queue
+            // TODO: Setting?
+            DocumentContent documentContentToQueue = new DocumentContent()
+            {
+                DocumentId = document.Id,
+                Text = documentContent.Text,
+                TextType = documentContent.TextType,
+                Confidence = documentContent.Confidence
+            };
+
+            this.rabbitMQService.Publish(documentContentToQueue, "rjm.background.tasks", "topic", "documentcontent.matcher");
 
             return document;
         }
@@ -260,15 +272,7 @@ namespace RJM.API.BLL
             document.MimeType = documentUpdate.MimeType;
             document.DocumentTypeId = documentUpdate.DocumentTypeId;
 
-            // #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
-            // Before update
-            // #-#-#
-
             document = await this.documentRepository.UpdateAsync(document);
-
-            // #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
-            // After update
-            // #-#-#
 
             return document;
         }
@@ -302,6 +306,7 @@ namespace RJM.API.BLL
             else
             {
                 // Mapping of fields on many-to-many
+                documentResumeLink.Primary = documentResume.Primary;
 
                 await this.documentResumeRepository.UpdateAsync(documentResumeLink);
             }
@@ -343,15 +348,7 @@ namespace RJM.API.BLL
             // Validation
             if (document == null) { return null; }
 
-            // #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
-            // Before deletion
-            // #-#-#
-
             await this.documentRepository.DeleteAsync(document);
-
-            // #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
-            // After deletion
-            // #-#-#
 
             return document;
         }

@@ -32,6 +32,9 @@
             <v-card-text>
               {{ resume.description }}
             </v-card-text>
+            <v-card-actions>
+              {{ resume.createdOn }}
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -50,7 +53,7 @@ export default {
   name: 'Resumes',
   computed: {
     ...mapGetters('resumes', {
-      resumes: 'getMyLatest',
+      resumes: 'getMy',
     }),
     ...mapState('auth', {
       authenticated: (state) => state.authenticated,
