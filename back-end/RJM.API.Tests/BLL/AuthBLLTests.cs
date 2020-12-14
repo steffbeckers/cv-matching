@@ -14,7 +14,7 @@ namespace RJM.API.Tests.BLL
             // Arrange
             LoginVM loginVM = new LoginVM() {
                 EmailOrUsername = "steff",
-                Password = "Steff12345!"
+                Password = "SECRET"
             };
 
             // Act
